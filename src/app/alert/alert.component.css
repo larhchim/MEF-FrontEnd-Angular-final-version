@@ -1,0 +1,28 @@
+body{
+  margin:0;
+  padding:0;
+}
+
+.ctrl{
+  width:100%;
+  position:relative;
+}
+
+.nortification{
+  display:block;
+  font-size:14px;
+  width:300px;
+  padding:5px 0;
+  position:absolute;
+  top:0;
+  left:50%;
+  margin-left:-90px;
+  box-sizing:border-box;
+  border-radius:15px;
+  background-color:#fff;
+  color:#3a9ab9;
+  font-weight: bold;
+  text-align: center;
+  box-shadow: 0 3px 0 rgba(0,0,0,0.2);
+}
+

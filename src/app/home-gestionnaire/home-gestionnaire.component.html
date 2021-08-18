@@ -1,0 +1,118 @@
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<h1 style="text-align: center">Espace Concours {{Headline}}</h1>
+
+<!-------------------------------------------------------
+-------------------------------------------------------->
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light ">
+  <!-- Container wrapper -->
+  <div class="container">
+
+
+    <!-- Toggle button -->
+    <button (click)="toggleCollapsed()"
+            class="navbar-toggler"
+            type="button"
+            data-mdb-toggle="collapse"
+            data-mdb-target="#navbarButtonsExample"
+            aria-controls="navbarButtonsExample"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+    >
+      <i class="fa fa-bars"></i>
+    </button>
+
+    <!-- Collapsible wrapper -->
+    <div class="collapse navbar-collapse" id="navbarButtonsExample"  [ngbCollapse]="isCollapsed">
+
+      <!-- Left links -->
+      <div class="d-flex align-items-center">
+
+
+        <button *ngIf="mod == 1" style="margin-top: 30px;margin-bottom: 20px;margin-right: 5px" (click)="ToNewConcours()" class="btn btn-primary me-3">
+          Ajouter Concours
+        </button>
+        <button *ngIf="mod == 1" style="margin-top: 30px;margin-bottom: 20px;margin-right: 5px" (click)="ToNewCentre()" class="btn btn-primary me-3">
+          Ajouter Centre
+        </button>
+        <button *ngIf="mod == 1" style="margin-top: 30px;margin-bottom: 20px;margin-right: 5px" (click)="ToListCentre()" class="btn btn-primary me-3">
+          List Centres
+        </button>
+        <button *ngIf="mod == 1" style="margin-top: 30px;margin-bottom: 20px;" (click)="GOHOME()" class="btn btn-primary me-3">
+          Return Home
+        </button>
+      </div>
+    </div>
+    <!-- Collapsible wrapper -->
+  </div>
+  <!-- Container wrapper -->
+</nav>
+<!-- Navbar -->
+
+<!-------------------------------------------------------
+-------------------------------------------------------->
+
+
+<div *ngIf="mod == 1" class="card border-primary mb-3"  xmlns="http://www.w3.org/1999/html">
+  <div class="card-header" style="background-color: #5a57fb" >
+  </div>
+  <div class="card-body">
+    <div class="form-group">
+      <label style="margin-right: 5px">
+        Mot Clé:
+      </label>
+      <input (keyup.enter)="chercher()" type="text" [(ngModel)]="motcle" style="margin-right: 5px">
+      <button class="btn btn-primary" (click)="chercher()">
+        Chercher
+      </button>
+    </div>
+    <div *ngIf="fileStatus.status==='progress'">
+      <div class="progress">
+        <div [style.width.%]="fileStatus.percent" class="progress-bar progress-bar-animated bg-info" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+          {{ fileStatus.requestType }} {{ fileStatus.percent }}
+        </div>
+      </div>
+    </div>
+    <table class="table table-striped mb-0" style="overflow: auto;display: block ">
+      <thead>
+      <tr>
+        <th scope="col">ID Concours</th>
+        <th scope="col">Date Publication</th>
+        <th scope="col">Date Limite</th>
+        <th scope="col">Date Passage</th>
+        <th scope="col">Intitulé</th>
+        <th scope="col">Postes</th>
+        <th scope="col">Etat</th>
+        <th scope="col">Direction</th>
+        <th scope="col">Communiqué</th>
+
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let cnc of Cocnours?.content;let i=index"  (click)="setClickedRow(cnc)" >
+        <td>{{cnc.idConcours}}</td>
+        <td>{{cnc.dateConcours}}</td>
+        <td>{{cnc.dateLimiteConcours  | date:'medium'}}</td>
+        <td>{{cnc.datePassage}}</td>
+        <td>{{cnc.intitled}}</td>
+        <td>{{cnc.nombrePostes}}</td>
+        <td>{{cnc.etat}}</td>
+        <td>{{cnc.direction.intitled}}: {{cnc.direction.nom}}</td>
+        <td onMouseOver="this.style.color='#00F'"
+            onMouseOut="this.style.color='black'" style="cursor: pointer;" (click)="onDownloadFile(cnc.exigences)">{{cnc.exigences}}</td>
+
+      </tr>
+      </tbody>
+    </table>
+    <div class="container">
+      <ul class="nav nav-pills">
+        <li class="nav-item"  *ngFor="let p of pages; let i = index">
+          <a style="cursor:pointer" class="nav-link " [ngClass]="{'active':i==currenPage}" data-toggle="pill" (click)="gotoPage(i)">{{i}}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

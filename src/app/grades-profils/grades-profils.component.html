@@ -1,0 +1,156 @@
+<h1 style="text-align: center">Espace Gestion Des Grades</h1>
+<button (click)="Return()" style=";margin-right: 10px;margin-top: 15px" *ngIf="mod==1" class="btn btn-primary">Return to Home</button>
+<button style="margin-top: 15px;margin-right: 10px" *ngIf="mod == 1" (click)="NewGrade()" class="btn btn-primary">Add New Grade</button>
+<div *ngIf="mod == 1" class="card border-primary mb-3" style="margin-top: 15px" xmlns="http://www.w3.org/1999/html">
+  <div class="card-header" style="background-color: #5a57fb" >
+  </div>
+  <div class="card-body">
+    <div class="form-group">
+      <label style="margin-right: 5px">
+        Mot Clé:
+      </label>
+      <input (keyup.enter)="chercher()" type="text" [(ngModel)]="motcle" style="margin-right: 5px">
+      <button class="btn btn-primary" (click)="chercher()">
+        Chercher
+      </button>
+    </div>
+    <table class="table table-striped mb-0" style="overflow: auto ">
+      <thead>
+      <tr>
+        <th scope="col">ID Grade</th>
+        <th scope="col">Intitulé Grade</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let grd of Grades?.content"  (click)="setClickedRow(grd)" >
+        <td>{{grd.id}}</td>
+        <td>{{grd.intitledGrade}}</td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="container">
+      <ul class="nav nav-pills">
+        <li class="nav-item"  *ngFor="let p of pages; let i = index">
+          <a style="cursor:pointer" class="nav-link " [ngClass]="{'active':i==currentpage}" data-toggle="pill" (click)="gotoPage(i)">{{i}}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="bol == true" id="cover-spin"></div>
+
+<button style="margin-top: 5px" *ngIf="mod == 2" class="btn btn-primary" (click)="BackToList()">Liste des Grades</button>
+
+
+
+<div *ngIf="mod == 2" class="card border-primary mb-3"  style="margin-top: 15px">
+  <div class="card-header" style="background-color: #5a57fb" >
+  </div>
+  <div class="card-body">
+
+    <form #formulaire="ngForm">
+
+      <div  class="form-group">
+
+        <label  for="int">Intitulé Grade:</label>
+        <input style="margin-bottom: 15px;" name="int" id="int" ngModel [(ngModel)]="intitledGrade" class="form-control" type="text" required>
+
+
+        <label for="dir">Add one Profil to the Grade: {{intitledGrade}}</label>
+        <select id="dir" name="dir"  ngModel  [(ngModel)]="id" class="form-control" required>
+          <option  *ngFor="let opt of SpecialProfiles" [value]="opt.idProfil" [selected]="opt.selected == true">{{opt.intitled}} de Type {{opt.type}}</option>
+        </select>
+
+
+        <label style="margin-top: 15px;" for="pro">Liste Des Profils</label>
+        <div *ngIf="p == false && mod ==2"  class="list-group">
+          <a  class="list-group-item list-group-item-action" > Profils non specifiés </a>
+        </div>
+        <div id="pro" name="pro" class="list-group">
+          <span  *ngFor="let f of profils">
+            <a style="background-color: beige"  class="list-group-item list-group-item-action" >{{f.intitled}} de Type : {{f.type}} </a>
+          </span>
+        </div>
+
+
+
+        <button style="margin-top: 15px;" [disabled]="formulaire.invalid" (click)="Update()" class="btn btn-primary">Envoyer</button>
+
+      </div>
+
+    </form>
+
+
+  </div>
+
+</div>
+
+
+
+
+<button style="margin-top: 15px" *ngIf="mod == 3" class="btn btn-primary" (click)="BackToList()">Liste des Grades</button>
+
+<div *ngIf="mod == 3" class="card border-primary mb-3"  style="margin-top: 15px">
+  <div class="card-header" style="background-color: #5a57fb" >
+  </div>
+  <div class="card-body">
+
+    <form #formulaire="ngForm">
+
+      <div  class="form-group">
+
+        <label for="int2">Intitulé Grade u:</label>
+        <input name="int2" id="int2" ngModel [(ngModel)]="intitledGrade" class="form-control" type="text" required>
+
+
+        <label for="dir2">Add one Profil to the Grade: {{intitledGrade}}</label>
+        <select id="dir2" name="dir2"  ngModel  [(ngModel)]="idProfil" class="form-control" required>
+          <option  *ngFor="let opt of AllProfiles" [value]="opt.idProfil" [selected]="opt.selected == true">{{opt.intitled}} de Type {{opt.type}}</option>
+        </select>
+
+        <button [disabled]="formulaire.invalid" (click)="AddNewGrade(intitledGrade,idProfil)" class="btn btn-primary">Envoyer</button>
+
+      </div>
+
+    </form>
+
+
+  </div>
+
+</div>
+
+
+
+
+<button style="margin-top: 15px" *ngIf="mod==4" class="btn btn-primary" (click)="BackToList()">
+  Liste Des Grades
+</button>
+<div *ngIf="mod==4" class="card border-primary mb-3"  style="margin-top: 15px">
+  <div class="card-header" style="background-color: #5a57fb" >
+  </div>
+  <div class="card-body">
+
+    <table class="table table-striped mb-0" style="overflow: auto ">
+
+      <tbody>
+      <tr>
+        <th scope="col">ID Grade</th>
+      </tr>
+      <tr>
+        <td>{{AddedGrade.id}}</td>
+      </tr>
+
+      <tr>
+        <th scope="col">Intitulé Grade</th>
+      </tr>
+      <tr>
+        <td>{{AddedGrade.intitledGrade}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+

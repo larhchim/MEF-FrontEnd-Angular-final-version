@@ -1,0 +1,76 @@
+<div class="container-fluid mb-5">
+  <h1 style="text-align: center">Admin Dashboard</h1>
+
+  <div class="row">
+
+    <div [routerLink]="['gest']" routerLinkActive="active"   class="col-md-6 custom-col">
+      <div class="box">
+        <div class="our-services settings">
+          <div class="icon"> <img src="https://i.imgur.com/6NKPrhO.png"> </div>
+          <h4>Voir Gestionnaires</h4>
+          <p>Espace Modification Gestionnaires</p>
+        </div>
+      </div>
+    </div>
+
+
+    <div [routerLink]="['directions']"  class="col-md-6 custom-col">
+      <div class="box">
+        <div class="our-services speedup">
+          <div class="icon"> <img src="https://i.imgur.com/KMbnpFF.png"> </div>
+          <h4>Voir Directions</h4>
+          <p>Espace Direction MERFA</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row">
+
+    <div [routerLink]="['newGest']" routerLinkActive="active"  class="col-md-6 custom-col">
+      <div class="box">
+        <div class="our-services privacy">
+          <div class="icon"> <img src="https://i.imgur.com/AgyneKA.png"> </div>
+          <h4>Ajouter Gestionniare</h4>
+          <p>Espace Creation Gestionnaire</p>
+        </div>
+      </div>
+    </div>
+
+    <div  [routerLink]="['HomeGest']"  class="col-md-6 custom-col">
+      <div class="box">
+        <div class="our-services backups">
+          <div class="icon"> <img src="https://i.imgur.com/vdH9LKi.png"> </div>
+          <h4>Voir Concours</h4>
+          <p>Espace de previsualisation des concours</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div  [routerLink]="['gradesProfils']" routerLinkActive="active" class="col-md-6 custom-col">
+      <div class="box">
+        <div class="our-services ssl">
+          <div class="icon"> <img src="https://i.imgur.com/v6OnUqu.png"> </div>
+          <h4>Voir Grades</h4>
+          <p>Espace De Visualisation des Grades</p>
+        </div>
+      </div>
+    </div>
+
+    <div [routerLink]="['profils']" routerLinkActive="active" class="col-md-6 custom-col">
+      <div class="box">
+        <div class="our-services database">
+          <div class="icon"> <img src="https://i.imgur.com/VzjZw9M.png"> </div>
+          <h4>Voir Profils</h4>
+          <p>Espace visualisation des Profils</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+</div>

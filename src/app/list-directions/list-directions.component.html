@@ -1,0 +1,83 @@
+<h1 style="text-align: center">Espace Directions</h1>
+<button (click)="Return()" style="margin-top: 15px" *ngIf="mod==1" class="btn btn-primary">Return to Home</button>
+<div *ngIf="mod == 1" class="card border-primary mb-3" style="margin-top: 15px;overflow: auto;display: block" xmlns="http://www.w3.org/1999/html">
+  <div class="card-header" style="background-color: #5a57fb" >
+  </div>
+  <div class="card-body">
+    <div class="form-group">
+      <label style="margin-right: 5px">
+        Mot Clé:
+      </label>
+      <input (keyup.enter)="chercher()" type="text" [(ngModel)]="motcle" style="margin-right: 5px">
+      <button class="btn btn-primary" (click)="chercher()">
+        Chercher
+      </button>
+    </div>
+    <table class="table table-striped mb-0" style="overflow: auto ">
+      <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Fonction</th>
+        <th scope="col">Intitulé</th>
+        <th scope="col">Nom</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let dirs of Directions?.content;let i=index"  (click)="setClickedRow(dirs)" >
+        <td>{{dirs.id}}</td>
+        <td>{{dirs.fonction}}</td>
+        <td>{{dirs.intitled}}</td>
+        <td>{{dirs.nom}}</td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="container">
+      <ul class="nav nav-pills">
+        <li class="nav-item"  *ngFor="let p of pages; let i = index">
+          <a style="cursor:pointer" class="nav-link " [ngClass]="{'active':i==currenPage}" data-toggle="pill" (click)="gotoPage(i)">{{i}}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="bol == true" id="cover-spin"></div>
+
+<button style="margin-top: 15px" *ngIf="mod == 2" class="btn btn-primary" (click)="BackToList()">Liste des Directions</button>
+
+
+<div *ngIf="mod == 2" class="card border-primary mb-3"  style="margin-top: 15px">
+  <div class="card-header" style="background-color: #5a57fb" >
+  </div>
+  <div class="card-body">
+
+    <form #formulaire="ngForm">
+
+      <div  class="form-group">
+        <label for="id">ID:</label>
+        <input name="id" id="id" ngModel [(ngModel)]="id" class="form-control" type="text" disabled>
+
+        <label for="fonc">Fonction</label>
+        <input name="fonc" id="fonc" ngModel [(ngModel)]="fonction" class="form-control" type="text" required>
+
+        <label for="desc">Description:</label>
+        <textarea id="desc" name="desc" style="resize:none" ngModel [(ngModel)]="description" class="form-control"></textarea>
+
+
+        <label for="int">Intitulé:</label>
+        <input name="int" id="int" ngModel [(ngModel)]="intitled" class="form-control" type="text" required>
+
+
+        <label for="nm">Nom:</label>
+        <input name="nm" id="nm" ngModel [(ngModel)]="nom" class="form-control" type="text" required>
+
+        <button [disabled]="formulaire.invalid" (click)="Update()" class="btn btn-primary">Envoyer</button>
+
+      </div>
+
+    </form>
+
+
+  </div>
+
+</div>

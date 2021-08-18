@@ -1,0 +1,81 @@
+<h1 style="text-align: center">Espace Concours Ajout d'un Centre</h1>
+
+<button *ngIf="mod == 1" style="margin-top: 15px"  class="btn btn-primary" (click)="BackToList()">Liste des Concours</button>
+
+
+<div *ngIf="mod == 1"  class="card border-primary mb-3"  style="margin-top: 15px">
+  <div class="card-header" style="background-color: #5a57fb" >
+  </div>
+  <div class="card-body">
+
+    <form #formulaire="ngForm">
+
+      <div  class="form-group">
+
+        <label for="fonc">Adresse:</label>
+        <input name="fonc" id="fonc" ngModel [(ngModel)]="adresse" class="form-control" type="text" required>
+
+        <label for="desc">Salle:</label>
+        <textarea id="desc" name="desc" style="resize:none" ngModel [(ngModel)]="salle" class="form-control" required></textarea>
+
+        <label for="dir">Ville:</label>
+        <select id="dir" name="dir"  ngModel  [(ngModel)]="id" class="form-control" required>
+          <option  *ngFor="let opt of objvilles" [value]="opt.idVille" [selected]="opt.selected == true">{{opt.nomVille}}</option>
+        </select>
+        <button [disabled]="formulaire.invalid" (click)="AddNewCentre()" class="btn btn-primary">Envoyer</button>
+
+      </div>
+
+    </form>
+
+
+  </div>
+
+</div>
+
+<button *ngIf="mod == 2" style="margin-top: 80px;margin-right: 10px"  class="btn btn-primary" (click)="BackTo()">Ajouter Autre Centre</button>
+<button *ngIf="mod == 2" style="margin-top: 80px;margin-right: 10px"  class="btn btn-primary" (click)="BackToList()">Liste des Concours </button>
+
+<div *ngIf="mod==2" class="card border-primary mb-3"  style="margin-top: 15px">
+  <div class="card-header" style="background-color: #5a57fb" >
+  </div>
+  <div class="card-body">
+
+    <table class="table table-striped mb-0" style="overflow: auto ">
+
+      <tbody>
+      <tr>
+        <th scope="col">ID Centre:</th>
+      </tr>
+      <tr>
+        <td>{{AddedCentre.idCentre}}</td>
+      </tr>
+
+      <tr>
+        <th scope="col">Adresse Centre:</th>
+      </tr>
+      <tr>
+        <td>{{AddedCentre.adresse}}</td>
+      </tr>
+
+      <tr>
+        <th scope="col">Salle Centre:</th>
+      </tr>
+      <tr>
+        <td>{{AddedCentre.salle}}</td>
+      </tr>
+
+      <tr>
+        <th scope="col">ID Ville:</th>
+      </tr>
+      <tr>
+        <td>{{AddedCentre.ville.idVille}}</td>
+      </tr>
+      </tbody>
+    </table>
+
+
+
+  </div>
+
+</div>

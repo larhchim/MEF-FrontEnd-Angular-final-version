@@ -1,0 +1,143 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Fixed Bootstrap 4 Vertical Sidebar Navigation Example</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans&family=El+Messiri&family=Hind:wght@300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+
+  </script>
+</head>
+<body>
+<app-header></app-header>
+
+
+<!-- Vertical navbar -->
+<div class="vertical-nav bg-light" id="sidebar" style="overflow: auto;display: block;">
+  <div class="py-4 px-3 mb-4 bg-light">
+    <div (click)="ReturnToHome()" class="media-body">
+      <img style="cursor: pointer"  class="rounded-circle" src="assets/images/logo.jpg" width="230px" height="100px">
+    </div>
+  </div>
+
+  <p class="font-weight-bold text-uppercase px-3 small pb-4 mb-0">Main</p>
+
+  <ul class="nav flex-column bg-light mb-0">
+    <li class="nav-item">
+      <a style="cursor: pointer" (click)="ReturnToHome()" class="nav-link bg-light">
+        <i class="fa fa-th-large mr-3  fa-fw"></i>
+        Home
+      </a>
+    </li>
+    <li class="nav-item">
+      <a [routerLink]="['gest']" class="nav-link ">
+        <i class="fa fa-user-secret mr-3  fa-fw"></i>
+        Gestionnaires
+      </a>
+    </li>
+    <li class="nav-item">
+      <a [routerLink]="['directions']"  class="nav-link ">
+        <i class="fa fa-bank mr-3  fa-fw"></i>
+        Directions
+      </a>
+    </li>
+    <li class="nav-item">
+      <a [routerLink]="['gradesProfils']" class="nav-link ">
+        <i class="fa fa-graduation-cap mr-3 fa-fw"></i>
+        Grades
+      </a>
+    </li>
+    <li class="nav-item">
+      <a [routerLink]="['profils']" class="nav-link ">
+        <i class="fa fa-user-circle mr-3 fa-fw"></i>
+        Profils
+      </a>
+    </li>
+    <li class="nav-item">
+      <a [routerLink]="['HomeGest']" class="nav-link ">
+        <i class="fa fa-bullhorn mr-3 fa-fw"></i>
+        Concours
+      </a>
+    </li>
+  </ul>
+
+
+  <p class=" font-weight-bold text-uppercase px-3 small py-4 mb-0">Charts</p>
+
+  <ul class="nav flex-column bg-light mb-0">
+    <li class="nav-item">
+      <a [routerLink]="['ariachart']" class="nav-link ">
+        <i class="fa fa-area-chart mr-3 fa-fw"></i>
+        Area charts
+      </a>
+    </li>
+    <li class="nav-item">
+      <a [routerLink]="['barchart']" class="nav-link ">
+        <i class="fa fa-bar-chart mr-3 fa-fw"></i>
+        Bar charts
+      </a>
+    </li>
+    <li class="nav-item">
+      <a [routerLink]="['piechart']" class="nav-link ">
+        <i class="fa fa-pie-chart mr-3 fa-fw"></i>
+        Pie charts
+      </a>
+    </li>
+    <li class="nav-item">
+      <a [routerLink]="['linechart']" class="nav-link ">
+        <i class="fa fa-line-chart mr-3 fa-fw"></i>
+        Line charts
+      </a>
+    </li>
+  </ul>
+</div>
+<!-- End vertical navbar -->
+
+<!-- Page content holder -->
+<div class="page-content p-5" id="content">
+  <router-outlet></router-outlet>
+</div>
+<!-- End content -->
+<script>
+  try {
+    fetch(new Request("https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js", { method: 'HEAD', mode: 'no-cors' })).then(function(response) {
+      return true;
+    }).catch(function(e) {
+      var carbonScript = document.createElement("script");
+      carbonScript.src = "//cdn.carbonads.com/carbon.js?serve=CK7DKKQU&placement=wwwjqueryscriptnet";
+      carbonScript.id = "_carbonads_js";
+      document.getElementById("carbon-block").appendChild(carbonScript);
+    });
+  } catch (error) {
+    console.log(error);
+  }
+</script>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36251023-1']);
+  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</body>
+</html>

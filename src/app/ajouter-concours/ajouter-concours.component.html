@@ -1,0 +1,181 @@
+<h1 style="text-align: center">Espace Concours Ajout d'un Concours</h1>
+
+<button *ngIf="mod == 1" style="margin-top: 15px"  class="btn btn-primary" (click)="BackToList()">Liste des Concours</button>
+
+
+<div *ngIf="mod == 1"  class="card border-primary mb-3"  style="margin-top: 15px">
+  <div class="card-header" style="background-color: #5a57fb" >
+  </div>
+  <div class="card-body">
+
+    <form #formulaire="ngForm">
+
+      <div  class="form-group">
+
+        <label for="dt">Date Concours:</label>
+        <input name="dt" id="dt" ngModel [(ngModel)]="dateConcours" class="form-control" type="date" required>
+
+        <label for="dtl">Date Limite Concours:</label>
+        <input name="dtl" id="dtl" ngModel [(ngModel)]="dateLimiteConcours" class="form-control" type="datetime-local" required>
+
+
+        <label for="ps">Date Passage:</label>
+        <input name="ps" id="ps" ngModel [(ngModel)]="datePassage" class="form-control" type="date" required>
+
+        <label for="in">Intitulé:</label>
+        <input name="in" id="in" ngModel [(ngModel)]="intitled" class="form-control" type="text" required>
+
+        <label for="nm">Nombre Postes:</label>
+        <input  name="nm" id="nm" ngModel [(ngModel)]="nombrePostes" class="form-control" type="number" required>
+
+        <div *ngIf="fileStatus.status==='progress'">
+          <div class="progress">
+            <div [style.width.%]="fileStatus.percent" class="progress-bar progress-bar-animated bg-info" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+              {{ fileStatus.requestType }} {{ fileStatus.percent }}
+            </div>
+          </div>
+        </div>
+
+        <label for="xm">Communiqué Concours:</label>
+
+        <form id="xm" enctype="multipart/form-data">
+          <fieldset>
+            <div class="form-group">
+              <div>
+                <input type="file" (change)="onUploadFiles($any($event.target).files)" name="fl"  class="form-control" />
+              </div>
+            </div>
+          </fieldset>
+        </form>
+
+        <div *ngIf="filenames" class="js-upload-finished">
+          <h3>Processed files</h3>
+          <div *ngFor="let filename of filenames" class="list-group">
+            <a (click)="onDownloadFile(filename)" class="list-group-item list-group-item-success" style="cursor: pointer;">
+              {{ filename }}
+              <a class="alert-success float-right">Download</a>
+            </a><br>
+          </div>
+        </div>
+
+        <label for="etat">Etat Concours:</label>
+        <select name="etat" id="etat" [(ngModel)]="etat"  class="form-control"  ngModel required>
+          <option value="true">Activé</option>
+          <option value="false">Non Activé</option>
+        </select>
+
+        <label for="dir">Direction:</label>
+        <select id="dir" name="dir"  ngModel  [(ngModel)]="id" class="form-control" required>
+          <option  *ngFor="let opt of objdirections" [value]="opt.id" [selected]="opt.selected == true">{{opt.intitled}}: {{opt.nom}}</option>
+        </select>
+
+
+        <label for="cen">Centres:</label>
+        <!--     <select #element (change)="changeSelection(element)"  id="cen" name="cen"  ngModel  [(ngModel)]="idCentre" class="form-control" required>
+               <option  *ngFor="let opt of objCentres" [value]="opt" [selected]="opt.selected == true">{{opt.adresse}}: {{opt.ville.nomVille}}</option>
+             </select>
+     -->
+        <select class="form-control" required style="max-height: 250px;overflow: auto;display: block" id="cen" name="cen" multiple>
+          <option *ngFor="let opt of objCentres" (click)="clickedOption(opt)" [ngValue]="opt">
+            {{opt.adresse}} {{opt.ville.nomVille}}</option>
+        </select>
+
+
+
+        <div  style="max-height: 250px;overflow: auto;display: block" id="dr" class="list-group">
+          <span  *ngFor="let f of TabCentres">
+                      <a style="background-color: beige" class="list-group-item list-group-item-action" >{{f.adresse}} </a>
+          </span>
+        </div>
+
+
+        <label for="pl">Profils:</label>
+        <select style="max-height: 250px;overflow: auto;display: block" id="pl" name="pl"  ngModel   class="form-control" multiple required>
+          <option (click)="changeSelection(opt)"  *ngFor="let opt of objProfils" [ngValue]="opt" >{{opt.intitled}}: {{opt.type}}</option>
+        </select>
+
+
+        <div  style="max-height: 250px;overflow: auto;display: block" id="ddr" class="list-group">
+          <span  *ngFor="let f of TabProfils">
+                      <a style="background-color: beige" class="list-group-item list-group-item-action" >{{f.intitled}} : {{f.type}} </a>
+          </span>
+        </div>
+
+        <button [disabled]="formulaire.invalid || TabCentres.length ==0 || TabProfils.length ==0" (click)="AddNewConcours()" class="btn btn-primary">Envoyer</button>
+
+      </div>
+
+    </form>
+
+
+  </div>
+
+</div>
+
+<button *ngIf="mod == 2" style="margin-top: 80px;margin-right: 10px"  class="btn btn-primary" (click)="BackTo()">Ajouter Autre Concours</button>
+<button *ngIf="mod == 2" style="margin-top: 80px;margin-right: 10px"  class="btn btn-primary" (click)="BackToList()">Liste des Concours </button>
+
+<div *ngIf="mod==2" class="card border-primary mb-3"  style="margin-top: 15px">
+  <div class="card-header" style="background-color: #5a57fb" >
+  </div>
+  <div class="card-body">
+
+    <table class="table table-striped mb-0" style="overflow: auto ">
+
+      <tbody>
+      <tr>
+        <th scope="col">Date Concours:</th>
+      </tr>
+      <tr>
+        <td>{{AddedConcours.dateConcours}}</td>
+      </tr>
+
+      <tr>
+        <th scope="col">Date Limite Concours:</th>
+      </tr>
+      <tr>
+        <td>{{AddedConcours.dateLimiteConcours}}</td>
+      </tr>
+
+      <tr>
+        <th scope="col">Intitulé Concours:</th>
+      </tr>
+      <tr>
+        <td>{{AddedConcours.intitled}}</td>
+      </tr>
+
+      <tr>
+        <th scope="col">Nombre Postes Concours:</th>
+      </tr>
+      <tr>
+        <td>{{AddedConcours.nombrePostes}}</td>
+      </tr>
+
+      <tr>
+        <th scope="col">Centres Concours:</th>
+      </tr>
+      <tr>
+        <td style="background-color: beige" class="list-group-item list-group-item-action" *ngFor="let centre of TabCentres">
+          {{centre.adresse}}
+        </td>
+      </tr>
+      <tr>
+        <th scope="col">Profils Concours:</th>
+      </tr>
+      <tr>
+        <td style="background-color: beige" class="list-group-item list-group-item-action" *ngFor="let f of TabProfils">
+          {{f.intitled}} : {{f.type}}
+        </td>
+      </tr>
+
+
+      </tbody>
+    </table>
+
+
+
+  </div>
+
+</div>
+
+

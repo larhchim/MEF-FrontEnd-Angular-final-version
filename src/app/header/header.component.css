@@ -1,0 +1,118 @@
+@media (min-width: 1280px) {
+  nav.navbar ul.navbar-nav > li  {
+    padding: 25px 7px 25px 150px;
+    font-weight: bolder;
+    font-size: x-large;
+    cursor: pointer;
+  }
+  .dropdown-menu{
+    width: 290px;
+  }
+}
+nav.navbar ul.navbar-nav > li ,.navbar-toggler, .navbar-toggler-icon, .dropdown-menu>.dropdown-item{
+  font-weight: bolder;
+  font-size: x-large;
+  cursor: pointer;
+  color: dodgerblue;
+}
+nav.navbar ul.navbar-nav > li {
+  padding-left: 45px;
+}
+
+@media (min-width: 771px) and (max-width: 1055px) {
+  #showhide{
+    display: none!important;
+    visibility: hidden!important;
+  }
+  #showhides{
+    display: none!important;
+    visibility: hidden!important;
+  }
+}
+
+.dropdown-menu{
+  background-color: #f8f9fA;
+  border-radius: 5%;
+}
+@media (min-width: 768px) {
+  .animate {
+    animation-duration: 0.6s;
+    -webkit-animation-duration: 0.7s;
+    animation-fill-mode: both;
+    -webkit-animation-fill-mode: both;
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateY(1rem);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0rem);
+    opacity: 1;
+  }
+
+  0% {
+    transform: translateY(1rem);
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes slideIn {
+  0% {
+    -webkit-transform: transform;
+    -webkit-opacity: 0;
+  }
+
+  100% {
+    -webkit-transform: translateY(0);
+    -webkit-opacity: 1;
+  }
+
+  0% {
+    -webkit-transform: translateY(1rem);
+    -webkit-opacity: 0;
+  }
+}
+
+.slideIn {
+  -webkit-animation-name: slideIn;
+  animation-name: slideIn;
+}
+.dropdown-menu:hover{
+  background-color: #eeeeee;
+}
+
+body{
+  font-family: sans-serif;
+}
+
+
+@media (min-width: 767px) and (max-width: 945px) {
+  nav.navbar ul.navbar-nav > li {
+    font-weight:normal;
+    font-size:medium;
+    padding: 25px 7px 25px 7px;
+  }
+
+  .dropdown-menu{
+    font-size: large;
+  }
+
+}
+
+
+@media (min-width: 763px) and (max-width: 1279px) {
+  nav.navbar ul.navbar-nav > li  {
+    font-weight: bolder;
+    font-size: x-large;
+    cursor: pointer;
+    color: dodgerblue;
+  }
+
+}
+
+
+

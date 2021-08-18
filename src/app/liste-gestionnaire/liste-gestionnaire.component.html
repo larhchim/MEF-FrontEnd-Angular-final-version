@@ -1,0 +1,108 @@
+<h1 style="text-align: center">Espace Gestionnaire</h1>
+<button (click)="Return()" style="margin-top: 15px;margin-right: 15px" *ngIf="mod==1" class="btn btn-primary">Return to Home</button>
+<button (click)="GoToNewGest()" style="margin-top: 15px;margin-right: 15px" *ngIf="mod==1" class="btn btn-primary">Ajouter Gestionnaire</button>
+
+<div *ngIf="mod == 1" class="card border-primary mb-3" style="margin-top: 15px" xmlns="http://www.w3.org/1999/html">
+  <div class="card-header" style="background-color: #5a57fb" >
+  </div>
+  <div class="card-body">
+    <div class="form-group">
+      <label style="margin-right: 5px">
+        Mot Clé:
+      </label>
+      <input (keyup.enter)="chercher()" type="text" [(ngModel)]="motcle" style="margin-right: 5px">
+      <button class="btn btn-primary" (click)="chercher()">
+        Chercher
+      </button>
+    </div>
+    <table class="table table-striped mb-0" style="overflow: auto ">
+      <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Etat Compte</th>
+        <th scope="col">Habilitation</th>
+        <th scope="col">Login</th>
+        <th scope="col">Is Admin</th>
+      </tr>
+      </thead>
+      <tbody *ngIf="gestionnairedata">
+      <tr *ngFor="let gest of gestionnairedata?.content;let i=index"  (click)="setClickedRow(gest)" >
+        <td>{{gest.idGestionnaire}}</td>
+        <td>{{gest.etatcCompte}}</td>
+        <td>{{gest.habilitation}}</td>
+        <td>{{gest.login}}</td>
+        <td>{{gest.administrator}}</td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="container">
+      <ul class="nav nav-pills">
+        <li class="nav-item"  *ngFor="let p of pages; let i = index">
+          <a style="cursor:pointer" class="nav-link " [ngClass]="{'active':i==currenPage}" data-toggle="pill" (click)="gotoPage(i)">{{i}}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="bol == true" id="cover-spin"></div>
+
+<button style="margin-top: 15px" *ngIf="mod == 2" class="btn btn-primary" (click)="BackToList()">Liste des Gestionnaires</button>
+
+
+<div *ngIf="mod == 2" class="card border-primary mb-3"  style="margin-top: 15px">
+  <div class="card-header" style="background-color: #5a57fb" >
+  </div>
+  <div class="card-body">
+
+    <form #formulaire="ngForm">
+
+      <div  class="form-group">
+        <label for="log">Login:</label>
+        <input name="log" id="log" ngModel [(ngModel)]="login" class="form-control" type="text" disabled>
+
+        <label for="etat">Etat compte</label>
+        <select name="etat" id="etat" [(ngModel)]="etatcCompte"  class="form-control"  ngModel required>
+          <option value="true">Activé</option>
+          <option value="false">Non Activé</option>
+        </select>
+
+
+        <label for="hab">Habilitation:</label>
+        <input name="hab" id="hab" ngModel [(ngModel)]="habilitation" class="form-control" type="number" required>
+
+
+
+        <label for="ad">Is Administartor:</label>
+        <select id="ad" name="ad" ngModel [(ngModel)]="administrator" class="form-control" required>
+          <option value="true">True</option>
+          <option value="false">False</option>
+        </select>
+
+        <label for="dr">Liste des Directions:</label>
+        <div *ngIf="rd == null && mod ==2"  class="list-group">
+          <a style="background-color: beige" class="list-group-item list-group-item-action" > Directions non specifié </a>
+
+        </div>
+        <div style="max-height: 250px;overflow: auto;display: block" id="dr" class="list-group">
+          <span  *ngFor="let f of rd">
+                      <a style="background-color: beige" class="list-group-item list-group-item-action" >{{f.intitled}} de Fonction : {{f.nom}} </a>
+          </span>
+        </div>
+
+        <label for="dir">Add New Direction:</label>
+        <select id="dir" name="dir" ngModel   [(ngModel)]="id" class="form-control" required >
+          <option  *ngFor="let opt of objvalue" [value]="opt.id" [selected]="opt.selected == true">{{opt.nom}}</option>
+        </select>
+        <button [disabled]="!formulaire.valid || !formulaire.touched || !formulaire.dirty" class="btn btn-primary" (click)="Ajout()">
+          Envoyer
+        </button>
+
+      </div>
+
+    </form>
+
+
+  </div>
+
+</div>

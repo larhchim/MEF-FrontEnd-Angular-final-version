@@ -1,0 +1,45 @@
+<h1 style="text-align: center">Espace Concours Liste des Centres</h1>
+<button *ngIf="mod == 1" style="margin-top: 15px;margin-bottom: 20px;" (click)="BackToCocnours()" class="btn btn-primary">
+  List Concours
+</button>
+<div *ngIf="mod == 1" class="card border-primary mb-3"  xmlns="http://www.w3.org/1999/html">
+  <div class="card-header" style="background-color: #5a57fb" >
+  </div>
+  <div class="card-body">
+    <div class="form-group">
+      <label style="margin-right: 5px">
+        Mot Clé:
+      </label>
+      <input (keyup.enter)="chercher()" type="text" [(ngModel)]="motcle" style="margin-right: 5px">
+      <button class="btn btn-primary" (click)="chercher()">
+        Chercher
+      </button>
+    </div>
+    <table class="table table-striped mb-0" style="overflow: auto ">
+      <thead>
+      <tr>
+        <th scope="col">ID Centre</th>
+        <th scope="col">Adresse</th>
+        <th scope="col">Salle</th>
+        <th scope="col">Ville</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let cnc of Centres?.content;let i=index"  (click)="setClickedRow(cnc)" >
+        <td>{{cnc.idCentre}}</td>
+        <td>{{cnc.adresse}}</td>
+        <td>{{cnc.salle}}</td>
+        <td>{{cnc.ville.nomVille}}</td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="container">
+      <ul class="nav nav-pills">
+        <li class="nav-item"  *ngFor="let p of pages; let i = index">
+          <a style="cursor:pointer" class="nav-link " [ngClass]="{'active':i==currenPage}" data-toggle="pill" (click)="gotoPage(i)">{{i}}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+

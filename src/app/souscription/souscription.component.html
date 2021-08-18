@@ -1,0 +1,119 @@
+<div class="container">
+  <div  class="card border-primary mb-3"  style="margin-top: 15px">
+    <div class="card-header" style="background-color: #5a57fb" >
+    </div>
+    <div class="card-body">
+
+      <form #formulaire="ngForm">
+
+        <div  class="form-group">
+
+          <label for="dt">Adresse:</label>
+          <input name="dt" id="dt" ngModel [(ngModel)]="adresse" class="form-control" type="text" required>
+
+          <label for="dtl">Email:</label>
+          <input name="dtl" id="dtl" ngModel [(ngModel)]="adresseEmail" class="form-control" type="email" required>
+
+
+          <label for="ps1">Annee Obtention Diplome:</label>
+          <input min="1900" name="ps1" id="ps1" ngModel [(ngModel)]="anneeObtentionDiplome" class="form-control" type="number" required>
+
+          <label for="in">CIN:</label>
+          <input name="in" id="in" ngModel [(ngModel)]="cin" class="form-control" type="text" required>
+
+          <label for="nm11">Code Postal:</label>
+          <input  name="nm11" id="nm11" ngModel [(ngModel)]="codePostal" class="form-control" type="number" required>
+
+          <label for="nm1">Intitulé Diplome:</label>
+          <input  name="nm1" id="nm1" ngModel [(ngModel)]="diplomeObtenue" class="form-control" type="text" required>
+
+          <label for="nm2">Etablissement:</label>
+          <input  name="nm2" id="nm2" ngModel [(ngModel)]="etablissement" class="form-control" type="text" required>
+
+          <label for="nm3">Nom Complet:</label>
+          <input  name="nm3" id="nm3" ngModel [(ngModel)]="nomComplet" class="form-control" type="text" required>
+
+          <label for="nm33">Specialité:</label>
+          <input  name="nm33" id="nm33" ngModel [(ngModel)]="specialite" class="form-control" type="text" required>
+
+          <label for="nm44">Telephone:</label>
+          <input  name="nm44" id="nm44" ngModel [(ngModel)]="telephone" class="form-control" type="number" required>
+
+          <label for="nm4">Ville:</label>
+          <input  name="nm4" id="nm4" ngModel [(ngModel)]="ville" class="form-control" type="text" required>
+
+          <label for="nm55">Mot de passe:</label>
+          <input  name="nm55" id="nm55" ngModel [(ngModel)]="motDePasse" class="form-control" type="password" required>
+
+
+          <label for="nm5">Re Mot de passe:</label>
+          <input  name="nm5" id="nm5" ngModel [(ngModel)]="remotDePasse" class="form-control" type="password" required>
+
+          <div *ngIf="fileStatus.status==='progress'">
+            <div class="progress">
+              <div [style.width.%]="fileStatus.percent" class="progress-bar progress-bar-animated bg-info" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+                {{ fileStatus.requestType }} {{ fileStatus.percent }}
+              </div>
+            </div>
+          </div>
+
+          <label for="xm">Fichiers Joints : CIN (PDF Only)</label>
+
+          <form id="xm" enctype="multipart/form-data">
+            <fieldset>
+              <div class="form-group">
+                <div>
+                  <input *ngIf="c1 == false"  accept="application/pdf" [disabled]="cin == null || cin ==''" type="file" (change)="onUploadFiles(($any($event.target).files),'CIN')" name="fl"  class="form-control" />
+                </div>
+              </div>
+            </fieldset>
+          </form>
+
+          <label for="xm2">Fichiers Joints :Diplome (PDF Only)</label>
+          <form id="xm2" enctype="multipart/form-data">
+            <fieldset>
+              <div class="form-group">
+                <div>
+                  <input  *ngIf="c2 == false" accept="application/pdf" [disabled]="cin == null || cin ==''" type="file" (change)="onUploadFiles(($any($event.target).files),'DIPLOME')" name="fl"  class="form-control" />
+                </div>
+              </div>
+            </fieldset>
+          </form>
+
+          <label for="xm3">Fichiers Joints :CV (PDF Only)</label>
+          <form id="xm3" enctype="multipart/form-data">
+            <fieldset>
+              <div class="form-group">
+                <div>
+                  <input *ngIf="c3 == false" accept="application/pdf" [disabled]="cin == null || cin =='' " type="file" (change)="onUploadFiles(($any($event.target).files),'CV')" name="fl"  class="form-control" />
+                </div>
+              </div>
+            </fieldset>
+          </form>
+
+          <div *ngIf="filenames" class="js-upload-finished">
+            <h3>Processed files</h3>
+            <div *ngFor="let filename of filenames" class="list-group">
+              <a (click)="onDownloadFile(filename)" class="list-group-item list-group-item-success" style="cursor: pointer;">
+                {{ filename }}
+                <a class="alert-success float-right">Download</a>
+              </a><br>
+            </div>
+          </div>
+
+
+
+          <button (click)="AddNewIsncription()" [disabled]="formulaire.invalid || motDePasse!= remotDePasse" class="btn btn-primary">Envoyer</button>
+
+        </div>
+
+      </form>
+
+
+    </div>
+
+  </div>
+
+
+
+</div>

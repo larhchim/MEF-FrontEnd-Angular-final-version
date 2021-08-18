@@ -1,0 +1,178 @@
+<h1 style="text-align: center">Espace Profils</h1>
+<button (click)="Return()" style=";margin-right: 10px;margin-top: 15px" *ngIf="mod==1" class="btn btn-primary">Return to Home</button>
+<button style="margin-top: 15px;margin-right: 10px" *ngIf="mod == 1" (click)="NewProfil()" class="btn btn-primary">Add New Profile</button>
+<div *ngIf="mod == 1" class="card border-primary mb-3" style="margin-top: 15px" xmlns="http://www.w3.org/1999/html">
+  <div class="card-header" style="background-color: #5a57fb" >
+  </div>
+  <div class="card-body">
+    <div class="form-group">
+      <label style="margin-right: 5px">
+        Mot Clé:
+      </label>
+      <input  (keyup.enter)="chercher()" type="text" [(ngModel)]="motcle" style="margin-right: 5px">
+      <button class="btn btn-primary" (click)="chercher()">
+        Chercher
+      </button>
+    </div>
+    <table class="table table-striped mb-0" style="overflow: auto ">
+      <thead>
+      <tr>
+        <th scope="col">ID Profil</th>
+        <th scope="col">Intitulé Profil</th>
+        <th scope="col">Specialité Profil</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let prfl of profils?.content"  (click)="setClickedRow(prfl)" >
+        <td>{{prfl.idProfil}}</td>
+        <td>{{prfl.intitled}}</td>
+        <td>{{prfl.type}}</td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="container">
+      <ul class="nav nav-pills">
+        <li class="nav-item"  *ngFor="let p of pages; let i = index">
+          <a style="cursor:pointer" class="nav-link " [ngClass]="{'active':i==currentpage}" data-toggle="pill" (click)="gotoPage(i)">{{i}}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+
+<button style="margin-top: 15px" *ngIf="mod == 2" class="btn btn-primary" (click)="BackToList()">Liste des Profils</button>
+
+<div *ngIf="mod == 2" class="card border-primary mb-3"  style="margin-top: 15px">
+  <div class="card-header" style="background-color: #5a57fb" >
+  </div>
+  <div class="card-body">
+
+    <form #formulaire="ngForm">
+
+      <div  class="form-group">
+
+        <label for="id">ID Profil:</label>
+        <input name="id" id="id" ngModel [(ngModel)]="idProfil" class="form-control" type="text" [disabled]="mod == 2">
+
+        <label for="int">Intitulé Profil:</label>
+        <input name="int" id="int" ngModel [(ngModel)]="intitled" class="form-control" type="text" required>
+
+        <label for="ty">Specialité Profil:</label>
+        <input name="ty" id="ty" ngModel [(ngModel)]="type" class="form-control" type="text" required>
+
+        <button [disabled]="formulaire.invalid" (click)="Update()" class="btn btn-primary">Envoyer</button>
+
+      </div>
+
+    </form>
+
+
+  </div>
+
+</div>
+
+<button style="margin-top: 15px" *ngIf="mod==3" class="btn btn-primary" (click)="BackToList()">
+  Liste Profils
+</button>
+<div *ngIf="mod==3" class="card border-primary mb-3"  style="margin-top: 15px">
+  <div class="card-header" style="background-color: #5a57fb" >
+  </div>
+  <div class="card-body">
+
+    <table class="table table-striped mb-0" style="overflow: auto ">
+
+      <tbody>
+      <tr>
+        <th scope="col">ID Profil</th>
+      </tr>
+      <tr>
+        <td>{{UpdatedProfil.idProfil}}</td>
+      </tr>
+
+      <tr>
+        <th scope="col">Intitulé Profil</th>
+      </tr>
+      <tr>
+        <td>{{UpdatedProfil.intitled}}</td>
+      </tr>
+
+      <tr>
+        <th scope="col">Specialité Profil</th>
+      </tr>
+      <tr>
+        <td>{{UpdatedProfil.type}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+
+<button style="margin-top: 15px" *ngIf="mod == 4" class="btn btn-primary" (click)="BackToList()">Liste des Profils</button>
+
+<div *ngIf="mod == 4" class="card border-primary mb-3"  style="margin-top: 15px">
+  <div class="card-header" style="background-color: #5a57fb" >
+  </div>
+  <div class="card-body">
+
+    <form #formulaire="ngForm">
+
+      <div  class="form-group">
+
+        <label for="intl">Intitulé Profil:</label>
+        <input name="intl" id="intl" ngModel [(ngModel)]="intitled" class="form-control" type="text" required>
+
+        <label for="spec">Specialité Profil:</label>
+        <input name="spec" id="spec" ngModel [(ngModel)]="type" class="form-control" type="text" required>
+
+        <button [disabled]="formulaire.invalid" (click)="AddNewProfil(intitled,type)" class="btn btn-primary">Envoyer</button>
+
+      </div>
+
+    </form>
+
+
+  </div>
+
+</div>
+
+
+<button style="margin-top: 15px" *ngIf="mod==5" class="btn btn-primary" (click)="BackToList()">
+  Liste Profils
+</button>
+<div *ngIf="mod==5" class="card border-primary mb-3"  style="margin-top: 15px">
+  <div class="card-header" style="background-color: #5a57fb" >
+  </div>
+  <div class="card-body">
+
+    <table class="table table-striped mb-0" style="overflow: auto ">
+
+      <tbody>
+      <tr>
+        <th scope="col">ID Profil</th>
+      </tr>
+      <tr>
+        <td>{{AddedProfil.idProfil}}</td>
+      </tr>
+
+      <tr>
+        <th scope="col">Intitulé Profil</th>
+      </tr>
+      <tr>
+        <td>{{AddedProfil.intitled}}</td>
+      </tr>
+
+      <tr>
+        <th scope="col">Specialité Profil</th>
+      </tr>
+      <tr>
+        <td>{{AddedProfil.type}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

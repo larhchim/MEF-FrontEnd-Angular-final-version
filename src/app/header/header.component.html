@@ -1,0 +1,48 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<nav class="navbar navbar-expand-md bg-light">
+  <button class="navbar-toggler" type="button" (click)="toggleCollapsed()" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon" ngToggler></span>
+    Detail
+  </button>
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault"  [ngbCollapse]="isCollapsed" >
+    <ul  class="navbar-nav  ml-auto">
+      <li class="nav-item dropdown" ngbDropdown >
+        <a class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ngbDropdownToggle>Menu </a>
+        <div  class="dropdown-menu dropdown-menu-end animate slideIn" aria-labelledby="dropdown01" ngbDropdownMenu>
+          <a class="dropdown-item" [routerLink]="['/Admin']"  >Home</a>
+          <a class="dropdown-item" [routerLink]="['gest']"  >Liste Gestionnaires</a>
+          <a class="dropdown-item" [routerLink]="['newGest']" >Ajouter Gestionnaire</a>
+          <a class="dropdown-item" [routerLink]="['directions']">Liste Directions</a>
+          <a class="dropdown-item" [routerLink]="['gradesProfils']">Liste Grades</a>
+          <a class="dropdown-item" [routerLink]="['profils']">Liste Profils</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['gest']"  >Gestionnaires</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['directions']">Directions</a>
+      </li>
+      <li id="showhide" class="nav-item">
+        <a class="nav-link" [routerLink]="['profils']">Profils</a>
+      </li>
+      <li id="showhides" class="nav-item">
+        <a class="nav-link" [routerLink]="['gradesProfils']">Grades</a>
+      </li>
+
+
+    </ul>
+  </div>
+</nav>
+
+<script>
+  $('.dropdown').on('show.bs.dropdown', function() {
+    $(this).find('.dropdown-menu').first().stop(true, true).slideDown();
+  });
+
+  // Add slideUp animation to Bootstrap dropdown when collapsing.
+  $('.dropdown').on('hide.bs.dropdown', function() {
+    $(this).find('.dropdown-menu').first().stop(true, true).slideUp();
+  });
+</script>

@@ -1,0 +1,192 @@
+<!--
+
+  <div class="container" >
+
+    <div class="wrapper" style="float: left;margin-top: 100px">
+      <a class="cta" href="#">
+        <span>NEXT</span>
+        <span>
+      <svg width="66px" height="43px" viewBox="0 0 66 43" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <g id="arrow" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+          <path class="one" d="M40.1543933,3.89485454 L43.9763149,0.139296592 C44.1708311,-0.0518420739 44.4826329,-0.0518571125 44.6771675,0.139262789 L65.6916134,20.7848311 C66.0855801,21.1718824 66.0911863,21.8050225 65.704135,22.1989893 C65.7000188,22.2031791 65.6958657,22.2073326 65.6916762,22.2114492 L44.677098,42.8607841 C44.4825957,43.0519059 44.1708242,43.0519358 43.9762853,42.8608513 L40.1545186,39.1069479 C39.9575152,38.9134427 39.9546793,38.5968729 40.1481845,38.3998695 C40.1502893,38.3977268 40.1524132,38.395603 40.1545562,38.3934985 L56.9937789,21.8567812 C57.1908028,21.6632968 57.193672,21.3467273 57.0001876,21.1497035 C56.9980647,21.1475418 56.9959223,21.1453995 56.9937605,21.1432767 L40.1545208,4.60825197 C39.9574869,4.41477773 39.9546013,4.09820839 40.1480756,3.90117456 C40.1501626,3.89904911 40.1522686,3.89694235 40.1543933,3.89485454 Z" fill="#FFFFFF"></path>
+          <path class="two" d="M20.1543933,3.89485454 L23.9763149,0.139296592 C24.1708311,-0.0518420739 24.4826329,-0.0518571125 24.6771675,0.139262789 L45.6916134,20.7848311 C46.0855801,21.1718824 46.0911863,21.8050225 45.704135,22.1989893 C45.7000188,22.2031791 45.6958657,22.2073326 45.6916762,22.2114492 L24.677098,42.8607841 C24.4825957,43.0519059 24.1708242,43.0519358 23.9762853,42.8608513 L20.1545186,39.1069479 C19.9575152,38.9134427 19.9546793,38.5968729 20.1481845,38.3998695 C20.1502893,38.3977268 20.1524132,38.395603 20.1545562,38.3934985 L36.9937789,21.8567812 C37.1908028,21.6632968 37.193672,21.3467273 37.0001876,21.1497035 C36.9980647,21.1475418 36.9959223,21.1453995 36.9937605,21.1432767 L20.1545208,4.60825197 C19.9574869,4.41477773 19.9546013,4.09820839 20.1480756,3.90117456 C20.1501626,3.89904911 20.1522686,3.89694235 20.1543933,3.89485454 Z" fill="#FFFFFF"></path>
+          <path class="three" d="M0.154393339,3.89485454 L3.97631488,0.139296592 C4.17083111,-0.0518420739 4.48263286,-0.0518571125 4.67716753,0.139262789 L25.6916134,20.7848311 C26.0855801,21.1718824 26.0911863,21.8050225 25.704135,22.1989893 C25.7000188,22.2031791 25.6958657,22.2073326 25.6916762,22.2114492 L4.67709797,42.8607841 C4.48259567,43.0519059 4.17082418,43.0519358 3.97628526,42.8608513 L0.154518591,39.1069479 C-0.0424848215,38.9134427 -0.0453206733,38.5968729 0.148184538,38.3998695 C0.150289256,38.3977268 0.152413239,38.395603 0.154556228,38.3934985 L16.9937789,21.8567812 C17.1908028,21.6632968 17.193672,21.3467273 17.0001876,21.1497035 C16.9980647,21.1475418 16.9959223,21.1453995 16.9937605,21.1432767 L0.15452076,4.60825197 C-0.0425130651,4.41477773 -0.0453986756,4.09820839 0.148075568,3.90117456 C0.150162624,3.89904911 0.152268631,3.89694235 0.154393339,3.89485454 Z" fill="#FFFFFF"></path>
+        </g>
+      </svg>
+    </span>
+      </a>
+
+    </div>
+
+    <div class="wrapper">
+      <h4>Your way to begin</h4>
+    </div>
+
+    <div style="float: right;margin-left: 1000px">
+      <img src="assets/images/finances.svg" alt="" style="width: 400px;height: 400px;margin-top: -150px">
+    </div>
+
+  </div>
+-->
+
+<div class="container">
+  <div class="First"></div>
+  <div class="Second">
+    <div *ngIf="pod == 1" style="float: right;margin-left: 1000px">
+      <img src="assets/images/finances.svg" alt="" style="width: 400px;height: 400px;margin-top: 20px">
+    </div>
+    <div *ngIf="pod == 2" style="float: right;margin-left: 1000px;margin-top: 80px">
+      <div  class="card border-primary mb-3"  >
+        <div class="card-header" style="background-color: #5a57fb" >
+        </div>
+        <div class="card-body">
+
+          <table  class="table table-striped mb-0" style="overflow: auto;display: block;max-height: 350px ">
+            <thead>
+            <tr>
+              <th scope="col">Date Publication</th>
+              <th scope="col">Date Limite</th>
+              <th scope="col">Date Passage</th>
+              <th scope="col">Intitulé</th>
+              <th scope="col">Postes</th>
+              <th scope="col">Direction</th>
+              <th scope="col">Communiqué</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let cnc of Cocnours;let i=index"  (click)="setClickedRow(cnc)" >
+              <td>{{cnc.dateConcours}}</td>
+              <td>{{cnc.dateLimiteConcours  | date:'medium'}}</td>
+              <td>{{cnc.datePassage}}</td>
+              <td>{{cnc.intitled}}</td>
+              <td>{{cnc.nombrePostes}}</td>
+              <td>{{cnc.direction.intitled}}: {{cnc.direction.nom}}</td>
+              <td onMouseOver="this.style.color='#00F'"
+                  onMouseOut="this.style.color='black'" style="cursor: pointer;" (click)="onDownloadFile(cnc.exigences)">{{cnc.exigences}}</td>
+
+            </tr>
+            </tbody>
+          </table>
+
+
+
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="ff">
+
+    <div (click)="Clicked()" *ngIf="mod == 1" class="wrapper" style="float: left;margin-top: 100px;margin-left: 55px">
+      <a class="cta" href="#">
+        <span>NEXT</span>
+        <span>
+      <svg width="66px" height="43px" viewBox="0 0 66 43" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <g id="arrow" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+          <path class="one" d="M40.1543933,3.89485454 L43.9763149,0.139296592 C44.1708311,-0.0518420739 44.4826329,-0.0518571125 44.6771675,0.139262789 L65.6916134,20.7848311 C66.0855801,21.1718824 66.0911863,21.8050225 65.704135,22.1989893 C65.7000188,22.2031791 65.6958657,22.2073326 65.6916762,22.2114492 L44.677098,42.8607841 C44.4825957,43.0519059 44.1708242,43.0519358 43.9762853,42.8608513 L40.1545186,39.1069479 C39.9575152,38.9134427 39.9546793,38.5968729 40.1481845,38.3998695 C40.1502893,38.3977268 40.1524132,38.395603 40.1545562,38.3934985 L56.9937789,21.8567812 C57.1908028,21.6632968 57.193672,21.3467273 57.0001876,21.1497035 C56.9980647,21.1475418 56.9959223,21.1453995 56.9937605,21.1432767 L40.1545208,4.60825197 C39.9574869,4.41477773 39.9546013,4.09820839 40.1480756,3.90117456 C40.1501626,3.89904911 40.1522686,3.89694235 40.1543933,3.89485454 Z" fill="#FFFFFF"></path>
+          <path class="two" d="M20.1543933,3.89485454 L23.9763149,0.139296592 C24.1708311,-0.0518420739 24.4826329,-0.0518571125 24.6771675,0.139262789 L45.6916134,20.7848311 C46.0855801,21.1718824 46.0911863,21.8050225 45.704135,22.1989893 C45.7000188,22.2031791 45.6958657,22.2073326 45.6916762,22.2114492 L24.677098,42.8607841 C24.4825957,43.0519059 24.1708242,43.0519358 23.9762853,42.8608513 L20.1545186,39.1069479 C19.9575152,38.9134427 19.9546793,38.5968729 20.1481845,38.3998695 C20.1502893,38.3977268 20.1524132,38.395603 20.1545562,38.3934985 L36.9937789,21.8567812 C37.1908028,21.6632968 37.193672,21.3467273 37.0001876,21.1497035 C36.9980647,21.1475418 36.9959223,21.1453995 36.9937605,21.1432767 L20.1545208,4.60825197 C19.9574869,4.41477773 19.9546013,4.09820839 20.1480756,3.90117456 C20.1501626,3.89904911 20.1522686,3.89694235 20.1543933,3.89485454 Z" fill="#FFFFFF"></path>
+          <path class="three" d="M0.154393339,3.89485454 L3.97631488,0.139296592 C4.17083111,-0.0518420739 4.48263286,-0.0518571125 4.67716753,0.139262789 L25.6916134,20.7848311 C26.0855801,21.1718824 26.0911863,21.8050225 25.704135,22.1989893 C25.7000188,22.2031791 25.6958657,22.2073326 25.6916762,22.2114492 L4.67709797,42.8607841 C4.48259567,43.0519059 4.17082418,43.0519358 3.97628526,42.8608513 L0.154518591,39.1069479 C-0.0424848215,38.9134427 -0.0453206733,38.5968729 0.148184538,38.3998695 C0.150289256,38.3977268 0.152413239,38.395603 0.154556228,38.3934985 L16.9937789,21.8567812 C17.1908028,21.6632968 17.193672,21.3467273 17.0001876,21.1497035 C16.9980647,21.1475418 16.9959223,21.1453995 16.9937605,21.1432767 L0.15452076,4.60825197 C-0.0425130651,4.41477773 -0.0453986756,4.09820839 0.148075568,3.90117456 C0.150162624,3.89904911 0.152268631,3.89694235 0.154393339,3.89485454 Z" fill="#FFFFFF"></path>
+        </g>
+      </svg>
+    </span>
+      </a>
+
+    </div>
+
+    <div *ngIf="mod ==2" style="margin-top: 100px">
+      <label for="dir">Profils:</label>
+
+      <select (change)="changeSelection(intitled)" id="dir" name="dir"  ngModel  [(ngModel)]="intitled" class="form-control" required>
+        <option  *ngFor="let opt of objProfils" [value]="opt.intitled" [selected]="opt.selected == true">{{opt.intitled}} de Type {{opt.type}}</option>
+      </select>
+
+    </div>
+
+  </div>
+  <div class="gg" style="text-align: center;font-family: 'Hind', sans-serif">
+    <h4 style="color: #00b4db;font-family: 'Arabic Typesetting';font-size: xx-large">Your way to begin with Us.....</h4>
+    <p>
+      <span style="color: #f99324">Please Click the Next Button to choose your convenient Profile from the above List</span> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus alias cupiditate deserunt, doloribus ducimus enim et, ipsa laudantium maiores quis reiciendis veniam. Accusamus consectetur eos harum laboriosam rem repellat rerum.
+    </p>
+
+  </div>
+</div>
+
+<!-- Wave SVG Animation -->
+<div class="waves">
+  <svg width="100%" height="200px" fill="none" version="1.1"
+       xmlns="http://www.w3.org/2000/svg">
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00B4DB" />
+      <stop offset="50%" stop-color="#224488" />
+      <stop offset="100%" stop-color="#0083B0" />
+    </linearGradient>
+    <path
+      fill="url(#grad1)"
+      d="
+          M0 67
+          C 273,183
+            822,-40
+            1920.00,106
+
+          V 359
+          H 0
+          V 67
+          Z">
+      <animate
+        repeatCount="indefinite"
+        fill="url(#grad1)"
+        attributeName="d"
+        dur="15s"
+        attributeType="XML"
+        values="
+            M0 77
+            C 473,283
+              822,-40
+              1920,116
+
+            V 359
+            H 0
+            V 67
+            Z;
+
+            M0 77
+            C 473,-40
+              1222,283
+              1920,136
+
+            V 359
+            H 0
+            V 67
+            Z;
+
+            M0 77
+            C 973,260
+              1722,-53
+              1920,120
+
+            V 359
+            H 0
+            V 67
+            Z;
+
+            M0 77
+            C 473,283
+              822,-40
+              1920,116
+
+            V 359
+            H 0
+            V 67
+            Z
+            ">
+      </animate>
+    </path>
+  </svg>
+</div>
+
+
+
+

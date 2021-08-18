@@ -1,0 +1,134 @@
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script></head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
+<h1 style="text-align: center">Espace Ajout Nouveau Gestionnaire</h1>
+<button (click)="Return()" style="margin-top: 15px;margin-right: 10px" *ngIf="mod==1" class="btn btn-primary">Return to Home</button>
+<button (click)="ReturnList()" style="margin-top: 15px;margin-right: 10px" *ngIf="mod==1" class="btn btn-primary">Liste gestionnaires</button>
+
+<div *ngIf="mod==1" class="card border-primary mb-3"  style="margin-top: 15px">
+  <div class="card-header" style="background-color: #5a57fb" >
+  </div>
+  <div class="card-body">
+
+    <form #formulaire="ngForm">
+
+      <div  class="form-group">
+        <label for="etat">Etat compte</label>
+        <select name="etat" id="etat" [(ngModel)]="etatcCompte"  class="form-control"  ngModel required>
+          <option value="true">Activé</option>
+          <option value="false">Non Activé</option>
+        </select>
+
+
+        <label for="hab">Habilitation</label>
+        <select id="hab" name="hab" ngModel [(ngModel)]="habilitation" class="form-control" required>
+          <option value="1">Partielle</option>
+          <option value="2">Globale</option>
+          <option value="0">None</option>
+        </select>
+
+        <label for="log">Login</label>
+        <input id="log" name="log" ngModel [(ngModel)]="login"  class="form-control" email required>
+
+
+        <label for="ad">Is Administartor</label>
+        <select id="ad" name="ad" ngModel [(ngModel)]="administrator" class="form-control" required>
+          <option value="true">True</option>
+          <option value="false">False</option>
+        </select>
+
+
+
+
+        <label for="dir">Direction</label>
+        <input class="form-control" required  id="dir" name="dir" type="text"  list="codes" [(ngModel)]="id" >
+        <datalist id="codes">
+          <option *ngFor="let c of objvalue" [value]="c.nom" >{{c.nom}}</option>
+        </datalist>
+
+        <!--
+        <select  id="dir" name="dir"  ngModel  [(ngModel)]="id" class="form-control" required>
+        <option  *ngFor="let opt of objvalue" [value]="opt.id" [selected]="opt.selected == true">{{opt.nom}}</option>
+        </select>
+  -->
+
+        <button [disabled]="!formulaire.valid || !formulaire.touched || !formulaire.dirty" class="btn btn-primary" (click)="Ajout()">
+          Envoyer
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
+
+<div *ngIf="bol == true" id="cover-spin"></div>
+
+
+<div *ngIf="mod==2" class="card border-primary mb-3"  style="margin-top: 45px">
+  <div class="card-header" style="background-color: #5a57fb" >
+  </div>
+  <div class="card-body">
+
+    <table class="table table-striped mb-0" style="overflow: auto ">
+
+      <tbody>
+      <tr>
+        <th scope="col">ID</th>
+      </tr>
+      <tr>
+        <td>{{Gestio.idGestionnaire}}</td>
+      </tr>
+
+      <tr>
+        <th scope="col">Etat compte</th>
+      </tr>
+      <tr>
+        <td>{{Gestio.etatcCompte}}</td>
+      </tr>
+
+      <tr>
+        <th scope="col">Habilitation</th>
+      </tr>
+      <tr>
+        <td>{{Gestio.habilitation}}</td>
+      </tr>
+
+      <tr>
+        <th scope="col">Login</th>
+      </tr>
+      <tr>
+        <td>{{Gestio.login}}</td>
+      </tr>
+
+      <tr>
+        <th scope="col">Is Administartor</th>
+      </tr>
+      <tr>
+        <td>{{Gestio.administrator}}</td>
+      </tr>
+      </tbody>
+    </table>
+
+
+    <button class="btn btn-primary" (click)="AjoutGest()">
+      Ajouter Gestionnaire
+    </button>
+
+  </div>
+
+</div>
+
+<script>
+  $(document).ready(function () {
+    $('select').selectize({
+      sortField: 'text'
+    });
+  });
+</script>
