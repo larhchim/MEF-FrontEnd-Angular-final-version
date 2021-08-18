@@ -100,8 +100,6 @@ export class ListDirectionsComponent implements OnInit {
     this.Change(this.fonction,this.description,this.intitled,this.nom);
     this.ngOnInit();
     this.chercher()
-    this.ngOnInit();
-
   }
   Return(){
     this.route.navigate(['Admin']);

@@ -5,7 +5,6 @@ import {saveAs} from 'file-saver';
 import {FileServiceService} from '../file-service.service';
 import {SgestionnaireService} from '../Services/sgestionnaire.service';
 import {SinscriptionService} from '../Services/sinscription.service';
-import {formatDate} from '@angular/common';
 import {Fichiers} from '../Model/Fichiers';
 @Component({
   selector: 'app-souscription',
@@ -75,6 +74,7 @@ export class SouscriptionComponent implements OnInit {
       },
       (error) => {
         this.ss.showError('Error cannot add data to server','Error 500 Internal')
+        console.log(error.status)
       },
       () => {
         // tslint:disable-next-line:forin
@@ -110,7 +110,6 @@ export class SouscriptionComponent implements OnInit {
 
 
   // define a function to download files
-  fileInput: any;
   onDownloadFile(filename: string): void {
     this.fileService.download(filename).subscribe(
       event => {
