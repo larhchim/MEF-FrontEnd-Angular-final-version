@@ -23,7 +23,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let dirs of Directions?.content;let i=index"  (click)="setClickedRow(dirs)" >
+      <tr [ngClass]="darkEnabled==true ? 'some-class__normal':'some-class__success'"  *ngFor="let dirs of Directions?.content;let i=index"  (click)="setClickedRow(dirs)" >
         <td>{{dirs.id}}</td>
         <td>{{dirs.fonction}}</td>
         <td>{{dirs.intitled}}</td>

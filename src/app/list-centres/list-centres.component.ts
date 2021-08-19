@@ -3,6 +3,7 @@ import {ScentreService} from '../Services/scentre.service';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {SgestionnaireService} from '../Services/sgestionnaire.service';
+import {GlobalConstants} from "../GlobalConstants";
 
 @Component({
   selector: 'app-list-centres',
@@ -16,9 +17,11 @@ export class ListCentresComponent implements OnInit {
   currenPage:any = 0;
   Centres:any;
   size:any = 5;
+  darkEnabled:any
   constructor(private centre:ScentreService,private route:Router,private ss:SgestionnaireService) { }
 
   ngOnInit(): void {
+    this.darkEnabled =GlobalConstants.darkEnabled;
     this.centre.getCentres(this.motcle,this.size,this.currenPage).subscribe(
       (resp) => {
         this.Centres = resp;

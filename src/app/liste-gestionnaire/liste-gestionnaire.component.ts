@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 import {Gestionnaire} from '../Model/Gestionnaire';
 import {SgestionnaireService} from '../Services/sgestionnaire.service';
 import {Router} from '@angular/router';
+import {GlobalConstants} from "../GlobalConstants";
 
 @Component({
   selector: 'app-liste-gestionnaire',
@@ -35,6 +36,7 @@ export class ListeGestionnaireComponent implements OnInit {
   motDePasse:any;
   mod:any;
   bol:any;
+  darkEnabled:any;
   // tslint:disable-next-line:no-empty
   constructor(private http:HttpClient,
               private gservice:SgestionnaireService,private route:Router) { }
@@ -43,6 +45,7 @@ export class ListeGestionnaireComponent implements OnInit {
   ngOnInit(): void {
     // @ts-ignore
     this.mod =1;
+    this.darkEnabled =GlobalConstants.darkEnabled;
 
     // tslint:disable-next-line:no-empty
     this.gservice.getGestionnaire(this.motcle,this.currenPage,this.size).subscribe(result => {

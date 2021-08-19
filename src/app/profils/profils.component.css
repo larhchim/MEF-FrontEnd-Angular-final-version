@@ -41,3 +41,11 @@ tbody tr:hover td, tbody tr:hover th {
 .ng-invalid.ng-touched {
   border-color: red;
 }
+
+.some-class__success{
+  color: #1d1d22;
+}
+
+.some-class__normal:nth-child(2n) > td,.some-class__normal:nth-child(2n+1) > td{
+  color: white;
+}

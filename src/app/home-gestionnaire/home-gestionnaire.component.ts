@@ -6,6 +6,7 @@ import { saveAs } from 'file-saver';
 
 import {FileServiceService} from '../file-service.service';
 import {HttpErrorResponse, HttpEvent, HttpEventType} from '@angular/common/http';
+import {GlobalConstants} from "../GlobalConstants";
 
 @Component({
   selector: 'app-home-gestionnaire',
@@ -22,6 +23,7 @@ export class HomeGestionnaireComponent implements OnInit {
   filenames: string[] = [];
   fileStatus = { status: '', requestType: '', percent: 0 };
   Headline ='';
+  darkEnabled:any;
   constructor(private route:Router,private cnc:SconcoursService,private ss:SgestionnaireService,
               private fileService: FileServiceService) {
   }
@@ -29,6 +31,7 @@ export class HomeGestionnaireComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.darkEnabled =GlobalConstants.darkEnabled;
     this.cnc.getConcours(this.motcle,this.size,this.currenPage).subscribe(
       (resp) => {
         this.Cocnours =resp;

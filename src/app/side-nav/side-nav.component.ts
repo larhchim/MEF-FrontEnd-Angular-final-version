@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 
 @Component({
@@ -8,6 +8,7 @@ import {Router} from '@angular/router';
 })
 export class SideNavComponent implements OnInit {
   toogle = '';
+  @Input() @Output()darkMode:any;
   constructor(private route:Router) { }
 
   // tslint:disable-next-line:no-empty

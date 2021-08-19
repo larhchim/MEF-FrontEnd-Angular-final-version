@@ -26,8 +26,8 @@
       </tr>
       </thead>
       <tbody *ngIf="gestionnairedata">
-      <tr *ngFor="let gest of gestionnairedata?.content;let i=index"  (click)="setClickedRow(gest)" >
-        <td>{{gest.idGestionnaire}}</td>
+      <tr [ngClass]="darkEnabled==true ?   'some-class__normal':'some-class__success'"  *ngFor="let gest of gestionnairedata?.content;let i=index"  (click)="setClickedRow(gest)" >
+        <td >{{gest.idGestionnaire}}</td>
         <td>{{gest.etatcCompte}}</td>
         <td>{{gest.habilitation}}</td>
         <td>{{gest.login}}</td>
@@ -81,10 +81,10 @@
 
         <label for="dr">Liste des Directions:</label>
         <div *ngIf="rd == null && mod ==2"  class="list-group">
-          <a style="background-color: beige" class="list-group-item list-group-item-action" > Directions non specifié </a>
+          <a style="color: #1d1d22;background-color: beige" class="list-group-item list-group-item-action" > Directions non specifié </a>
 
         </div>
-        <div style="max-height: 250px;overflow: auto;display: block" id="dr" class="list-group">
+        <div style="max-height: 250px;overflow: auto;display: block;color: #1d1d22" id="dr" class="list-group">
           <span  *ngFor="let f of rd">
                       <a style="background-color: beige" class="list-group-item list-group-item-action" >{{f.intitled}} de Fonction : {{f.nom}} </a>
           </span>

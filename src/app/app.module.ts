@@ -33,6 +33,7 @@ import { AjouterCentreComponent } from './ajouter-centre/ajouter-centre.componen
 import { ListCentresComponent } from './list-centres/list-centres.component';
 import { CandidatureComponent } from './candidature/candidature.component';
 import { SouscriptionComponent } from './souscription/souscription.component';
+import { NgApexchartsModule } from "ng-apexcharts";
 
 
 
@@ -64,6 +65,7 @@ import { SouscriptionComponent } from './souscription/souscription.component';
   ],
   imports: [
     BrowserModule,
+    NgApexchartsModule,
     MDBBootstrapModulesPro.forRoot(),
     ToastModule.forRoot(),
     BrowserAnimationsModule,

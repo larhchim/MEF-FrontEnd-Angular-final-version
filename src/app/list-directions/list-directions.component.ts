@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {SdirectionsService} from '../Services/sdirections.service';
 import {SgestionnaireService} from '../Services/sgestionnaire.service';
 import {Router} from '@angular/router';
+import {GlobalConstants} from "../GlobalConstants";
 
 @Component({
   selector: 'app-list-directions',
@@ -22,11 +23,13 @@ export class ListDirectionsComponent implements OnInit {
   intitled:any;
   nom:any;
   bol:any;
+  darkEnabled:any;
   constructor(private serv:SdirectionsService,private  ss:SgestionnaireService,private route:Router) { }
 
   ngOnInit(): void {
     this.mod = 1
     this.motcle = '';
+    this.darkEnabled =GlobalConstants.darkEnabled;
     this.serv.getDirections(this.motcle,this.size,this.currenPage).subscribe(
       (resp) =>{
         this.Directions = resp;

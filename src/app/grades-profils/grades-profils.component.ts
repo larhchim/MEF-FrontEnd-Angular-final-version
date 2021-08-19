@@ -3,6 +3,7 @@ import {SgradesService} from '../Services/sgrades.service';
 import {SgestionnaireService} from '../Services/sgestionnaire.service';
 import {element} from 'protractor';
 import {Router} from '@angular/router';
+import {GlobalConstants} from "../GlobalConstants";
 
 @Component({
   selector: 'app-grades-profils',
@@ -28,11 +29,12 @@ export class GradesProfilsComponent implements OnInit {
   SpecialProfiles:any;
   AddedGrade:any;
   idGardeSelected:any;
-
+  darkEnabled:any;
   constructor(private serv:SgradesService,private ss:SgestionnaireService,private route:Router) { }
 
   ngOnInit(): void {
     this.mod = 1;
+    this.darkEnabled =GlobalConstants.darkEnabled;
     this.serv.getAllGrades(this.motcle,this.size,this.currentpage).subscribe(
       (resp) => {
         this.Grades = resp;

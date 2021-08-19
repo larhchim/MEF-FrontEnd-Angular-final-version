@@ -22,7 +22,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let grd of Grades?.content"  (click)="setClickedRow(grd)" >
+      <tr [ngClass]="darkEnabled==true ?   'some-class__normal':'some-class__success'"  *ngFor="let grd of Grades?.content"  (click)="setClickedRow(grd)" >
         <td>{{grd.id}}</td>
         <td>{{grd.intitledGrade}}</td>
       </tr>

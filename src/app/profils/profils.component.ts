@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ProfilService} from '../Services/profil.service';
 import {SgestionnaireService} from '../Services/sgestionnaire.service';
 import {Router} from '@angular/router';
+import {GlobalConstants} from "../GlobalConstants";
 
 @Component({
   selector: 'app-profils',
@@ -21,9 +22,11 @@ export class ProfilsComponent implements OnInit {
   idProfil:any;
   UpdatedProfil:any;
   AddedProfil:any;
+  darkEnabled:any;
   constructor(private pserv:ProfilService,private ss:SgestionnaireService,private route:Router) { }
 
   ngOnInit(): void {
+    this.darkEnabled =GlobalConstants.darkEnabled;
     this.pserv.getAllProfils(this.motcle,this.currentpage,this.size).subscribe(
       (resp) => {
         // @ts-ignore

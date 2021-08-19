@@ -23,7 +23,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let prfl of profils?.content"  (click)="setClickedRow(prfl)" >
+      <tr [ngClass]="darkEnabled==true ?   'some-class__normal':'some-class__success'"  *ngFor="let prfl of profils?.content"  (click)="setClickedRow(prfl)" >
         <td>{{prfl.idProfil}}</td>
         <td>{{prfl.intitled}}</td>
         <td>{{prfl.type}}</td>
@@ -54,7 +54,7 @@
       <div  class="form-group">
 
         <label for="id">ID Profil:</label>
-        <input name="id" id="id" ngModel [(ngModel)]="idProfil" class="form-control" type="text" [disabled]="mod == 2">
+        <input style="cursor: not-allowed" name="id" id="id" ngModel [(ngModel)]="idProfil" class="form-control" type="text" [disabled]="mod == 2">
 
         <label for="int">Intitulé Profil:</label>
         <input name="int" id="int" ngModel [(ngModel)]="intitled" class="form-control" type="text" required>

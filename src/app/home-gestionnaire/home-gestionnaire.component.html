@@ -13,7 +13,7 @@
 
 
     <!-- Toggle button -->
-    <button (click)="toggleCollapsed()"
+    <button style="color:white;border: 1px solid white;" (click)="toggleCollapsed()"
             class="navbar-toggler"
             type="button"
             data-mdb-toggle="collapse"
@@ -92,7 +92,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let cnc of Cocnours?.content;let i=index"  (click)="setClickedRow(cnc)" >
+      <tr [ngClass]="darkEnabled==true ?   'some-class__normal':'some-class__success'"  *ngFor="let cnc of Cocnours?.content;let i=index"  (click)="setClickedRow(cnc)" >
         <td>{{cnc.idConcours}}</td>
         <td>{{cnc.dateConcours}}</td>
         <td>{{cnc.dateLimiteConcours  | date:'medium'}}</td>
