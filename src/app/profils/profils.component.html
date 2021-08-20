@@ -9,12 +9,12 @@
       <label style="margin-right: 5px">
         Mot Clé:
       </label>
-      <input  (keyup.enter)="chercher()" type="text" [(ngModel)]="motcle" style="margin-right: 5px">
-      <button class="btn btn-primary" (click)="chercher()">
+      <input class="form-control" class="col-md-6" (keyup.enter)="chercher()" type="text" [(ngModel)]="motcle" style="margin-right: 5px">
+      <button  class="col-md-6" class="btn btn-primary" (click)="chercher()">
         Chercher
       </button>
     </div>
-    <table class="table table-striped mb-0" style="overflow: auto ">
+    <table class="table table-striped mb-0"  id="re">
       <thead>
       <tr>
         <th scope="col">ID Profil</th>
@@ -23,7 +23,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr [ngClass]="darkEnabled==true ?   'some-class__normal':'some-class__success'"  *ngFor="let prfl of profils?.content"  (click)="setClickedRow(prfl)" >
+      <tr [ngClass]="darkEnabled==true ?   'some-class__normal':'some-class__success'"   *ngFor="let prfl of profils?.content"  (click)="setClickedRow(prfl)" >
         <td>{{prfl.idProfil}}</td>
         <td>{{prfl.intitled}}</td>
         <td>{{prfl.type}}</td>
