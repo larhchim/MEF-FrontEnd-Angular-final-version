@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpEvent} from '@angular/common/http';
+import {HttpClient, HttpEvent, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {SAuthentificationService} from "./Services/sauthentification.service";
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,6 @@ export class FileServiceService {
   private server = 'http://localhost:8083';
 
   constructor(private http: HttpClient) {}
-
   // define function to upload files
   upload(formData: FormData): Observable<HttpEvent<string[]>> {
     return this.http.post<string[]>(`${this.server}/file/upload`, formData, {

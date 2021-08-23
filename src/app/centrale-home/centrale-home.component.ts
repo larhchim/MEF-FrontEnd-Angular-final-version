@@ -19,14 +19,13 @@ export class CentraleHomeComponent implements OnInit {
       },
       (error) => {
         this.srv.logout();
-        this.route.navigateByUrl('/LoginPage')
+        this.route.navigateByUrl('/LoginPage');
       }
     )
   }
 
   LogOut(){
     this.srv.logout();
-    this.route.navigateByUrl('/LoginPage')
   }
 
 }

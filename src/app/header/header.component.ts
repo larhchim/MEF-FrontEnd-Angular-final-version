@@ -15,6 +15,16 @@ export class HeaderComponent implements OnInit {
 
   // tslint:disable-next-line:no-empty
   ngOnInit(): void {
+    this.srev.loadToken();
+    this.srev.getDirectionTest().subscribe(
+      (resp) => {
+
+      },
+      (error) => {
+        this.srev.logout();
+        this.route.navigateByUrl('/LoginPage');
+      }
+    )
   }
   isCollapsed = true;
   @Input()dark =true;

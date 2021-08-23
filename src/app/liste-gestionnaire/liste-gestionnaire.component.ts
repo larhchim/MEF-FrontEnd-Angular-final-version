@@ -5,6 +5,7 @@ import {Gestionnaire} from '../Model/Gestionnaire';
 import {SgestionnaireService} from '../Services/sgestionnaire.service';
 import {Router} from '@angular/router';
 import {GlobalConstants} from "../GlobalConstants";
+import {SAuthentificationService} from "../Services/sauthentification.service";
 
 @Component({
   selector: 'app-liste-gestionnaire',
@@ -39,10 +40,20 @@ export class ListeGestionnaireComponent implements OnInit {
   darkEnabled:any;
   // tslint:disable-next-line:no-empty
   constructor(private http:HttpClient,
-              private gservice:SgestionnaireService,private route:Router) { }
+              private gservice:SgestionnaireService,private route:Router,private srv:SAuthentificationService) { }
 
   // tslint:disable-next-line:no-empty
   ngOnInit(): void {
+    this.srv.loadToken();
+    this.srv.getDirectionTest().subscribe(
+      (resp) => {
+
+      },
+      (error) => {
+        this.srv.logout();
+        this.route.navigateByUrl('/LoginPage');
+      }
+    )
     // @ts-ignore
     this.mod =1;
     this.darkEnabled =GlobalConstants.darkEnabled;

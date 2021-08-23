@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {SvillesService} from '../Services/svilles.service';
 import {SgestionnaireService} from '../Services/sgestionnaire.service';
 import {ScentreService} from '../Services/scentre.service';
+import {SAuthentificationService} from "../Services/sauthentification.service";
 
 @Component({
   selector: 'app-ajouter-centre',
@@ -17,17 +18,22 @@ export class AjouterCentreComponent implements OnInit {
   mod=1;
   AddedCentre:any;
   constructor(private route:Router,private ville:SvillesService,private ss:SgestionnaireService,
-              private centre:ScentreService) { }
+              private centre:ScentreService,private srv:SAuthentificationService) { }
 
   ngOnInit(): void {
+    this.srv.loadToken();
+    this.srv.getDirectionTest().subscribe(
+      (resp) => {
+
+      },
+      (error) => {
+        this.srv.logout();
+        this.route.navigateByUrl('/LoginPage');
+      }
+    )
     this.ville.getVilles().subscribe(
       (resp) => {
         this.objvilles =resp;
-      },
-      (error) => {
-        this.ss.showError('Internal Server Error Contact the Admin',"Message Error 500");
-        // tslint:disable-next-line:no-console
-        console.log(error);
       }
     )
   }

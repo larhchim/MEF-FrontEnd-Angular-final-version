@@ -9,6 +9,7 @@ import {HttpErrorResponse, HttpEvent, HttpEventType} from '@angular/common/http'
 import { saveAs } from 'file-saver';
 import {FileServiceService} from '../file-service.service';
 import {Fichiers} from '../Model/Fichiers';
+import {SAuthentificationService} from "../Services/sauthentification.service";
 
 @Component({
   selector: 'app-ajouter-concours',
@@ -43,9 +44,20 @@ export class AjouterConcoursComponent implements OnInit {
               private profil:ProfilService,private direction:SdirectionsService,
               private concours:SconcoursService,
               private ss:SgestionnaireService,
-              private fileService: FileServiceService) { }
+              private fileService: FileServiceService,
+              private srv:SAuthentificationService) { }
 
   ngOnInit(): void {
+    this.srv.loadToken();
+    this.srv.getDirectionTest().subscribe(
+      (resp) => {
+
+      },
+      (error) => {
+        this.srv.logout();
+        this.route.navigateByUrl('/LoginPage');
+      }
+    )
     this.TabCentres = [];
     this.TabProfils = [];
     this.centre.getAllCentres().subscribe(

@@ -7,6 +7,7 @@ import { saveAs } from 'file-saver';
 import {FileServiceService} from '../file-service.service';
 import {HttpErrorResponse, HttpEvent, HttpEventType} from '@angular/common/http';
 import {GlobalConstants} from "../GlobalConstants";
+import {SAuthentificationService} from "../Services/sauthentification.service";
 
 @Component({
   selector: 'app-home-gestionnaire',
@@ -25,12 +26,22 @@ export class HomeGestionnaireComponent implements OnInit {
   Headline ='';
   darkEnabled:any;
   constructor(private route:Router,private cnc:SconcoursService,private ss:SgestionnaireService,
-              private fileService: FileServiceService) {
+              private fileService: FileServiceService,private srv:SAuthentificationService) {
   }
 
 
 
   ngOnInit(): void {
+    this.srv.loadToken();
+    this.srv.getDirectionTest().subscribe(
+      (resp) => {
+
+      },
+      (error) => {
+        this.srv.logout();
+        this.route.navigateByUrl('/LoginPage');
+      }
+    )
     this.darkEnabled =GlobalConstants.darkEnabled;
     this.cnc.getConcours(this.motcle,this.size,this.currenPage).subscribe(
       (resp) => {

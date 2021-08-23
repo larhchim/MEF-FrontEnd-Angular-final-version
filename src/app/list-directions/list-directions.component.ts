@@ -3,6 +3,7 @@ import {SdirectionsService} from '../Services/sdirections.service';
 import {SgestionnaireService} from '../Services/sgestionnaire.service';
 import {Router} from '@angular/router';
 import {GlobalConstants} from "../GlobalConstants";
+import {SAuthentificationService} from "../Services/sauthentification.service";
 
 @Component({
   selector: 'app-list-directions',
@@ -24,9 +25,19 @@ export class ListDirectionsComponent implements OnInit {
   nom:any;
   bol:any;
   darkEnabled:any;
-  constructor(private serv:SdirectionsService,private  ss:SgestionnaireService,private route:Router) { }
+  constructor(private serv:SdirectionsService,private  ss:SgestionnaireService,private route:Router,private srv:SAuthentificationService) { }
 
   ngOnInit(): void {
+    this.srv.loadToken();
+    this.srv.getDirectionTest().subscribe(
+      (resp) => {
+
+      },
+      (error) => {
+        this.srv.logout();
+        this.route.navigateByUrl('/LoginPage');
+      }
+    )
     this.mod = 1
     this.motcle = '';
     this.darkEnabled =GlobalConstants.darkEnabled;

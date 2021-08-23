@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {SgestionnaireService} from '../Services/sgestionnaire.service';
 import {Router} from '@angular/router';
 import {SdirectionsService} from '../Services/sdirections.service';
+import {SAuthentificationService} from "../Services/sauthentification.service";
 
 @Component({
   selector: 'app-add-gestionnaire',
@@ -37,13 +38,24 @@ export class AddGestionnaireComponent implements OnInit {
   newid:any;
 
   // @ts-ignore
-  constructor(private serv:SgestionnaireService,private route:Router,private se:SdirectionsService) { }
+  constructor(private serv:SgestionnaireService,private route:Router,private se:SdirectionsService,private srv:SAuthentificationService) { }
 
   ngOnInit(): void {
+
+    this.srv.loadToken();
+    this.srv.getDirectionTest().subscribe(
+      (resp) => {
+
+      },
+      (error) => {
+        this.srv.logout();
+        this.route.navigateByUrl('/LoginPage');
+      }
+    )
+
     this.serv.getDirections().subscribe(
       (resp) => {
         this.objvalue = resp;
-        console.log(resp);
       }
     )
     this.mod = 1;

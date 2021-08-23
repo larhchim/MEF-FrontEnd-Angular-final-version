@@ -4,6 +4,7 @@ import {SgestionnaireService} from '../Services/sgestionnaire.service';
 import {element} from 'protractor';
 import {Router} from '@angular/router';
 import {GlobalConstants} from "../GlobalConstants";
+import {SAuthentificationService} from "../Services/sauthentification.service";
 
 @Component({
   selector: 'app-grades-profils',
@@ -30,9 +31,19 @@ export class GradesProfilsComponent implements OnInit {
   AddedGrade:any;
   idGardeSelected:any;
   darkEnabled:any;
-  constructor(private serv:SgradesService,private ss:SgestionnaireService,private route:Router) { }
+  constructor(private serv:SgradesService,private ss:SgestionnaireService,private route:Router,private srv:SAuthentificationService) { }
 
   ngOnInit(): void {
+    this.srv.loadToken();
+    this.srv.getDirectionTest().subscribe(
+      (resp) => {
+
+      },
+      (error) => {
+        this.srv.logout();
+        this.route.navigateByUrl('/LoginPage');
+      }
+    )
     this.mod = 1;
     this.darkEnabled =GlobalConstants.darkEnabled;
     this.serv.getAllGrades(this.motcle,this.size,this.currentpage).subscribe(

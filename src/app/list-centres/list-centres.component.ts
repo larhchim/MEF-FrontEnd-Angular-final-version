@@ -4,6 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {SgestionnaireService} from '../Services/sgestionnaire.service';
 import {GlobalConstants} from "../GlobalConstants";
+import {SAuthentificationService} from "../Services/sauthentification.service";
 
 @Component({
   selector: 'app-list-centres',
@@ -18,9 +19,20 @@ export class ListCentresComponent implements OnInit {
   Centres:any;
   size:any = 5;
   darkEnabled:any
-  constructor(private centre:ScentreService,private route:Router,private ss:SgestionnaireService) { }
+  constructor(private centre:ScentreService,private route:Router,private ss:SgestionnaireService,private srv:SAuthentificationService) { }
 
   ngOnInit(): void {
+    this.srv.loadToken();
+    this.srv.getDirectionTest().subscribe(
+      (resp) => {
+
+      },
+      (error) => {
+        this.srv.logout();
+        this.route.navigateByUrl('/LoginPage');
+      }
+    )
+
     this.darkEnabled =GlobalConstants.darkEnabled;
     this.centre.getCentres(this.motcle,this.size,this.currenPage).subscribe(
       (resp) => {

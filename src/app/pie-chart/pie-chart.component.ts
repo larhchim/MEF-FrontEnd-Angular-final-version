@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart, BarElement,LinearScale, BarController, CategoryScale, Decimation, Filler, Legend, Title, Tooltip} from 'chart.js';
+import {SAuthentificationService} from "../Services/sauthentification.service";
+import {Router} from "@angular/router";
 
 
 
@@ -11,6 +13,16 @@ import { Chart, BarElement,LinearScale, BarController, CategoryScale, Decimation
 export class PieChartComponent implements OnInit  {
 
   ngOnInit(): void {
+    this.srv.loadToken();
+    this.srv.getDirectionTest().subscribe(
+      (resp) => {
+
+      },
+      (error) => {
+        this.srv.logout();
+        this.route.navigateByUrl('/LoginPage');
+      }
+    )
     var myChart = new Chart("MYCHART", {
       type: 'bar',
       data: {
@@ -48,7 +60,7 @@ export class PieChartComponent implements OnInit  {
   }
 
 
-  constructor() {
+  constructor(private srv:SAuthentificationService,private route:Router) {
 
     Chart.register(BarElement,LinearScale, BarController, CategoryScale, Decimation, Filler, Legend, Title, Tooltip);
 

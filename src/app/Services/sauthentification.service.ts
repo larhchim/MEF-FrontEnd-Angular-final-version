@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {JwtHelper} from "angular2-jwt";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class SAuthentificationService {
   private host :string = "http://localhost:8083";
   // @ts-ignore
   private roles:Array<any>;
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient,private route:Router) { }
 
   login(user:any){
     return this.http.post(this.host+'/login',user,{observe:'response'}).pipe()
@@ -27,6 +28,7 @@ export class SAuthentificationService {
   loadToken(){
     this.jwtToken = localStorage.getItem('token');
     let jwtHelper = new JwtHelper();
+    if(this.jwtToken!=null)
     this.roles = jwtHelper.decodeToken(this.jwtToken).roles;
   }
 
@@ -46,12 +48,27 @@ export class SAuthentificationService {
   }
 
   isAdmin(){
+    if (this.roles!=null)
     for (let  au of this.roles) {
-
-      if (au.authority == "ADMIN") return true
-
+      if (au.authority == "ADMIN") return true;
     }
-    return false
+    return false;
+  }
+
+  isGestLV1(){
+    if (this.roles!=null)
+      for (let au of this.roles) {
+      if (au.authority == "GESTLV1") return true;
+    }
+    return false;
+  }
+
+  isGestLV2(){
+    if (this.roles!=null)
+      for (let au of this.roles){
+      if (au.authority == "GESTLV2") return true;
+    }
+    return false;
   }
 
 }
