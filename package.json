@@ -24,6 +24,7 @@
     "@syncfusion/ej2-angular-buttons": "^19.2.47",
     "@syncfusion/ej2-angular-navigations": "^19.2.51",
     "@types/file-saver": "^2.0.3",
+    "angular2-jwt": "^0.2.3",
     "apexcharts": "^3.27.3",
     "bootstrap": "^5.0.2",
     "chart.js": "^3.5.1",

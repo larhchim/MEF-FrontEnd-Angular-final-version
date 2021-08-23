@@ -25,9 +25,11 @@
         </div>
       </li>
 
-      <li class="#showhides" class="nav-item">
-        <a class="nav-link" [routerLink]="['HomeGest']">Concours</a>
+      <li (click)="LogOut()" class="#showhides" class="nav-item">
+        <i class="fa fa-sign-out" style="font-size:48px;color:dodgerblue"></i>
       </li>
+
+
       <li class="#showhidess" class="nav-item">
         <a class="nav-link" [routerLink]="['/Admin']">Home</a>
       </li>
