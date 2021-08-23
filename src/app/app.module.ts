@@ -34,6 +34,7 @@ import { ListCentresComponent } from './list-centres/list-centres.component';
 import { CandidatureComponent } from './candidature/candidature.component';
 import { SouscriptionComponent } from './souscription/souscription.component';
 import { NgApexchartsModule } from "ng-apexcharts";
+import { AuthentificationComponent } from './authentification/authentification.component';
 
 
 
@@ -61,7 +62,8 @@ import { NgApexchartsModule } from "ng-apexcharts";
     AjouterCentreComponent,
     ListCentresComponent,
     CandidatureComponent,
-    SouscriptionComponent
+    SouscriptionComponent,
+    AuthentificationComponent
   ],
   imports: [
     BrowserModule,

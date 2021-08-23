@@ -44,24 +44,20 @@
           <table  class="table table-striped mb-0" style="overflow: auto;display: block;max-height: 350px ">
             <thead>
             <tr>
-              <th scope="col">Date Publication</th>
               <th scope="col">Date Limite</th>
               <th scope="col">Date Passage</th>
               <th scope="col">Intitulé</th>
               <th scope="col">Postes</th>
-              <th scope="col">Direction</th>
               <th scope="col">Communiqué</th>
 
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let cnc of Cocnours;let i=index"  (click)="setClickedRow(cnc)" >
-              <td>{{cnc.dateConcours}}</td>
               <td>{{cnc.dateLimiteConcours  | date:'medium'}}</td>
               <td>{{cnc.datePassage}}</td>
               <td>{{cnc.intitled}}</td>
               <td>{{cnc.nombrePostes}}</td>
-              <td>{{cnc.direction.intitled}}: {{cnc.direction.nom}}</td>
               <td onMouseOver="this.style.color='#00F'"
                   onMouseOut="this.style.color='black'" style="cursor: pointer;" (click)="onDownloadFile(cnc.exigences)">{{cnc.exigences}}</td>
 

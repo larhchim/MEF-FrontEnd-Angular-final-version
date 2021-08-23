@@ -18,6 +18,7 @@ import {ListCentresComponent} from './list-centres/list-centres.component';
 import {SideNavComponent} from './side-nav/side-nav.component';
 import {CandidatureComponent} from "./candidature/candidature.component";
 import {SouscriptionComponent} from "./souscription/souscription.component";
+import {AuthentificationComponent} from "./authentification/authentification.component";
 
 const APP_ROUTING: Routes = [
   {
@@ -40,6 +41,7 @@ const APP_ROUTING: Routes = [
       {path: '**', component: ErrorComponent}
     ]
   },
+  {path: 'LoginPage', component:AuthentificationComponent},
   {path: '',component:CandidatureComponent},
   {path: 'Candidat',component:CandidatureComponent},
   {path: 'Inscription/:id',component:SouscriptionComponent},

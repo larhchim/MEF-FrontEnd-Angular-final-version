@@ -23,4 +23,7 @@ export class SgradesService {
   ModifyGrade(id:number,G:any){
     return this.http.put('http://localhost:8083/UpdateGrade/'+id+'',G).pipe()
   }
+  TousLesGrades(){
+    return this.http.get('http://localhost:8083/ALLGrades').pipe();
+  }
 }

@@ -128,6 +128,16 @@
         <label for="spec">Specialité Profil:</label>
         <input name="spec" id="spec" ngModel [(ngModel)]="type" class="form-control" type="text" required>
 
+        <label for="pl">Grades:</label>
+        <select style="max-height: 250px;overflow: auto;display: block" id="pl" name="pl"  ngModel   class="form-control" multiple required>
+          <option (click)="changeSelection(opt)"  *ngFor="let opt of objGrades" [ngValue]="opt" >{{opt.intitledGrade}}</option>
+        </select>
+        <div  style="max-height: 250px;overflow: auto;display: block" id="ddr" class="list-group">
+          <span  *ngFor="let f of TabGrades">
+                      <a style="background-color: beige;color: #1d1d22" class="list-group-item list-group-item-action" >{{f.intitledGrade}} </a>
+          </span>
+        </div>
+
         <button [disabled]="formulaire.invalid" (click)="AddNewProfil(intitled,type)" class="btn btn-primary">Envoyer</button>
 
       </div>

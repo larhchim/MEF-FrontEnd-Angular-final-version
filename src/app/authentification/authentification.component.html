@@ -1,0 +1,29 @@
+
+
+<div   class="card border-primary mb-3 col-md-6 col-sm-6 mx-auto "  style="margin-top: 200px" >
+  <div class="card-header" style="background-color: #5a57fb" >
+    <span style="color: white;text-align: center">Authentification</span>
+  </div>
+  <div class="card-body">
+
+    <form #formulaire="ngForm" (ngSubmit)="SeConnecter(formulaire.value)">
+
+      <div  class="form-group">
+
+        <label class="control-label" for="login">Email:</label>
+        <input email name="login" id="login" ngModel [(ngModel)]="username" class="form-control" type="text" required>
+
+        <label class="form-label" for="motDePasse">Mot De Passe:</label>
+        <input name="motDePasse" id="motDePasse" ngModel [(ngModel)]="password" class="form-control" type="password" required>
+
+
+        <button [disabled]="formulaire.invalid"  class="btn btn-primary">Envoyer</button>
+
+      </div>
+
+    </form>
+
+
+  </div>
+
+</div>

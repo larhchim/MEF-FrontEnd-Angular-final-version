@@ -3,6 +3,7 @@ import {ProfilService} from '../Services/profil.service';
 import {SgestionnaireService} from '../Services/sgestionnaire.service';
 import {Router} from '@angular/router';
 import {GlobalConstants} from "../GlobalConstants";
+import {SgradesService} from "../Services/sgrades.service";
 
 @Component({
   selector: 'app-profils',
@@ -23,7 +24,10 @@ export class ProfilsComponent implements OnInit {
   UpdatedProfil:any;
   AddedProfil:any;
   darkEnabled:any;
-  constructor(private pserv:ProfilService,private ss:SgestionnaireService,private route:Router) { }
+  objGrades:any;
+  // @ts-ignore
+  TabGrades:any[] = [];
+  constructor(private pserv:ProfilService,private ss:SgestionnaireService,private route:Router,private grade:SgradesService) { }
 
   ngOnInit(): void {
     this.darkEnabled =GlobalConstants.darkEnabled;
@@ -43,6 +47,17 @@ export class ProfilsComponent implements OnInit {
         this.ss.showSuccess('Loaded Successfully','Message de Confirmation 200')
       }
     )
+    this.grade.TousLesGrades().subscribe(
+      (resp) => {
+        this.objGrades =resp;
+      },
+      (error) => {
+        console.log(error)
+      },
+      () => {
+
+      }
+    )
   }
   NewProfil(){
     this.type ='';
@@ -51,7 +66,8 @@ export class ProfilsComponent implements OnInit {
     this.mod = 4;
   }
   AddNewProfil(intitled:any,type:any){
-    this.pserv.AddOneProfil({intitled,type}).subscribe(
+    const TabGrades = this.TabGrades;
+    this.pserv.AddOneProfil({intitled,type,grades:TabGrades}).subscribe(
       (resp) => {
         this.AddedProfil =resp;
       },
@@ -63,6 +79,8 @@ export class ProfilsComponent implements OnInit {
         console.log('Completed');
         this.mod = 5;
         this.ss.showSuccess('Profile Added Successfully','Message de Confirmation 200');
+        this.TabGrades = [];
+        this.ngOnInit();
       }
     )
   }
@@ -120,5 +138,10 @@ export class ProfilsComponent implements OnInit {
   }
   Return(){
     this.route.navigate(['Admin']);
+  }
+  changeSelection(option:any){
+    this.TabGrades.push(option);
+    this.objGrades.splice(option,1);
+    // tslint:disable-next-line:no-console
   }
 }
