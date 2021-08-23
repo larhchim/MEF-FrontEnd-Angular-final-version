@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {SAuthentificationService} from "../Services/sauthentification.service";
 import {Router} from "@angular/router";
+import {SgestionnaireService} from "../Services/sgestionnaire.service";
 
 @Component({
   selector: 'app-centrale-home',
@@ -9,7 +10,7 @@ import {Router} from "@angular/router";
 })
 export class CentraleHomeComponent implements OnInit {
 
-  constructor(public srv:SAuthentificationService,private route:Router) { }
+  constructor(public srv:SAuthentificationService,private route:Router,private ss:SgestionnaireService) { }
 
   ngOnInit(): void {
     this.srv.loadToken();
@@ -22,6 +23,8 @@ export class CentraleHomeComponent implements OnInit {
         this.route.navigateByUrl('/LoginPage');
       }
     )
+
+
   }
 
   LogOut(){

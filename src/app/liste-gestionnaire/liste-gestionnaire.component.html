@@ -94,7 +94,7 @@
         <select id="dir" name="dir" ngModel   [(ngModel)]="id" class="form-control" required >
           <option  *ngFor="let opt of objvalue" [value]="opt.id" [selected]="opt.selected == true">{{opt.nom}}</option>
         </select>
-        <button [disabled]="!formulaire.valid || !formulaire.touched || !formulaire.dirty" class="btn btn-primary" (click)="Ajout()">
+        <button *ngIf="srv.isAdmin()==true || srv.isGestLV1()==true" [disabled]="!formulaire.valid || !formulaire.touched || !formulaire.dirty" class="btn btn-primary" (click)="Ajout()">
           Envoyer
         </button>
 

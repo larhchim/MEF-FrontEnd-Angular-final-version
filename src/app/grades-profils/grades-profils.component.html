@@ -1,6 +1,6 @@
 <h1 style="text-align: center">Espace Gestion Des Grades</h1>
 <button (click)="Return()" style=";margin-right: 10px;margin-top: 15px" *ngIf="mod==1" class="btn btn-primary">Return to Home</button>
-<button style="margin-top: 15px;margin-right: 10px" *ngIf="mod == 1" (click)="NewGrade()" class="btn btn-primary">Add New Grade</button>
+<button  style="margin-top: 15px;margin-right: 10px" *ngIf="mod == 1 &&(srv.isAdmin()==true || srv.isGestLV1()==true)" (click)="NewGrade()" class="btn btn-primary">Add New Grade</button>
 <div *ngIf="mod == 1" class="card border-primary mb-3" style="margin-top: 15px" xmlns="http://www.w3.org/1999/html">
   <div class="card-header" style="background-color: #5a57fb" >
   </div>
@@ -76,7 +76,7 @@
 
 
 
-        <button style="margin-top: 15px;" [disabled]="formulaire.invalid" (click)="Update()" class="btn btn-primary">Envoyer</button>
+        <button *ngIf="srv.isAdmin()==true || srv.isGestLV1()==true" style="margin-top: 15px;" [disabled]="formulaire.invalid" (click)="Update()" class="btn btn-primary">Envoyer</button>
 
       </div>
 
@@ -110,7 +110,7 @@
           <option  *ngFor="let opt of AllProfiles" [value]="opt.idProfil" [selected]="opt.selected == true">{{opt.intitled}} de Type {{opt.type}}</option>
         </select>
 
-        <button [disabled]="formulaire.invalid" (click)="AddNewGrade(intitledGrade,idProfil)" class="btn btn-primary">Envoyer</button>
+        <button *ngIf="srv.isAdmin()==true || srv.isGestLV1()==true" [disabled]="formulaire.invalid" (click)="AddNewGrade(intitledGrade,idProfil)" class="btn btn-primary">Envoyer</button>
 
       </div>
 

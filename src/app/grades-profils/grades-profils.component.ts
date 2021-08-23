@@ -31,7 +31,7 @@ export class GradesProfilsComponent implements OnInit {
   AddedGrade:any;
   idGardeSelected:any;
   darkEnabled:any;
-  constructor(private serv:SgradesService,private ss:SgestionnaireService,private route:Router,private srv:SAuthentificationService) { }
+  constructor(private serv:SgradesService,private ss:SgestionnaireService,private route:Router,public srv:SAuthentificationService) { }
 
   ngOnInit(): void {
     this.srv.loadToken();

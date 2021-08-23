@@ -34,7 +34,7 @@ export class AuthentificationComponent implements OnInit {
        this.ss.showError('Server Internal Error Error Login',"Username / Password are incorrect ");
       },
       () => {
-       this.ss.showSuccess('Message de Confirmation 200',"logged successfully");
+       this.ss.showSuccess(''+this.servAuth.leUsername()+'',"logged successfully");
       }
     )
   }

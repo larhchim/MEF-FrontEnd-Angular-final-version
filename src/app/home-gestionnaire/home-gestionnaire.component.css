@@ -51,3 +51,4 @@ tbody tr:hover td, tbody tr:hover th {
 .some-class__normal:nth-child(2n) > td,.some-class__normal:nth-child(2n+1) > td{
   color: white;
 }
+

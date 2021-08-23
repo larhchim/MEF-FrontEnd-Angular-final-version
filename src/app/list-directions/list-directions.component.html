@@ -71,7 +71,7 @@
         <label for="nm">Nom:</label>
         <input name="nm" id="nm" ngModel [(ngModel)]="nom" class="form-control" type="text" required>
 
-        <button [disabled]="formulaire.invalid" (click)="Update()" class="btn btn-primary">Envoyer</button>
+        <button *ngIf="srv.isAdmin()==true || srv.isGestLV1()==true" [disabled]="formulaire.invalid" (click)="Update()" class="btn btn-primary">Envoyer</button>
 
       </div>
 

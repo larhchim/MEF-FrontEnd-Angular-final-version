@@ -12,6 +12,7 @@ export class SAuthentificationService {
   private host :string = "http://localhost:8083";
   // @ts-ignore
   private roles:Array<any>;
+  private username="";
   constructor(private http:HttpClient,private route:Router) { }
 
   login(user:any){
@@ -23,13 +24,17 @@ export class SAuthentificationService {
     localStorage.setItem('token',jwt);
     let jwtHelper = new JwtHelper();
     this.roles = jwtHelper.decodeToken(this.jwtToken).roles;
+    this.username = jwtHelper.decodeToken(this.jwtToken).sub;
+    localStorage.setItem('username',this.username);
   }
 
   loadToken(){
     this.jwtToken = localStorage.getItem('token');
     let jwtHelper = new JwtHelper();
-    if(this.jwtToken!=null)
-    this.roles = jwtHelper.decodeToken(this.jwtToken).roles;
+    if(this.jwtToken!=null){
+      this.roles = jwtHelper.decodeToken(this.jwtToken).roles;
+      this.username = jwtHelper.decodeToken(this.jwtToken).sub;
+    }
   }
 
   getDirectionTest(){
@@ -39,12 +44,19 @@ export class SAuthentificationService {
 
   logout(){
     this.jwtToken = null;
+    this.username ="";
     localStorage.removeItem('token');
+    localStorage.removeItem('username');
   }
 
   leToken(){
     if (this.jwtToken == null) return localStorage.getItem('token');
     return this.jwtToken;
+  }
+
+  leUsername(){
+    if (this.username == "") return localStorage.getItem('username');
+    return this.username;
   }
 
   isAdmin(){

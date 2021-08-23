@@ -58,6 +58,10 @@ export class AjouterConcoursComponent implements OnInit {
         this.route.navigateByUrl('/LoginPage');
       }
     )
+    if (this.srv.isAdmin()==false && this.srv.isGestLV1()==false){
+      this.route.navigateByUrl('/LoginPage');
+      return;
+    }
     this.TabCentres = [];
     this.TabProfils = [];
     this.centre.getAllCentres().subscribe(

@@ -13,7 +13,7 @@
 
 
     <!-- Toggle button -->
-    <button style="color:white;border: 1px solid white;" (click)="toggleCollapsed()"
+    <button style="color: dodgerblue;border: dodgerblue 5px solid"  (click)="toggleCollapsed()"
             class="navbar-toggler"
             type="button"
             data-mdb-toggle="collapse"
@@ -32,10 +32,10 @@
       <div class="d-flex align-items-center">
 
 
-        <button *ngIf="mod == 1" style="margin-top: 30px;margin-bottom: 20px;margin-right: 5px" (click)="ToNewConcours()" class="btn btn-primary me-3">
+        <button *ngIf="mod == 1 &&(srv.isAdmin()==true || srv.isGestLV1()==true)" style="margin-top: 30px;margin-bottom: 20px;margin-right: 5px" (click)="ToNewConcours()" class="btn btn-primary me-3">
           Ajouter Concours
         </button>
-        <button *ngIf="mod == 1" style="margin-top: 30px;margin-bottom: 20px;margin-right: 5px" (click)="ToNewCentre()" class="btn btn-primary me-3">
+        <button *ngIf="mod == 1 &&(srv.isAdmin()==true || srv.isGestLV1()==true)" style="margin-top: 30px;margin-bottom: 20px;margin-right: 5px" (click)="ToNewCentre()" class="btn btn-primary me-3">
           Ajouter Centre
         </button>
         <button *ngIf="mod == 1" style="margin-top: 30px;margin-bottom: 20px;margin-right: 5px" (click)="ToListCentre()" class="btn btn-primary me-3">

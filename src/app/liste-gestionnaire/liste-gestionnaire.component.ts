@@ -40,7 +40,7 @@ export class ListeGestionnaireComponent implements OnInit {
   darkEnabled:any;
   // tslint:disable-next-line:no-empty
   constructor(private http:HttpClient,
-              private gservice:SgestionnaireService,private route:Router,private srv:SAuthentificationService) { }
+              private gservice:SgestionnaireService,private route:Router,public srv:SAuthentificationService) { }
 
   // tslint:disable-next-line:no-empty
   ngOnInit(): void {

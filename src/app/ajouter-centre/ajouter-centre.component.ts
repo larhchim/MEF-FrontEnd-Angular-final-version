@@ -31,6 +31,11 @@ export class AjouterCentreComponent implements OnInit {
         this.route.navigateByUrl('/LoginPage');
       }
     )
+
+    if (this.srv.isAdmin()==false && this.srv.isGestLV1()==false){
+      this.route.navigateByUrl('/LoginPage');
+      return;
+    }
     this.ville.getVilles().subscribe(
       (resp) => {
         this.objvilles =resp;

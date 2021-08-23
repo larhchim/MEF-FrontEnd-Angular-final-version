@@ -10,7 +10,7 @@ import {SAuthentificationService} from "../Services/sauthentification.service";
 export class SideNavComponent implements OnInit {
   toogle = '';
   @Input() @Output()darkMode:any;
-  constructor(private route:Router,private srv:SAuthentificationService) { }
+  constructor(private route:Router,public srv:SAuthentificationService) { }
 
   // tslint:disable-next-line:no-empty
   ngOnInit(): void {

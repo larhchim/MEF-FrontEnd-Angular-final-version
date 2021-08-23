@@ -29,7 +29,7 @@ export class ProfilsComponent implements OnInit {
   // @ts-ignore
   TabGrades:any[] = [];
   constructor(private pserv:ProfilService,private ss:SgestionnaireService,
-              private route:Router,private grade:SgradesService,private srv:SAuthentificationService) { }
+              private route:Router,private grade:SgradesService,public srv:SAuthentificationService) { }
 
   ngOnInit(): void {
     this.srv.loadToken();

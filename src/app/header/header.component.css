@@ -186,3 +186,11 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
+.bCOL{
+  color: white;
+}
+
+.bCOL2{
+  color: #1d1d22;
+}

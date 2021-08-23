@@ -3,7 +3,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <nav class="navbar navbar-expand-md  bg-light  " [ngClass]="dark==true ?'bg-dark': 'bg-light'">
-  <button style="color: #1d1d22" class="navbar-toggler" type="button" (click)="toggleCollapsed()" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+  <button [ngClass]="dark==true ? 'bCOL' : 'bCOL2'" class="navbar-toggler" type="button" (click)="toggleCollapsed()" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
     <i class="fa fa-bars"></i>
     Detail
   </button>
@@ -13,20 +13,20 @@
         <a class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ngbDropdownToggle>Menu </a>
         <div  class="dropdown-menu dropdown-menu-end animate slideIn" aria-labelledby="dropdown01" ngbDropdownMenu>
           <a class="dropdown-item" [routerLink]="['/Admin']"  >Home</a>
-          <a class="dropdown-item" [routerLink]="['gest']"  >Liste Gestionnaires</a>
-          <a class="dropdown-item" [routerLink]="['newGest']" >Ajouter Gestionnaire</a>
+          <a *ngIf="srev.isAdmin()==true" class="dropdown-item" [routerLink]="['gest']"  >Liste Gestionnaires</a>
+          <a *ngIf="srev.isAdmin()==true" class="dropdown-item" [routerLink]="['newGest']" >Ajouter Gestionnaire</a>
           <a class="dropdown-item" [routerLink]="['directions']">Liste Directions</a>
           <a class="dropdown-item" [routerLink]="['gradesProfils']">Liste Grades</a>
           <a class="dropdown-item" [routerLink]="['profils']">Liste Profils</a>
           <a class="dropdown-item" [routerLink]="['HomeGest']">Concours</a>
-          <a class="dropdown-item" [routerLink]="['AddConcours']">Add Concours</a>
+          <a *ngIf="srev.isAdmin()==true || srev.isGestLV1()==true" class="dropdown-item" [routerLink]="['AddConcours']">Add Concours</a>
           <a class="dropdown-item" [routerLink]="['listCentres']">Centres</a>
-          <a class="dropdown-item" [routerLink]="['AddCentre']">Add Centre</a>
+          <a *ngIf="srev.isAdmin()==true || srev.isGestLV1()==true" class="dropdown-item" [routerLink]="['AddCentre']">Add Centre</a>
         </div>
       </li>
 
       <li (click)="LogOut()" class="#showhides" class="nav-item">
-        <i class="fa fa-sign-out" style="font-size:48px;color:dodgerblue"></i>
+        <i class="fa fa-sign-out" title="{{srev.leUsername()}}" style="font-size:48px;color:dodgerblue"></i>
       </li>
 
 

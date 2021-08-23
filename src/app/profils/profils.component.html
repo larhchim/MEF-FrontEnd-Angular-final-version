@@ -1,6 +1,6 @@
 <h1 style="text-align: center">Espace Profils</h1>
 <button (click)="Return()" style=";margin-right: 10px;margin-top: 15px" *ngIf="mod==1" class="btn btn-primary">Return to Home</button>
-<button style="margin-top: 15px;margin-right: 10px" *ngIf="mod == 1" (click)="NewProfil()" class="btn btn-primary">Add New Profile</button>
+<button style="margin-top: 15px;margin-right: 10px" *ngIf="mod == 1 &&(srv.isAdmin()==true || srv.isGestLV1()==true)" (click)="NewProfil()" class="btn btn-primary">Add New Profile</button>
 <div *ngIf="mod == 1" class="card border-primary mb-3" style="margin-top: 15px" xmlns="http://www.w3.org/1999/html">
   <div class="card-header" style="background-color: #5a57fb" >
   </div>
@@ -62,7 +62,7 @@
         <label for="ty">Specialité Profil:</label>
         <input name="ty" id="ty" ngModel [(ngModel)]="type" class="form-control" type="text" required>
 
-        <button [disabled]="formulaire.invalid" (click)="Update()" class="btn btn-primary">Envoyer</button>
+        <button *ngIf="srv.isGestLV1()==true || srv.isAdmin()==true" [disabled]="formulaire.invalid" (click)="Update()" class="btn btn-primary">Envoyer</button>
 
       </div>
 

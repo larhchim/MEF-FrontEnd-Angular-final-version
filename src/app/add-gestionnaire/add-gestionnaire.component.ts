@@ -53,6 +53,11 @@ export class AddGestionnaireComponent implements OnInit {
       }
     )
 
+    if (this.srv.isAdmin()!=true){
+      this.route.navigateByUrl('/LoginPage');
+      return;
+    }
+
     this.serv.getDirections().subscribe(
       (resp) => {
         this.objvalue = resp;

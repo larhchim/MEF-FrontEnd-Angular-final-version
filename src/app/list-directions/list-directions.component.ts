@@ -25,7 +25,7 @@ export class ListDirectionsComponent implements OnInit {
   nom:any;
   bol:any;
   darkEnabled:any;
-  constructor(private serv:SdirectionsService,private  ss:SgestionnaireService,private route:Router,private srv:SAuthentificationService) { }
+  constructor(private serv:SdirectionsService,private  ss:SgestionnaireService,private route:Router,public srv:SAuthentificationService) { }
 
   ngOnInit(): void {
     this.srv.loadToken();

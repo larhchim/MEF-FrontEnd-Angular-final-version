@@ -26,7 +26,7 @@ export class HomeGestionnaireComponent implements OnInit {
   Headline ='';
   darkEnabled:any;
   constructor(private route:Router,private cnc:SconcoursService,private ss:SgestionnaireService,
-              private fileService: FileServiceService,private srv:SAuthentificationService) {
+              private fileService: FileServiceService,public srv:SAuthentificationService) {
   }
 
 

@@ -19,7 +19,7 @@ export class ListCentresComponent implements OnInit {
   Centres:any;
   size:any = 5;
   darkEnabled:any
-  constructor(private centre:ScentreService,private route:Router,private ss:SgestionnaireService,private srv:SAuthentificationService) { }
+  constructor(private centre:ScentreService,private route:Router,private ss:SgestionnaireService,public srv:SAuthentificationService) { }
 
   ngOnInit(): void {
     this.srv.loadToken();
