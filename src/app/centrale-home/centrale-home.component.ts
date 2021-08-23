@@ -9,9 +9,10 @@ import {Router} from "@angular/router";
 })
 export class CentraleHomeComponent implements OnInit {
 
-  constructor(private srv:SAuthentificationService,private route:Router) { }
+  constructor(public srv:SAuthentificationService,private route:Router) { }
 
   ngOnInit(): void {
+    this.srv.loadToken();
     this.srv.getDirectionTest().subscribe(
       (resp) => {
 
