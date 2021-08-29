@@ -13,4 +13,7 @@ export class SinscriptionService {
   AddInscription(G:any,id:any){
     return this.http.post('http://localhost:8083/AddInscription/'+id+'',G).pipe()
   }
+  RecuInscription(G:any,id:number){
+    return this.http.post("http://localhost:8083/users/export/pdf/"+id,G).pipe()
+  }
 }

@@ -10,7 +10,7 @@ export class FileServiceService {
 
   private server = 'http://localhost:8083';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,private ss:SAuthentificationService) {}
   // define function to upload files
   upload(formData: FormData): Observable<HttpEvent<string[]>> {
     return this.http.post<string[]>(`${this.server}/file/upload`, formData, {

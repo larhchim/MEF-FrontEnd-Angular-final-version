@@ -17,4 +17,5 @@ export class SconcoursService {
   SpecificConcours(name:any){
     return this.http.get('http://localhost:8083/SearchBYProf/'+name+'').pipe()
   }
+
 }

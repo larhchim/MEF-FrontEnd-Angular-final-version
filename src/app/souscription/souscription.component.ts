@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {HttpErrorResponse, HttpEvent, HttpEventType} from '@angular/common/http';
 import {saveAs} from 'file-saver';
 import {FileServiceService} from '../file-service.service';
 import {SgestionnaireService} from '../Services/sgestionnaire.service';
 import {SinscriptionService} from '../Services/sinscription.service';
 import {Fichiers} from '../Model/Fichiers';
+import {GlobalConstants} from "../GlobalConstants";
+import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 @Component({
   selector: 'app-souscription',
   templateUrl: './souscription.component.html',
@@ -13,6 +15,9 @@ import {Fichiers} from '../Model/Fichiers';
 })
 export class SouscriptionComponent implements OnInit {
 
+  // @ts-ignore
+  closeResult: string;
+  bool=0;
   id: any;
   nomComplet:any;
   adresse:any;
@@ -39,15 +44,50 @@ export class SouscriptionComponent implements OnInit {
   c3=false;
   // @ts-ignore
   TabFichiers:Fichiers[] = [] ;
-  constructor(private activatedRoute: ActivatedRoute,private fileService:FileServiceService ,private ss:SgestionnaireService,private isncr:SinscriptionService) {
+  Errors:any;
+  err=0;
+  UserAlredayEx:any;
+  ee=0;
+  SavedSubscription:any;
+  Prf:any;
+  qsd=0;
+  ct:any;
+  mod=0;
+
+  constructor(private activatedRoute: ActivatedRoute,
+              private fileService:FileServiceService ,
+              private ss:SgestionnaireService,
+              private isncr:SinscriptionService,private modalService: NgbModal,
+              private route:Router) {
   }
 
   ngOnInit(): void {
-    this.id = this.activatedRoute.snapshot.paramMap.get('id');
+    this.id = this.activatedRoute.snapshot.paramMap.get('id')
+    this.Prf = this.activatedRoute.snapshot.paramMap.get('profil');
     this.currentTime = new Date()
     this.formData = new FormData();
+    this.ee =0;
+    this.err =0;
+    this.bool=0;
+    this.mod=1;
+
+    this.nomComplet = "";
+    this.adresse = "";
+    this.cin ="";
+    this.telephone = "";
+    this.codePostal = "";
+    this.adresseEmail ="";
+    this.ville="";
+    this.specialite="";
+    this.anneeObtentionDiplome="";
+    this.diplomeObtenue="";
+    this.etablissement="";
+    this.motDePasse=""
+    this.remotDePasse="";
+
   }
   AddNewIsncription(){
+    this.bool = 1;
     const idConcours = this.id;
     const nomComplet = this.nomComplet;
     const adresse = this.adresse;
@@ -61,22 +101,39 @@ export class SouscriptionComponent implements OnInit {
     const diplomeObtenue = this.diplomeObtenue;
     const etablissement = this.etablissement;
     const motDePasse = this.motDePasse
+    const remotDePasse = this.remotDePasse;
     const idcnc = this.id;
-    const Arr = ["CIN","DIPLOME","CV"];
-    for (const a of Arr) {
+    const Arr = ["CIN","DIPLOME","CV"];for (const a of Arr) {
       this.TabFichiers.push(new Fichiers(a,this.nomComplet+ "_"+this.cin +"_"+a+"_"+(this.currentTime.getMonth()+1)+"_"+(this.currentTime.getDate())+"_"+(this.currentTime.getFullYear())+".pdf"));
     }
-    const FileTable = this.TabFichiers;
-    this.isncr.AddInscription({concours:idConcours,fichiers:FileTable,motDePasse,nomComplet,adresse,cin,telephone,codePostal,adresseEmail,ville,specialite,anneeObtentionDiplome,diplomeObtenue,etablissement},idcnc).subscribe(
+    let FileTable = this.TabFichiers;
+    if (this.MYFILES.size<3){
+      FileTable = [];
+    }
+
+    this.isncr.AddInscription({concours:idConcours,fichiers:FileTable,motDePasse,nomComplet,adresse,cin,telephone,remotDePasse,codePostal,adresseEmail,ville,specialite,anneeObtentionDiplome,diplomeObtenue,etablissement},idcnc).subscribe(
       (resp) => {
         // tslint:disable-next-line:no-console
+        console.log(resp)
         console.log(resp);
+        this.SavedSubscription =resp;
+
+
       },
       (error) => {
-        this.ss.showError('Error cannot add data to server','Error 500 Internal')
-        console.log(error.status)
+        this.ss.showError('Les donnees ne sont pas correctes veuillez reverifier les données saisies','Incoherence de données')
+        if (error.status == 406){
+          this.Errors = error.error;
+          this.err=1;
+        }
+       if (error.status == 409){
+         this.UserAlredayEx = "User Already Exists";
+         this.ee = 1;
+         this.ss.showError("Utilisateur existe deja veuillez postuler pour un autre concours","Erreur")
+       }
       },
       () => {
+        console.log(this.SavedSubscription)
         // tslint:disable-next-line:forin
         for (const [key, value] of this.MYFILES){
           this.formData.append('files',value, this.nomComplet+ "_"+this.cin +"_"+key+"_"+(this.currentTime.getMonth()+1)+"_"+(this.currentTime.getDate())+"_"+(this.currentTime.getFullYear())+".pdf");
@@ -89,13 +146,60 @@ export class SouscriptionComponent implements OnInit {
           },
           (error: HttpErrorResponse) => {
             // tslint:disable-next-line:no-console
-            console.log(error);
+            if (error.status == 406)
+             alert(error);
+          },
+          ()=> {
+            this.Errors = null;
+            this.ee =0;
+            this.err=0;
+            this.ss.showSuccess("You registred successfully","Confirm message")
+
           }
         );
+
+        const numeroInscription = this.SavedSubscription.idInscription + 10000;
+        const nomComplet =this.SavedSubscription.nomComplet;
+        const email = this.SavedSubscription.adresseEmail;
+        const cin = this.SavedSubscription.cin;
+        const concours = "Concours Ministere de la finance option "+this.Prf;
+        this.isncr.RecuInscription({numeroInscription,nomComplet,email,cin,concours},this.id).subscribe(
+          (resp) => {
+
+            console.log(resp)
+
+          },
+          (err) => {
+console.log(err)
+          },
+          ()=> {
+           GlobalConstants.ConcoursName ="";
+
+          }
+        )
         this.ss.showSuccess('You registred successfully an Email sent to your mail account','verification 200')
+        this.nomComplet = "";
+        this.adresse = "";
+        this.cin ="";
+        this.telephone = "";
+        this.codePostal = "";
+        this.adresseEmail ="";
+        this.ville="";
+        this.specialite="";
+        this.anneeObtentionDiplome="";
+        this.diplomeObtenue="";
+        this.etablissement="";
+        this.motDePasse=""
+        this.remotDePasse="";
+        this.ee=0;
+        this.err=0;
+        this.DownloadRecu();
+        this.bool =0;
+        this.mod=2;
       }
 
     )
+    this.bool =0;
   }
 
   onUploadFiles(files: File[],name:any): void {
@@ -115,6 +219,7 @@ export class SouscriptionComponent implements OnInit {
       event => {
         // tslint:disable-next-line:no-console
         console.log(event);
+
         this.resportProgress(event);
       },
       (error: HttpErrorResponse) => {
@@ -163,6 +268,32 @@ export class SouscriptionComponent implements OnInit {
     this.fileStatus.status = 'progress';
     this.fileStatus.requestType = requestType;
     this.fileStatus.percent = Math.round(100 * loaded / total);
+  }
+
+  open(content:any) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
+  }
+
+  DownloadRecu(){
+    const nm =this.SavedSubscription.idInscription + 10000;
+    const nom = this.SavedSubscription.nomComplet;
+    const cin = this.SavedSubscription.cin
+    this.onDownloadFile(nom+"_"+nm+"_"+cin+"-"+this.id+".pdf");
+    this.qsd = 0;
   }
 
 }

@@ -53,13 +53,14 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let cnc of Cocnours;let i=index"  (click)="setClickedRow(cnc)" >
+            <tr *ngFor="let cnc of Cocnours;let i=index"  >
               <td>{{cnc.dateLimiteConcours  | date:'medium'}}</td>
               <td>{{cnc.datePassage}}</td>
               <td>{{cnc.intitled}}</td>
               <td>{{cnc.nombrePostes}}</td>
               <td onMouseOver="this.style.color='#00F'"
                   onMouseOut="this.style.color='black'" style="cursor: pointer;" (click)="onDownloadFile(cnc.exigences)">{{cnc.exigences}}</td>
+              <td><button  (click)="setClickedRow(cnc)" class="btn btn-success">Postuler</button></td>
 
             </tr>
             </tbody>

@@ -38,6 +38,8 @@ export class ListeGestionnaireComponent implements OnInit {
   mod:any;
   bol:any;
   darkEnabled:any;
+  Errors:any
+  err=0;
   // tslint:disable-next-line:no-empty
   constructor(private http:HttpClient,
               private gservice:SgestionnaireService,private route:Router,public srv:SAuthentificationService) { }
@@ -120,6 +122,7 @@ export class ListeGestionnaireComponent implements OnInit {
   }
   UpdateGest(etatcCompte:any,habilitation:any,administrator:any,login:any,motDePasse:any){
 
+    if (this.id!=null)
     this.rd.push(JSON.parse('{"id": '+this.id+'}'));
     this.gservice.updateGestionnaire(this.idG,{etatcCompte,habilitation,login,administrator,motDePasse,directions:this.rd}).subscribe(
       (resp) =>{
@@ -129,12 +132,19 @@ export class ListeGestionnaireComponent implements OnInit {
       (error) =>{
         console.log(error);
         this.gservice.showError('Server Error Contact Admin','Error'+error.status+'')
+        if (error.status == 406){
+          this.Errors = error.error;
+          this.err=1;
+
+        }
       },
       () =>{
         this.rd = null;
         this.gservice.showSuccess('Gestionnaire Modifié avec succes','Message 200')
         this.bol =false;
         this.ngOnInit();
+        this.err =0;
+        this.Errors=null;
       }
     )
   }

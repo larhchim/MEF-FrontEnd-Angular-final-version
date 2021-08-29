@@ -2,7 +2,7 @@
 
 
 
-  <div   class="card border mb-3 col-md-6 col-sm-6 mx-auto "  style="margin-top: 200px" >
+  <div  *ngIf="choix==1"  class="card border mb-3 col-md-6 col-sm-6 mx-auto "  style="margin-top: 200px" >
     <div *ngIf="mod==1" class="alert alert-danger" style="border: none">
       Bad Credentials Please enter valid username and password
     </div>
@@ -22,7 +22,8 @@
           <input name="motDePasse" id="motDePasse" ngModel [(ngModel)]="password" class="form-control" type="password" required>
 
 
-          <button [disabled]="formulaire.invalid"  class="btn btn-primary">Envoyer</button>
+          <button [disabled]="formulaire.invalid"  class="btn btn-primary">Envoyer</button><br>
+          <a class="a" style="cursor: pointer;" (click)="GoToRecoverForm()">Mot de passe oublié ?</a>
 
         </div>
 
@@ -33,4 +34,82 @@
 
   </div>
 
+
+
+
+  <div *ngIf="choix==2"  class="card border mb-3 col-md-6 col-sm-6 mx-auto "  style="margin-top: 200px" >
+    <div *ngIf="status == 409"  class="alert alert-danger" style="border: none">
+      {{Error.error}}
+    </div>
+    <div class="card-header" style="background-color: #5a57fb" >
+      <span style="color: white;text-align: center">Authentification</span>
+    </div>
+    <div class="card-body">
+
+      <form #formulaire="ngForm" (ngSubmit)="RecoveryPass(formulaire.value)">
+
+        <div  class="form-group">
+
+          <label class="control-label" for="LoginMail">Entrez votre Email:</label>
+          <input  name="LoginMail" id="LoginMail" ngModel [(ngModel)]="LoginMail" class="form-control" type="text" required>
+
+          <button class="btn btn-primary">Récuperer</button><br>
+          <a class="a" style="cursor: pointer;" (click)="GoToLoginForm()">Login Form ?</a>
+
+
+        </div>
+
+      </form>
+
+
+    </div>
+
+  </div>
+
+
+
+
+  <div *ngIf="choix==3"  class="card border mb-3 col-md-6 col-sm-6 mx-auto "  style="margin-top: 200px" >
+    <div *ngIf="status == 406"  class="alert alert-danger" style="border: none">
+      {{Erroremail}}
+      {{Errorpassword}}
+      {{Errorpin}}
+    </div>
+    <div class="card-header" style="background-color: #5a57fb" >
+      <span style="color: white;text-align: center">Authentification</span>
+    </div>
+    <div class="card-body">
+
+      <form #formulaire="ngForm" (ngSubmit)="UpdateRecover(formulaire.value)">
+
+        <div  class="form-group">
+
+          <label class="control-label" for="pinNumber">Entrez le code pin qui vous a été envoyé par mail:</label>
+          <input  name="pinNumber" id="pinNumber" ngModel  class="form-control" type="text" required>
+
+          <label class="control-label" for="password">Entrez votre mot de passe:</label>
+          <input  name="password" id="password" ngModel  class="form-control" type="text" required>
+
+
+          <label class="control-label" for="confirmpassword">Confirmez votre mot de passe:</label>
+          <input  name="confirmpassword" id="confirmpassword" ngModel class="form-control" type="text" required>
+
+          <button class="btn btn-primary">Confirmer</button><br>
+          <a class="a" style="cursor: pointer;" (click)="GoToLoginForm()">Login Form ?</a>
+
+        </div>
+
+      </form>
+
+
+    </div>
+
+  </div>
+
+
+
+
+
 </div>
+
+<div *ngIf="bol == true" id="cover-spin"></div>

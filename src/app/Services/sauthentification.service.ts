@@ -83,4 +83,12 @@ export class SAuthentificationService {
     return false;
   }
 
+  RecoverPass(email:any){
+    return this.http.get('http://localhost:8083/RecoveryPass/'+email).pipe()
+  }
+
+  Updaterecover(G:any,code:any){
+    return this.http.post("http://localhost:8083/UpdateRecover/"+code,G).pipe();
+  }
+
 }

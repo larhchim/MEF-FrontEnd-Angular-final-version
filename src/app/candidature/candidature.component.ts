@@ -6,6 +6,7 @@ import {FileServiceService} from '../file-service.service';
 import {SconcoursService} from '../Services/sconcours.service';
 import {SgestionnaireService} from '../Services/sgestionnaire.service';
 import {Router} from '@angular/router';
+import {GlobalConstants} from "../GlobalConstants";
 
 @Component({
   selector: 'app-candidature',
@@ -48,8 +49,8 @@ export class CandidatureComponent implements OnInit {
       () => {
         this.pod = 2;
         this.mod = 1;
-        console.log('completed')
-        console.log(this.Cocnours)
+
+        GlobalConstants.ConcoursName = option;
 
       }
     )
@@ -62,10 +63,8 @@ export class CandidatureComponent implements OnInit {
         this.resportProgress(event);
       },
       (error: HttpErrorResponse) => {
-        console.log(error);
       },
       () => {
-        window.open("C:\\Users\\LARHCHIM ISMAIL/Downloads/null (11).pdf" + '#page=' + 1, '_blank', '', true);
       }
     );
   }
@@ -112,7 +111,7 @@ export class CandidatureComponent implements OnInit {
   setClickedRow(cnc:any){
     this.mod =1;
     this.pod =1;
-    this.route.navigate(['Inscription/'+cnc.idConcours+''])
+    this.route.navigate(['Inscription/'+cnc.idConcours+'/'+GlobalConstants.ConcoursName+''])
   }
 }
 

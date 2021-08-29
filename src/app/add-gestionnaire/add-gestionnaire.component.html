@@ -23,6 +23,8 @@
           <option value="true">Activé</option>
           <option value="false">Non Activé</option>
         </select>
+        <span *ngIf="err==1" style="color: red">{{Errors.etatcCompte}}</span>
+        <br>
 
 
         <label for="hab">Habilitation</label>
@@ -31,17 +33,23 @@
           <option value="2">Globale</option>
           <option value="0">None</option>
         </select>
+        <span *ngIf="err==1" style="color: red">{{Errors.habilitation}}</span>
+        <br>
+
+
 
         <label for="log">Login</label>
         <input id="log" name="log" ngModel [(ngModel)]="login"  class="form-control" email required>
-
+        <span *ngIf="err==1" style="color: red">{{Errors.login}}</span>
+        <br>
 
         <label for="ad">Is Administartor</label>
         <select id="ad" name="ad" ngModel [(ngModel)]="administrator" class="form-control" required>
           <option value="true">True</option>
           <option value="false">False</option>
         </select>
-
+        <span *ngIf="err==1" style="color: red">{{Errors.isAdministrator}}</span>
+<br>
 
 
 

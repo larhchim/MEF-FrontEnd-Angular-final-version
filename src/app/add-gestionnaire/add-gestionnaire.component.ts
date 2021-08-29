@@ -36,12 +36,15 @@ export class AddGestionnaireComponent implements OnInit {
   // @ts-ignore
   show:string;
   newid:any;
+  Errors:any;
+  err:any;
 
   // @ts-ignore
   constructor(private serv:SgestionnaireService,private route:Router,private se:SdirectionsService,private srv:SAuthentificationService) { }
 
   ngOnInit(): void {
 
+    this.err=0;
     this.srv.loadToken();
     this.srv.getDirectionTest().subscribe(
       (resp) => {
@@ -86,6 +89,7 @@ export class AddGestionnaireComponent implements OnInit {
         // @ts-ignore
         const id = this.newid = re.id;
         this.bol =true;
+
         this.serv.addGestionnaire({etatcCompte,habilitation,login,administrator,directions : [{id}]}).subscribe(
           (resp) => {
             this.Gestio = resp;
@@ -94,15 +98,22 @@ export class AddGestionnaireComponent implements OnInit {
             console.log(resp);
             this.table =this.Gestio.directions;
             console.log(etatcCompte,habilitation,login,administrator,id);
+            console.log(resp)
           },(error) =>{
             // tslint:disable-next-line:no-console
             this.showError(error,"Server Error")
             this.bol = false;
-            console.log(etatcCompte,habilitation,login,administrator,id);
+            if (error.status == 406){
+              this.Errors = error.error;
+              this.err=1;
+
+            }
           }, () =>{
             this.bol =false;
             this.mod = 2;
             this.showSuccess("Gestionnaire Ajouté avec succes","Message de Confirmation")
+            this.err =0;
+            this.Errors=null;
 
           }
 
@@ -115,7 +126,13 @@ export class AddGestionnaireComponent implements OnInit {
 
   Ajout(){
 
-    this.Ajouter(this.etatcCompte,this.habilitation,this.login,this.administrator);
+    if (this.id =="" || this.id == null){
+      alert('Veuillez specifier la direction premierement');
+      return
+    }else{
+      this.Ajouter(this.etatcCompte,this.habilitation,this.login,this.administrator);
+    }
+
   }
 
   AjoutGest(){

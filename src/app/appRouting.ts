@@ -44,7 +44,7 @@ const APP_ROUTING: Routes = [
   {path: 'LoginPage', component:AuthentificationComponent},
   {path: '',component:CandidatureComponent},
   {path: 'Candidat',component:CandidatureComponent},
-  {path: 'Inscription/:id',component:SouscriptionComponent},
+  {path: 'Inscription/:id/:profil',component:SouscriptionComponent},
   {path: '**', component: ErrorComponent}
 ];
 
