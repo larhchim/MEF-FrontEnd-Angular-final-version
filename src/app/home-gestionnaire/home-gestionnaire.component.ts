@@ -8,6 +8,8 @@ import {FileServiceService} from '../file-service.service';
 import {HttpErrorResponse, HttpEvent, HttpEventType} from '@angular/common/http';
 import {GlobalConstants} from "../GlobalConstants";
 import {SAuthentificationService} from "../Services/sauthentification.service";
+import {SinscriptionService} from "../Services/sinscription.service";
+import {HistoriqueCandidatureService} from "../Services/historique-candidature.service";
 
 @Component({
   selector: 'app-home-gestionnaire',
@@ -21,12 +23,26 @@ export class HomeGestionnaireComponent implements OnInit {
   pages:any;
   currenPage:any=0;
   size = 5;
+  jbutton1=0;
+  jbutton2=0;
+  jbutton3=0;
+  RefusedMotif:any;
+  InstanceMotif:any;
+
+  motcle2:any='';
+  currenPage2:any=0;
+  size2 = 5;
   filenames: string[] = [];
   fileStatus = { status: '', requestType: '', percent: 0 };
   Headline ='';
   darkEnabled:any;
+  AllInscriptions:any;
+  pages2:any;
+  idc:any;
+  ObjInscription:any;
   constructor(private route:Router,private cnc:SconcoursService,private ss:SgestionnaireService,
-              private fileService: FileServiceService,public srv:SAuthentificationService) {
+              private fileService: FileServiceService,public srv:SAuthentificationService,
+              private sinsc:SinscriptionService,private history:HistoriqueCandidatureService) {
   }
 
 
@@ -75,7 +91,73 @@ export class HomeGestionnaireComponent implements OnInit {
       }
     )
   }
-  setClickedRow(obj:any){}
+
+  setClickedRow(obj:any){
+    this.mod = 2;
+    this.idc=obj.idConcours;
+    this.sinsc.SearchInscription(this.motcle2,this.size2,this.currenPage2,obj.idConcours).subscribe(
+      (resp) =>{
+        this.AllInscriptions = resp;
+        // @ts-ignore
+        this.pages2 = new Array(resp.totalPages);
+
+      },
+      (error) => {
+
+      },
+      ()=> {
+
+      }
+    )
+
+  }
+
+  setClickedRowInscription(subs:any){
+
+    this.ObjInscription =subs;
+    this.mod =3
+
+  }
+
+  gotoPage2(p:any){
+    this.currenPage2=p;
+    this.sinsc.SearchInscription(this.motcle2,this.size2,this.currenPage2,this.idc).subscribe(
+      (resp) =>{
+        this.AllInscriptions = resp;
+        // @ts-ignore
+        this.pages2 = new Array(resp.totalPages);
+
+      },
+      (error) => {
+
+      },
+      ()=> {
+
+      }
+    )
+  }
+
+  chercher2(){
+    this.sinsc.SearchInscription(this.motcle2,this.size2,this.currenPage2,this.idc).subscribe(
+      (resp) =>{
+        this.AllInscriptions = resp;
+        // @ts-ignore
+        this.pages2 = new Array(resp.totalPages);
+
+      },
+      (error) => {
+
+      },
+      ()=> {
+
+      }
+    )
+  }
+
+  GoBack(){
+    this.mod=1;
+  }
+
   gotoPage(p:any){
     this.currenPage = p;
     this.chercher();
@@ -102,7 +184,6 @@ export class HomeGestionnaireComponent implements OnInit {
         console.log(error);
       },
       () => {
-        window.open("C:\\Users\\LARHCHIM ISMAIL/Downloads/null (11).pdf" + '#page=' + 1, '_blank', '', true);
       }
     );
   }
@@ -157,5 +238,91 @@ export class HomeGestionnaireComponent implements OnInit {
   }
 
 
+  AcceptQuery(){
+
+    const described = "Accepté:Cette Inscription a été validé par "+this.srv.leUsername();
+
+     this.history.AddHistoryCandidate({description:described},this.ObjInscription.idInscription).subscribe(
+       (resp) => {
+
+       },
+       (error) => {
+
+       },
+       () => {
+
+                this.ss.showSuccess('Candidature validé avec succes',"Message de Confirmation")
+                this.mod =2;
+                this.ObjInscription = null;
+
+       }
+     )
+
+  }
+
+  OnRefused(){
+    this.jbutton1=2;
+    this.jbutton3=2;
+    this.jbutton2=1
+
+  }
+
+  OnInstance(){
+    this.jbutton1=2;
+    this.jbutton2=2;
+    this.jbutton3=1;
+
+  }
+
+  OnConfirmRefused(){
+    console.log(this.RefusedMotif)
+    const described = "Refusé:Cette Inscription a été Refusé par "+this.srv.leUsername()+"Avec Motif:"+this.RefusedMotif;
+
+    this.history.AddHistoryCandidate({description:described},this.ObjInscription.idInscription).subscribe(
+      (resp) => {
+
+      },
+      (error) => {
+
+      },
+      () => {
+
+        this.ss.showSuccess('Candidature Refusé',"Message de Confirmation")
+        this.mod =2;
+        this.ObjInscription = null;
+
+      }
+    )
+  }
+
+  OnConfirmInstance(){
+    const described = "Instance:Cette Inscription a été marqué en Instance par "+this.srv.leUsername()+" Avec Motif"+this.InstanceMotif;
+
+    this.history.AddHistoryCandidate({description:described},this.ObjInscription.idInscription).subscribe(
+      (resp) => {
+
+      },
+      (error) => {
+
+      },
+      () => {
+
+        this.ss.showSuccess('Candidature est marqué en Instance avec succes',"Message de Confirmation")
+        this.mod =2;
+        this.ObjInscription = null;
+
+      }
+    )
+  }
+  Reinisialiser(){
+    this.jbutton3=0;
+    this.jbutton2=0;
+    this.jbutton1=0;
+  }
+
+  GoToHistorique(){
+    this.route.navigate(["/Admin/ConsultHistory/"+this.ObjInscription.idInscription])
+    //this.route.navigateByUrl("/Admin/ConsultHistory/"+this.ObjInscription.idInscription)
+  }
 
 }

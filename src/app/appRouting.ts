@@ -19,6 +19,7 @@ import {SideNavComponent} from './side-nav/side-nav.component';
 import {CandidatureComponent} from "./candidature/candidature.component";
 import {SouscriptionComponent} from "./souscription/souscription.component";
 import {AuthentificationComponent} from "./authentification/authentification.component";
+import {ConsulterHistoriqueComponent} from "./consulter-historique/consulter-historique.component";
 
 const APP_ROUTING: Routes = [
   {
@@ -35,6 +36,7 @@ const APP_ROUTING: Routes = [
       {path: 'barchart',component:BarChartComponent},
       {path: 'ariachart',component:AriaChartComponent},
       {path: 'HomeGest',component:HomeGestionnaireComponent},
+      {path: 'ConsultHistory/:id',component:ConsulterHistoriqueComponent},
       {path: 'AddCentre',component:AjouterCentreComponent},
       {path: 'AddConcours',component:AjouterConcoursComponent},
       {path: 'listCentres',component:ListCentresComponent},

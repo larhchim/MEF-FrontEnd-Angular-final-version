@@ -17,5 +17,8 @@ export class SconcoursService {
   SpecificConcours(name:any){
     return this.http.get('http://localhost:8083/SearchBYProf/'+name+'').pipe()
   }
+  getAllConcours(){
+    return this.http.get('http://localhost:8083/listcnc',{headers: new HttpHeaders({'Authorization':this.serv.leToken()})}).pipe()
+  }
 
 }

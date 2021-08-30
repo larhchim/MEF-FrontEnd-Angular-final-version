@@ -1,0 +1,14 @@
+.card-header{
+  height: 34px;
+}
+.table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
+  color: #f3f3f3;
+}
+.some-class__success:nth-child(2n) > td,.some-class__success:nth-child(2n+1) > td{
+  color: black!important;
+}
+
+.some-class__normal:nth-child(2n) > td,.some-class__normal:nth-child(2n+1) > td{
+  color: white;
+}
+

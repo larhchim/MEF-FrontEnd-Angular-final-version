@@ -2,7 +2,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
-<h1 style="text-align: center">Espace Concours {{Headline}}</h1>
+<h1 *ngIf="mod==1 || mod==2" style="text-align: center">Espace Concours {{Headline}}</h1>
 
 <!-------------------------------------------------------
 -------------------------------------------------------->
@@ -13,7 +13,7 @@
 
 
     <!-- Toggle button -->
-    <button style="color: dodgerblue;border: dodgerblue 5px solid"  (click)="toggleCollapsed()"
+    <button *ngIf="mod==1" style="color: dodgerblue;border: dodgerblue 5px solid"  (click)="toggleCollapsed()"
             class="navbar-toggler"
             type="button"
             data-mdb-toggle="collapse"
@@ -116,3 +116,135 @@
     </div>
   </div>
 </div>
+
+<button style="margin-right: 10px;margin-bottom: 10px" (click)="GoBack()" *ngIf="mod==2" class="btn btn-primary">Back</button>
+<button style="margin-bottom: 10px" *ngIf="mod==2 &&(srv.isAdmin()==true || srv.isGestLV1()==true)" class="btn btn-primary">Resultats</button>
+
+<div *ngIf="mod==2" class="card border-primary mb-3"  xmlns="http://www.w3.org/1999/html">
+  <div class="card-header" style="background-color: #5a57fb" >
+  </div>
+  <div class="card-body">
+    <div class="form-group">
+      <label style="margin-right: 5px">
+        Mot Clé:
+      </label>
+      <input (keyup.enter)="chercher2()" type="text" [(ngModel)]="motcle2" style="margin-right: 5px">
+      <button class="btn btn-primary" (click)="chercher2()">
+        Chercher
+      </button>
+    </div>
+
+    <table class="table table-striped mb-0" style="overflow: auto;" >
+      <thead>
+      <tr>
+        <th scope="col">NomComplet</th>
+        <th scope="col">Adresse Email</th>
+        <th scope="col">Cin</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr [ngClass]="darkEnabled==true ?   'some-class__normal':'some-class__success'"  *ngFor="let cnc of AllInscriptions?.content;let i=index"  (click)="setClickedRowInscription(cnc)" >
+        <td>{{cnc.nomComplet}}</td>
+        <td>{{cnc.adresseEmail}}</td>
+        <td>{{cnc.cin}}</td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="container">
+      <ul class="nav nav-pills">
+        <li class="nav-item"  *ngFor="let p of pages2; let i = index">
+          <a style="cursor:pointer" class="nav-link " [ngClass]="{'active':i==currenPage2}" data-toggle="pill" (click)="gotoPage2(i)">{{i}}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<h1 *ngIf="mod==3" class="text-center wow fadeInUp">Detail de la Candidature</h1>
+
+<button *ngIf="mod==3" style="margin-right: 15px" class="btn btn-primary" (click)="mod=2">Go Back</button>
+<button *ngIf="mod==3" class="btn btn-primary" (click)="GoToHistorique()">Consultez Historique</button>
+
+<div *ngIf="mod==3" class="page-section">
+  <div class="container">
+
+    <form class="main-form">
+      <div class="row mt-5 ">
+        <div class="col-12 col-sm-6 py-2 wow fadeInLeft">
+          <label >Nom Complet:</label>
+          <input type="text" class="form-control" [value]="ObjInscription.nomComplet"   placeholder="Full name">
+        </div>
+        <div class="col-12 col-sm-6 py-2 wow fadeInRight">
+          <label>Adresse Email:</label>
+          <input type="text" class="form-control" [value]="ObjInscription.adresseEmail" placeholder="Email address..">
+        </div>
+        <div class="col-12 col-sm-6 py-2 wow fadeInLeft"  data-wow-delay="300ms">
+          <label>CIN</label>
+          <input type="text" [value]="ObjInscription.cin" class="form-control">
+        </div>
+        <div class="col-12 col-sm-6 py-2 wow fadeInRight" data-wow-delay="300ms">
+          <label>Telephone:</label>
+          <input type="text" [value]="ObjInscription.telephone" class="form-control">
+        </div>
+        <div class="col-12 py-2 wow fadeInUp" data-wow-delay="300ms">
+          <label>Adresse:</label>
+          <input [value]="ObjInscription.adresse" type="text" class="form-control">
+        </div>
+        <div class="col-12 col-sm-6 py-2 wow fadeInLeft"  data-wow-delay="300ms">
+          <label>Code Postal:</label>
+          <input [value]="ObjInscription.codePostal" type="text" class="form-control">
+        </div>
+        <div class="col-12 col-sm-6 py-2 wow fadeInRight" data-wow-delay="300ms">
+          <label>Ville:</label>
+          <input [value]="ObjInscription.ville" type="text" class="form-control">
+        </div>
+        <div class="col-12 col-sm-6 py-2 wow fadeInLeft"  data-wow-delay="300ms">
+          <label>Specialité:</label>
+          <input [value]="ObjInscription.specialite" type="text" class="form-control">
+        </div>
+        <div class="col-12 col-sm-6 py-2 wow fadeInRight" data-wow-delay="300ms">
+          <label>Annee Obtention Diplome:</label>
+          <input [value]="ObjInscription.anneeObtentionDiplome" type="text" class="form-control">
+        </div>
+        <div class="col-12 col-sm-6 py-2 wow fadeInLeft"  data-wow-delay="300ms">
+          <label>Diplome Obtenue:</label>
+          <input [value]="ObjInscription.diplomeObtenue" type="text" class="form-control">
+        </div>
+        <div class="col-12 col-sm-6 py-2 wow fadeInRight" data-wow-delay="300ms">
+          <label>Etablissement:</label>
+          <input [value]="ObjInscription.etablissement" type="text" class="form-control">
+        </div>
+        <div class="col-12 col-sm-6 py-2 wow fadeInLeft"  data-wow-delay="300ms">
+          <label>Date Candidature:</label>
+          <input [value]="ObjInscription.dateCandidature" type="Date" class="form-control">
+        </div>
+        <div class="col-12 col-sm-6 py-2 wow fadeInRight" data-wow-delay="300ms">
+          <label>Etat Candidature:</label>
+          <input [value]="ObjInscription.etatCandidature" type="text" class="form-control">
+        </div>
+        <div *ngFor="let file of ObjInscription.fichiers" class="col-12 py-2 wow fadeInUp" data-wow-delay="300ms">
+          <label class="form-label" style="color: red">{{file.nomFichier}} PDF:</label>
+          <p style="cursor: pointer" class="alert-link" (click)="onDownloadFile(file.fichier)">{{file.fichier}}</p>
+        </div>
+
+
+      </div>
+
+      <button *ngIf="jbutton1==0" (click)="AcceptQuery()" style="margin-right: 15px" type="submit" class="btn btn-success mt-3 wow zoomIn">Accepter</button>
+      <button *ngIf="jbutton2==0" (click)="OnRefused()" style="margin-right: 15px" type="submit" class="btn btn-danger mt-3 wow zoomIn">Refuser</button>
+      <button *ngIf="jbutton3==0" (click)="OnInstance()" type="submit" class="btn btn-primary mt-3 wow zoomIn">Instance</button>
+
+      <div *ngIf="jbutton2==1" class="col-12 py-2 wow fadeInUp" data-wow-delay="300ms">
+        <button style="margin-bottom: 10px" (click)="Reinisialiser()" class="btn btn-primary">Return</button>
+        <textarea required name="message" [(ngModel)]="RefusedMotif" class="form-control" rows="6" placeholder="Entez Motif de Refus.."></textarea>
+        <button  *ngIf="jbutton2==1" (click)="OnConfirmRefused()" style="margin-right: 15px" type="submit" class="btn btn-danger mt-3 wow zoomIn">Confirmation Refus</button>
+      </div>
+      <div *ngIf="jbutton3==1" class="col-12 py-2 wow fadeInUp" data-wow-delay="300ms">
+        <button  style="margin-bottom: 10px" (click)="Reinisialiser()" class="btn btn-primary">Return</button>
+        <textarea required name="message" [(ngModel)]="InstanceMotif"  class="form-control" rows="6" placeholder="Entez Motif d'instance.."></textarea>
+        <button *ngIf="jbutton3==1"   (click)="OnConfirmInstance()" type="submit" class="btn btn-primary mt-3 wow zoomIn">Confirmation Instance</button>
+      </div>
+    </form>
+  </div> <!-- .container -->
+</div> <!-- .page-section -->
+

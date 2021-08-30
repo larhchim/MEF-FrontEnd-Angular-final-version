@@ -35,6 +35,7 @@ import { CandidatureComponent } from './candidature/candidature.component';
 import { SouscriptionComponent } from './souscription/souscription.component';
 import { NgApexchartsModule } from "ng-apexcharts";
 import { AuthentificationComponent } from './authentification/authentification.component';
+import { ConsulterHistoriqueComponent } from './consulter-historique/consulter-historique.component';
 
 
 
@@ -63,7 +64,8 @@ import { AuthentificationComponent } from './authentification/authentification.c
     ListCentresComponent,
     CandidatureComponent,
     SouscriptionComponent,
-    AuthentificationComponent
+    AuthentificationComponent,
+    ConsulterHistoriqueComponent
   ],
   imports: [
     BrowserModule,

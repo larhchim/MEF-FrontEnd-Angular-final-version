@@ -1,1 +1,25 @@
-<img style="margin-right: auto;margin-left: auto;display: block;margin-top: 25px" src="assets/images/chart2.svg" width="50%" height="50%" alt="">
+<h1>1. Bar chart</h1>
+<div class="container d-flex justify-content-center" >
+
+  <div class="row col-md-8 col-sm-12" >
+    <canvas  id="MYCHART11"></canvas>
+  </div>
+
+
+</div>
+
+<div  class="row container" style="width: 50%;margin: auto;margin-top: 40px;margin-bottom: 40px">
+  <select (change)="Chart()" id="dir" name="dir"  ngModel  [(ngModel)]="id" class="form-control" required>
+    <option  *ngFor="let opt of Directions" [value]="opt.id" [selected]="opt.selected == true">{{opt.intitled}}</option>
+  </select>
+
+</div>
+
+<div class="container d-flex justify-content-center" >
+
+
+  <div class="row col-md-8 col-sm-12" >
+    <canvas  id="MYCHART12"></canvas>
+  </div>
+
+</div>
