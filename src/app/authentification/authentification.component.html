@@ -1,3 +1,5 @@
+<!--
+
 <div class="container" >
 
 
@@ -69,7 +71,7 @@
 
 
 
-  <div *ngIf="choix==3"  class="card border mb-3 col-md-6 col-sm-6 mx-auto "  style="margin-top: 200px" >
+  <div *ngIf="choix==3"  class="card border mb-3 col-md-6 col-sm-6 mx-auto "  style="ng -top: 200px" >
     <div *ngIf="status == 406"  class="alert alert-danger" style="border: none">
       {{Erroremail}}
       {{Errorpassword}}
@@ -112,4 +114,107 @@
 
 </div>
 
+-->
+<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <div *ngIf="bol == true" id="cover-spin"></div>
+
+
+
+<div  class="container ml-0">
+
+  <div class="forms-container">
+    <div class="signin-signup">
+
+
+      <form *ngIf="choix==1" #formulaire="ngForm" (ngSubmit)="SeConnecter(formulaire.value)"  class="sign-in-form">
+        <h2  class="title">Se Connecter</h2>
+        <div *ngIf="mod==1" class="alert alert-danger" >
+          *Mauvaises informations d'identification Veuillez entrer un nom d'utilisateur et un mot de passe valides*
+        </div>
+        <div class="input-field">
+          <i class="fa fa-user"></i>
+          <input required name="login" id="login" ngModel [(ngModel)]="username" type="text" placeholder="Username" />
+        </div>
+        <div class="input-field">
+          <i class="fa fa-lock"></i>
+          <input name="motDePasse" id="motDePasse" ngModel [(ngModel)]="password" type="password" placeholder="Password" />
+        </div>
+        <input [disabled]="formulaire.invalid"  type="submit" value="Login" class="btn solid" />
+      </form>
+
+
+      <form *ngIf="choix==2" #formulaire="ngForm" (ngSubmit)="RecoveryPass(formulaire.value)" class="sign-up-form">
+        <h2 class="title">Récupérer le Compte</h2>
+        <div *ngIf="status == 409"  class="alert alert-danger" style="border: none">
+          {{Error.error}}
+        </div>
+        <div class="input-field">
+          <i class="fa fa-envelope"></i>
+          <input required  name="LoginMail" id="LoginMail" ngModel [(ngModel)]="LoginMail" type="email" placeholder="Email" />
+        </div>
+        <input type="submit" class="btn" value="Envoyer" />
+      </form>
+
+
+      <form *ngIf="choix==3" #formulaire="ngForm" (ngSubmit)="UpdateRecover(formulaire.value)"  class="sign-up-form">
+        <h2  class="title">Récupérer le Compte</h2>
+        <div *ngIf="status == 406||status==409"  class="alert alert-danger" style="border: none">
+          {{Erroremail}}
+          {{Errorpassword}}
+          {{Errorpin}}
+        </div>
+        <div class="input-field">
+          <i class="fa fa-lock"></i>
+          <input name="pinNumber" id="pinNumber" ngModel type="text" placeholder="Code pin envoyé a votre email" />
+        </div>
+        <div class="input-field">
+          <i class="fa fa-lock"></i>
+          <input name="password" id="password" ngModel type="password" placeholder="Nouveau Mot de Passe" />
+        </div>
+        <div class="input-field">
+          <i class="fa fa-lock"></i>
+          <input name="confirmpassword" id="confirmpassword" ngModel type="password" placeholder="Confirmez Nouveau Mot de Passe" />
+        </div>
+        <input [disabled]="formulaire.invalid"  type="submit" value="Récupérer" class="btn solid" />
+        <a class="a" style="cursor: pointer;" (click)="choix=2">Retour Avant ?</a>
+      </form>
+
+
+
+    </div>
+  </div>
+
+  <div class="panels-container">
+    <div class="panel left-panel">
+      <div class="content">
+        <h3>Mot de passe oublié ?</h3>
+        <p>
+          Afin de restaurer le compte Administrateur Gestionnaire de la plateforme E-concours
+          Veuillez Cliquer sur le button ci dessous
+        </p>
+        <button (click)="choix=2" class="btn transparent" id="sign-up-btn">
+          Récuperer
+        </button>
+      </div>
+      <img src="assets/images/log.svg" class="image" alt="logo" />
+    </div>
+    <div  class="panel right-panel">
+      <div class="content">
+        <h3>Se Connecter ?</h3>
+        <p>
+          Afin de Se Connecter au Compte Administrateur Gestionnaires de la plateforme E-concours
+          Veuillez cliquer sur le button ci dessous
+        </p>
+        <button (click)="choix=1" class="btn transparent" id="sign-in-btn">
+          Se Connecter
+        </button>
+      </div>
+      <img src="assets/images/register.svg" class="image" alt="register" />
+    </div>
+  </div>
+
+
+</div>
+
+

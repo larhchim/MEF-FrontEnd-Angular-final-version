@@ -242,7 +242,15 @@ export class HomeGestionnaireComponent implements OnInit {
 
     const described = "Accepté:Cette Inscription a été validé par "+this.srv.leUsername();
 
-     this.history.AddHistoryCandidate({description:described},this.ObjInscription.idInscription).subscribe(
+    const  refus = false;
+
+    const acceptation = true;
+
+    const instance = false;
+
+    const examinateur = this.srv.leUsername();
+
+     this.history.AddHistoryCandidate({description:described,refus,acceptation,instance,examinateur},this.ObjInscription.idInscription).subscribe(
        (resp) => {
 
        },
@@ -276,9 +284,18 @@ export class HomeGestionnaireComponent implements OnInit {
 
   OnConfirmRefused(){
     console.log(this.RefusedMotif)
+
+    const  refus = true;
+
+    const acceptation = false;
+
+    const instance = false;
+
+    const examinateur = this.srv.leUsername();
+
     const described = "Refusé:Cette Inscription a été Refusé par "+this.srv.leUsername()+"Avec Motif:"+this.RefusedMotif;
 
-    this.history.AddHistoryCandidate({description:described},this.ObjInscription.idInscription).subscribe(
+    this.history.AddHistoryCandidate({description:described,refus,acceptation,instance,examinateur},this.ObjInscription.idInscription).subscribe(
       (resp) => {
 
       },
@@ -296,9 +313,18 @@ export class HomeGestionnaireComponent implements OnInit {
   }
 
   OnConfirmInstance(){
+
     const described = "Instance:Cette Inscription a été marqué en Instance par "+this.srv.leUsername()+" Avec Motif"+this.InstanceMotif;
 
-    this.history.AddHistoryCandidate({description:described},this.ObjInscription.idInscription).subscribe(
+    const  refus = false;
+
+    const acceptation = false;
+
+    const instance = true;
+
+    const examinateur = this.srv.leUsername();
+
+    this.history.AddHistoryCandidate({description:described,refus,acceptation,instance,examinateur},this.ObjInscription.idInscription).subscribe(
       (resp) => {
 
       },

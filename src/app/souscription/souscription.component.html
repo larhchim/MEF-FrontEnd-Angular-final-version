@@ -27,6 +27,11 @@
           <span *ngIf="err==1" style="color: red">{{Errors.anneeObtentionDiplome}}</span>
           <br>
 
+          <label for="ageCandidat">Age Candidat:</label>
+          <input min="17" name="ageCandidat" id="ageCandidat" ngModel [(ngModel)]="ageCandidat" class="form-control" type="number" required>
+          <span *ngIf="err==1" style="color: red">{{Errors.ageCandidat}}</span>
+          <br>
+
           <label for="in">CIN:</label>
           <input name="in" id="in" ngModel [(ngModel)]="cin" class="form-control" type="text" required>
           <span *ngIf="err==1" style="color: red">{{Errors.cin}}</span>

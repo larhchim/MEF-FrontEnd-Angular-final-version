@@ -98,12 +98,15 @@
         </div>
 
         <label for="dir">Add New Direction:</label>
-        <select id="dir" name="dir" ngModel   [(ngModel)]="id" class="form-control" required >
+        <select id="dir" name="dir" ngModel   [(ngModel)]="id" class="form-control"  >
           <option  *ngFor="let opt of objvalue" [value]="opt.id" [selected]="opt.selected == true">{{opt.nom}}</option>
         </select>
         <button *ngIf="srv.isAdmin()==true || srv.isGestLV1()==true" [disabled]="!formulaire.valid || !formulaire.touched || !formulaire.dirty" class="btn btn-primary" (click)="Ajout()">
           Envoyer
         </button>
+        <div *ngIf="err==1"  class="alert alert-danger" style="border: none">
+          {{Errors.error}}
+        </div>
 
       </div>
 

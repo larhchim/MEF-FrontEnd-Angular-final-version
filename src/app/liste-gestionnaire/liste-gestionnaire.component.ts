@@ -40,6 +40,7 @@ export class ListeGestionnaireComponent implements OnInit {
   darkEnabled:any;
   Errors:any
   err=0;
+  status:any;
   // tslint:disable-next-line:no-empty
   constructor(private http:HttpClient,
               private gservice:SgestionnaireService,private route:Router,public srv:SAuthentificationService) { }
@@ -101,6 +102,7 @@ export class ListeGestionnaireComponent implements OnInit {
   }
   chercher(){
     this.doSearch();
+    this.err = 0;
   }
 
   gotoPage(i:number){
@@ -119,6 +121,7 @@ export class ListeGestionnaireComponent implements OnInit {
     this.administrator = i.administrator;
     this.idG = i.idGestionnaire;
     this.mod = 2;
+    this.err=0;
   }
   UpdateGest(etatcCompte:any,habilitation:any,administrator:any,login:any,motDePasse:any){
 
@@ -131,8 +134,9 @@ export class ListeGestionnaireComponent implements OnInit {
       },
       (error) =>{
         console.log(error);
-        this.gservice.showError('Server Error Contact Admin','Error'+error.status+'')
-        if (error.status == 406){
+        this.status =error.status;
+        this.gservice.showError('Cannot Update Users with Admin Roles or Server has taken down','Error from Server')
+        if (error.status == 406 || error.status == 409){
           this.Errors = error.error;
           this.err=1;
 

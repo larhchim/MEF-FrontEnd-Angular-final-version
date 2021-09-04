@@ -53,6 +53,7 @@ export class SouscriptionComponent implements OnInit {
   qsd=0;
   ct:any;
   mod=0;
+  ageCandidat:any;
 
   constructor(private activatedRoute: ActivatedRoute,
               private fileService:FileServiceService ,
@@ -103,6 +104,7 @@ export class SouscriptionComponent implements OnInit {
     const motDePasse = this.motDePasse
     const remotDePasse = this.remotDePasse;
     const idcnc = this.id;
+    const ageCandidat = this.ageCandidat;
     const Arr = ["CIN","DIPLOME","CV"];for (const a of Arr) {
       this.TabFichiers.push(new Fichiers(a,this.nomComplet+ "_"+this.cin +"_"+a+"_"+(this.currentTime.getMonth()+1)+"_"+(this.currentTime.getDate())+"_"+(this.currentTime.getFullYear())+".pdf"));
     }
@@ -111,7 +113,7 @@ export class SouscriptionComponent implements OnInit {
       FileTable = [];
     }
 
-    this.isncr.AddInscription({concours:idConcours,fichiers:FileTable,motDePasse,nomComplet,adresse,cin,telephone,remotDePasse,codePostal,adresseEmail,ville,specialite,anneeObtentionDiplome,diplomeObtenue,etablissement},idcnc).subscribe(
+    this.isncr.AddInscription({concours:idConcours,fichiers:FileTable,motDePasse,nomComplet,adresse,cin,telephone,remotDePasse,codePostal,adresseEmail,ville,specialite,anneeObtentionDiplome,diplomeObtenue,etablissement,ageCandidat},idcnc).subscribe(
       (resp) => {
         // tslint:disable-next-line:no-console
         console.log(resp)
@@ -121,6 +123,7 @@ export class SouscriptionComponent implements OnInit {
 
       },
       (error) => {
+        this.TabFichiers = [];
         this.ss.showError('Les donnees ne sont pas correctes veuillez reverifier les données saisies','Incoherence de données')
         if (error.status == 406){
           this.Errors = error.error;

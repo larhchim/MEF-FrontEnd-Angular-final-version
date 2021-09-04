@@ -29,6 +29,21 @@ export class AuthentificationComponent implements OnInit {
     if (this.servAuth.leToken()!=null){
       this.route.navigateByUrl('/Admin')
     }
+   const sign_in_btn = document.querySelector("#sign-in-btn");
+    const sign_up_btn = document.querySelector("#sign-up-btn");
+    const container = document.querySelector(".container");
+
+    // @ts-ignore
+    sign_up_btn.addEventListener("click", () => {
+      // @ts-ignore
+      container.classList.add("sign-up-mode");
+    });
+
+    // @ts-ignore
+    sign_in_btn.addEventListener("click", () => {
+      // @ts-ignore
+      container.classList.remove("sign-up-mode");
+    });
   }
 
   SeConnecter(data:any){
@@ -40,7 +55,7 @@ export class AuthentificationComponent implements OnInit {
       },
       (error) => {
         this.mod=1;
-       this.ss.showError('Server Internal Error Error Login',"Username / Password are incorrect ");
+       this.ss.showError('Server Internal Error Error Login',"Username / Password are incorrect or Account is suspended ");
       },
       () => {
        this.ss.showSuccess(''+this.servAuth.leUsername()+'',"logged successfully");
@@ -54,7 +69,7 @@ export class AuthentificationComponent implements OnInit {
 
   RecoveryPass(data:any){
     this.bol =true;
-     this.servAuth.RecoverPass(data.LoginMail).subscribe(
+     this.servAuth.RecoverPass(this.LoginMail).subscribe(
        (reponse) => {
           // @ts-ignore
          this.pinNumber = reponse.pin;
@@ -95,10 +110,13 @@ export class AuthentificationComponent implements OnInit {
 
         },
         (error) => {
+          console.log(error.error.password)
+          console.log(error.password)
+
           this.Error =error;
-          this.Erroremail = error.email;
-          this.Errorpassword = error.password;
-          this.Errorpin = error.pin
+          this.Erroremail = error.error.email;
+          this.Errorpassword = error.error.password;
+          this.Errorpin = error.error.pin;
           this.status=error.status;
           this.bol = false;
         },
