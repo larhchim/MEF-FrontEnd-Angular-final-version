@@ -40,4 +40,8 @@ export class SgestionnaireService {
     return this.http.get('http://localhost:8083/Directions/'+id+'',{headers: new HttpHeaders({'Authorization':this.serv.leToken()})}).pipe()
   }
 
+  getExaminators(){
+    return this.http.get('http://localhost:8083/Examinators',{headers: new HttpHeaders({'Authorization':this.serv.leToken()})}).pipe()
+  }
+
 }

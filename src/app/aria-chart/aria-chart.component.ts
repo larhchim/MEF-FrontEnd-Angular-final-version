@@ -2,6 +2,7 @@ import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {SAuthentificationService} from "../Services/sauthentification.service";
 import {Router} from "@angular/router";
 import {
+  ArcElement,
   BarController,
   BarElement,
   CategoryScale,
@@ -9,7 +10,7 @@ import {
   Decimation,
   Filler,
   Legend,
-  LinearScale, LineController, LineElement, PointElement,
+  LinearScale, LineController, LineElement, PieController, PointElement,
   Title, Tooltip
 } from "chart.js";
 import {LineChartComponent} from "../line-chart/line-chart.component";
@@ -28,6 +29,11 @@ export class AriaChartComponent implements OnInit{
   myChart2:any;
   Concours:any;
   CncResponse:any;
+  GLB1:any;
+  GLB2:any;
+  MYCHART1779:any;
+  MYCHART1778:any
+  idconc:any;
 
   ngOnInit(): void {
     this.srv.loadToken();
@@ -78,9 +84,114 @@ export class AriaChartComponent implements OnInit{
    this.Chart()
 
 
+    this.stat.getTrancheAgeGlobale().subscribe(
+      (resp)=>{
+         this.GLB1 = resp;
+      },
+      (err)=>{
+
+      },
+      ()=>{
+        this.MYCHART1778 = new Chart("MYCHART1778", {
+          type: 'pie',
+          data: {
+            labels: ['40-50ans', '<20ans', '50-60ans','20-30ans','30-40ans','>60ans'],
+            datasets: [{
+              label: 'Statistiques des Tranches Ages',
+              data: [this.GLB1.TrancheBetween40And50,this.GLB1.TrancheUnder20,this.GLB1.TrancheBetween50And60,this.GLB1.TrancheBetween20And30,this.GLB1.TrancheBetween30And40,this.GLB1.TrancheMoreThan60],
+              backgroundColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(80, 80, 41, 1)',
+                'rgba(60, 60, 235, 1)',
+                'rgba(99, 206, 86, 1)'
+              ],
+              borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(80, 80, 41, 1)',
+                'rgba(60, 60, 235, 1)',
+                'rgba(99, 206, 86, 1)'
+              ],
+              borderWidth: 1
+            }]
+          }, options: {
+            responsive: true,
+            plugins: {
+              legend: {
+                position: 'top',
+              },
+              title: {
+                display: true,
+                text: 'Statistiques Totaux des Tranches Ages'
+              }
+            }
+          }
+        });
+      }
+    )
 
 
+    this.idconc = 1;
+    this.ChartTrancheAge();
 
+  }
+
+  ChartTrancheAge(){
+    if (this.MYCHART1779!=null){
+      this.MYCHART1779.destroy();
+    }
+
+    this.stat.getTrancheAgeParConcours(this.idconc).subscribe(
+      (resp)=>{
+        this.GLB2 = resp;
+      },
+      (err) => {
+
+      },
+      () => {
+        this.MYCHART1779 = new Chart("MYCHART1779", {
+          type: 'pie',
+          data: {
+            labels: ['40-50ans', '<20ans', '50-60ans','20-30ans','30-40ans','>60ans'],
+            datasets: [{
+              label: 'Statistiques des Tranches Ages',
+              data: [this.GLB2.TrancheBetween40And50,this.GLB2.TrancheUnder20,this.GLB2.TrancheBetween50And60,this.GLB2.TrancheBetween20And30,this.GLB2.TrancheBetween30And40,this.GLB2.TrancheMoreThan60],
+              backgroundColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(80, 80, 41, 1)',
+                'rgba(60, 60, 235, 1)',
+                'rgba(99, 206, 86, 1)'
+              ],
+              borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(80, 80, 41, 1)',
+                'rgba(60, 60, 235, 1)',
+                'rgba(99, 206, 86, 1)'
+              ],
+              borderWidth: 1
+            }]
+          }, options: {
+            responsive: true,
+            plugins: {
+              legend: {
+                position: 'top',
+              },
+              title: {
+                display: true,
+                text: 'Statistiques Totaux des Tranches Ages'
+              }
+            }
+          }
+        });
+      }
+    )
   }
 
   Chart(){
@@ -121,7 +232,7 @@ export class AriaChartComponent implements OnInit{
 
   constructor(private srv:SAuthentificationService,private route:Router,private stat:StatistiquesService,private cnc:SconcoursService) {
 
-    Chart.register(BarElement,LinearScale, BarController, CategoryScale, Decimation, Filler, Legend, Title, Tooltip,LineElement,LineController,PointElement);
+    Chart.register(BarElement,LinearScale, BarController, CategoryScale, Decimation, Filler, Legend, Title, Tooltip,LineElement,LineController,PointElement,PieController,ArcElement);
 
 
   }

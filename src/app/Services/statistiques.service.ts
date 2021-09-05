@@ -37,4 +37,21 @@ export class StatistiquesService {
     return this.http.get('http://localhost:8083/CentreStats/'+id,{headers: new HttpHeaders({'Authorization':this.serv.leToken()})}).pipe()
   }
 
+  getGlobalStatsOfSubscription(){
+    return this.http.get('http://localhost:8083/HistoryChangeStatusOfCandidates',{headers: new HttpHeaders({'Authorization':this.serv.leToken()})}).pipe()
+  }
+
+  getGlobalStatsOfSubscriptionByGest(id:any){
+    return this.http.get('http://localhost:8083/HistoryChangeStatusOfCandidates/Username/'+id,{headers: new HttpHeaders({'Authorization':this.serv.leToken()})}).pipe()
+  }
+
+  getTrancheAgeGlobale(){
+    return this.http.get('http://localhost:8083/InscriptionsStatsConcours/TrancheAge',{headers: new HttpHeaders({'Authorization':this.serv.leToken()})}).pipe()
+  }
+
+  getTrancheAgeParConcours(id:any){
+    return this.http.get('http://localhost:8083/InscriptionsStatsConcours/TrancheAgeByConcours/'+id,{headers: new HttpHeaders({'Authorization':this.serv.leToken()})}).pipe()
+  }
+
+
 }

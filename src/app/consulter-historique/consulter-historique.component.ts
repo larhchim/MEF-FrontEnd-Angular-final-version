@@ -14,11 +14,11 @@ export class ConsulterHistoriqueComponent implements OnInit {
   constructor(private srv:SAuthentificationService,private route:Router,
               private activatedRoute:ActivatedRoute,
               private history:HistoriqueCandidatureService) { }
-  id:any;
-  pages:any;
-  currenPage:any=0;
-  size = 5;
-  HistoryCandidate:any;
+  idh:any;
+  pagesh:any;
+  currenPageh:any=0;
+  sizeh = 5;
+  HistoryCandidateh:any;
   darkEnabled:any;
   ngOnInit(): void {
     this.darkEnabled =GlobalConstants.darkEnabled;
@@ -32,13 +32,13 @@ export class ConsulterHistoriqueComponent implements OnInit {
         this.route.navigateByUrl('/LoginPage');
       }
     )
-    this.id = this.activatedRoute.snapshot.paramMap.get('id')
+    this.idh = this.activatedRoute.snapshot.paramMap.get('id')
 
-    this.history.SearchHistoryCandidate(this.size,this.currenPage,this.id).subscribe(
+    this.history.SearchHistoryCandidate(this.sizeh,this.currenPageh,this.idh).subscribe(
       (resp) => {
-        this.HistoryCandidate =resp;
+        this.HistoryCandidateh =resp;
         // @ts-ignore
-        this.pages = new Array(resp.totalPages);
+        this.pagesh = new Array(resp.totalPages);
       },
       () => {
 
@@ -50,12 +50,12 @@ export class ConsulterHistoriqueComponent implements OnInit {
 
   }
 
-  gotoPage(p:any){
-    this.currenPage=p;
+  gotoPageh(p:any){
+    this.currenPageh=p;
 
-    this.history.SearchHistoryCandidate(this.size,this.currenPage,this.id).subscribe(
+    this.history.SearchHistoryCandidate(this.sizeh,this.currenPageh,this.idh).subscribe(
       (resp) => {
-        this.HistoryCandidate =resp;
+        this.HistoryCandidateh =resp;
         // @ts-ignore
         this.pages = new Array(resp.totalPages);
       },

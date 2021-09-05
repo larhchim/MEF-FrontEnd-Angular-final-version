@@ -134,7 +134,7 @@
       </button>
     </div>
 
-    <table class="table table-striped mb-0" style="overflow: auto;" >
+    <table id="table950" class="table table-striped mb-0"  >
       <thead>
       <tr>
         <th scope="col">NomComplet</th>
@@ -247,4 +247,38 @@
     </form>
   </div> <!-- .container -->
 </div> <!-- .page-section -->
+
+<h1 *ngIf="mod==4" class="text-center wow fadeInUp">Historique de la Candidature</h1>
+
+<button *ngIf="mod==4" style="margin-right: 15px;margin-bottom: 15px" class="btn btn-primary" (click)="mod=3">Go Back</button>
+
+<div *ngIf="mod==4" class="card border-primary mb-3"  xmlns="http://www.w3.org/1999/html">
+  <div class="card-header" style="background-color: #5a57fb" >
+  </div>
+  <div class="card-body">
+    <table class="table table-striped mb-0" style="overflow: auto;" >
+      <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Date</th>
+        <th scope="col">Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr [ngClass]="darkEnabled==true ?   'some-class__normal':'some-class__success'"  *ngFor="let cnc of HistoryCandidateh?.content;let i=index"  >
+        <td>{{cnc.idHistoryStatus}}</td>
+        <td>{{cnc.dateAction}}</td>
+        <td>{{cnc.description}}</td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="container">
+      <ul class="nav nav-pills">
+        <li class="nav-item"  *ngFor="let p of pagesh; let i = index">
+          <a style="cursor:pointer" class="nav-link " [ngClass]="{'active':i==currenPageh}" data-toggle="pill" (click)="gotoPageh(i)">{{i}}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
 

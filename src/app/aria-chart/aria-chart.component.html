@@ -1,4 +1,4 @@
-<h1>1. Aria chart</h1>
+<h1>Statistiques sur les Tranches d'ages des inscriptions</h1>
 <div class="container d-flex justify-content-center" >
 
   <div class="row col-md-8 col-sm-12" >
@@ -21,4 +21,32 @@
     <canvas  id="MYCHART1112"></canvas>
   </div>
 
+</div>
+
+
+
+
+
+<div>
+  <div class="container d-flex justify-content-center" >
+    <div class="row col-md-6 col-sm-12" >
+      <canvas  id="MYCHART1778"></canvas>
+    </div>
+  </div>
+</div>
+
+
+
+<div>
+  <div  class="row container" style="width: 50%;margin: auto;margin-top: 40px;margin-bottom: 40px">
+    <select (change)="ChartTrancheAge()" id="cc" name="cc"  ngModel  [(ngModel)]="idconc" class="form-control" required>
+      <option  *ngFor="let opt of Concours" [value]="opt.idConcours" [selected]="opt.selected == true">{{opt.intitled}}</option>
+    </select>
+
+  </div>
+  <div class="container d-flex justify-content-center" >
+    <div class="row col-md-6 col-sm-12" >
+      <canvas  id="MYCHART1779"></canvas>
+    </div>
+  </div>
 </div>

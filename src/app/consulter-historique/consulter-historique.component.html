@@ -11,7 +11,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr [ngClass]="darkEnabled==true ?   'some-class__normal':'some-class__success'"  *ngFor="let cnc of HistoryCandidate?.content;let i=index"  >
+      <tr [ngClass]="darkEnabled==true ?   'some-class__normal':'some-class__success'"  *ngFor="let cnc of HistoryCandidateh?.content;let i=index"  >
         <td>{{cnc.idHistoryStatus}}</td>
         <td>{{cnc.dateAction}}</td>
         <td>{{cnc.description}}</td>
@@ -20,8 +20,8 @@
     </table>
     <div class="container">
       <ul class="nav nav-pills">
-        <li class="nav-item"  *ngFor="let p of pages; let i = index">
-          <a style="cursor:pointer" class="nav-link " [ngClass]="{'active':i==currenPage}" data-toggle="pill" (click)="gotoPage(i)">{{i}}</a>
+        <li class="nav-item"  *ngFor="let p of pagesh; let i = index">
+          <a style="cursor:pointer" class="nav-link " [ngClass]="{'active':i==currenPageh}" data-toggle="pill" (click)="gotoPageh(i)">{{i}}</a>
         </li>
       </ul>
     </div>

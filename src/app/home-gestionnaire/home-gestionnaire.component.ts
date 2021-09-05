@@ -40,6 +40,12 @@ export class HomeGestionnaireComponent implements OnInit {
   pages2:any;
   idc:any;
   ObjInscription:any;
+
+  idh:any;
+  pagesh:any;
+  currenPageh:any=0;
+  sizeh = 5;
+  HistoryCandidateh:any;
   constructor(private route:Router,private cnc:SconcoursService,private ss:SgestionnaireService,
               private fileService: FileServiceService,public srv:SAuthentificationService,
               private sinsc:SinscriptionService,private history:HistoriqueCandidatureService) {
@@ -72,6 +78,9 @@ export class HomeGestionnaireComponent implements OnInit {
         this.ss.showSuccess('Data Loaded Successfully','Message de Confirmation 200')
       }
     )
+
+
+
 
   }
   chercher(){
@@ -347,8 +356,41 @@ export class HomeGestionnaireComponent implements OnInit {
   }
 
   GoToHistorique(){
-    this.route.navigate(["/Admin/ConsultHistory/"+this.ObjInscription.idInscription])
+    //this.route.navigate(["/Admin/ConsultHistory/"+this.ObjInscription.idInscription])
     //this.route.navigateByUrl("/Admin/ConsultHistory/"+this.ObjInscription.idInscription)
+    this.idh = this.ObjInscription.idInscription;
+    this.history.SearchHistoryCandidate(this.sizeh,this.currenPageh,this.idh).subscribe(
+      (resp) => {
+        this.HistoryCandidateh =resp;
+        // @ts-ignore
+        this.pagesh = new Array(resp.totalPages);
+      },
+      () => {
+
+      },
+      () => {
+
+      }
+    )
+    this.mod = 4;
+  }
+
+  gotoPageh(p:any){
+    this.currenPageh=p;
+
+    this.history.SearchHistoryCandidate(this.sizeh,this.currenPageh,this.idh).subscribe(
+      (resp) => {
+        this.HistoryCandidateh =resp;
+        // @ts-ignore
+        this.pages = new Array(resp.totalPages);
+      },
+      () => {
+
+      },
+      () => {
+
+      }
+    )
   }
 
 }
