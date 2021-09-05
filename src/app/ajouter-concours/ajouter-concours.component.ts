@@ -39,6 +39,8 @@ export class AjouterConcoursComponent implements OnInit {
   filenames: string[] = [];
   fileStatus = { status: '', requestType: '', percent: 0 };
   datePassage:any;
+  Errors:any;
+  err:any=0;
 
   constructor(private route:Router,private centre:ScentreService,
               private profil:ProfilService,private direction:SdirectionsService,
@@ -106,6 +108,11 @@ export class AjouterConcoursComponent implements OnInit {
         this.ss.showError('Internal Server Error Contact the Admin','Error 500');
         // tslint:disable-next-line:no-console
         console.log(error);
+        this.Errors = error.error;
+        if (error.status==409 || error.status==406){
+          this.err=1;
+        }
+
       },
       () => {
         this.mod = 2;

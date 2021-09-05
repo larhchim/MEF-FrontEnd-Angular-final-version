@@ -118,7 +118,7 @@
 </div>
 
 <button style="margin-right: 10px;margin-bottom: 10px" (click)="GoBack()" *ngIf="mod==2" class="btn btn-primary">Back</button>
-<button style="margin-bottom: 10px" *ngIf="mod==2 &&(srv.isAdmin()==true || srv.isGestLV1()==true)" class="btn btn-primary">Resultats</button>
+<button (click)="mod=6" style="margin-bottom: 10px" *ngIf="mod==2" class="btn btn-primary">Resultats</button>
 
 <div *ngIf="mod==2" class="card border-primary mb-3"  xmlns="http://www.w3.org/1999/html">
   <div class="card-header" style="background-color: #5a57fb" >
@@ -281,4 +281,38 @@
     </div>
   </div>
 </div>
+
+
+
+
+
+<h1 *ngIf="mod==6" style="text-align: center">Espace Resultats Du Concours</h1>
+
+<button style="margin-right: 10px;margin-bottom: 10px" (click)="mod=2" *ngIf="mod==6" class="btn btn-primary">Back</button>
+<button style="margin-bottom: 10px" *ngIf="mod==6" class="btn btn-primary">Resultats</button>
+
+<div *ngIf="mod==6" class="card border-primary mb-3"  xmlns="http://www.w3.org/1999/html">
+  <div class="card-header" style="background-color: #5a57fb" >
+  </div>
+  <div class="card-body">
+
+
+    <table class="table table-striped mb-0"  >
+
+      <tbody>
+      <tr *ngIf="ficResults==null &&(srv.isAdmin()==true || srv.isGestLV1()==true)" [ngClass]="darkEnabled==true ?   'some-class__normal':'some-class__success'"  >
+        <td><h5>Generer Resultats:</h5></td>
+        <td><button (click)="OnGenerateResults()" class="btn btn-danger">Generate</button></td>
+      </tr>
+      <tr *ngIf="ficResults!=null" [ngClass]="darkEnabled==true ?   'some-class__normal':'some-class__success'">
+        <td><h5>Voir les Resultats:</h5></td>
+        <td><button (click)="onDownloadFile(ficResults.candidatsConvoques)" class="btn btn-danger">Generate</button></td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+
+<div *ngIf="bol == true" id="cover-spin"></div>
 

@@ -14,19 +14,32 @@
 
         <label for="dt">Date Concours:</label>
         <input name="dt" id="dt" ngModel [(ngModel)]="dateConcours" class="form-control" type="date" required>
+        <span *ngIf="err==1" style="color: red">{{Errors.dateConcours}}</span>
+        <br>
 
         <label for="dtl">Date Limite Concours:</label>
         <input name="dtl" id="dtl" ngModel [(ngModel)]="dateLimiteConcours" class="form-control" type="datetime-local" required>
+        <span *ngIf="err==1" style="color: red">{{Errors.dateLimiteConcours}}</span>
+        <br>
 
 
         <label for="ps">Date Passage:</label>
         <input name="ps" id="ps" ngModel [(ngModel)]="datePassage" class="form-control" type="date" required>
+        <span *ngIf="err==1" style="color: red">{{Errors.datePassage}}</span>
+        <br>
+
 
         <label for="in">Intitulé:</label>
         <input name="in" id="in" ngModel [(ngModel)]="intitled" class="form-control" type="text" required>
+        <span *ngIf="err==1" style="color: red">{{Errors.intitled}}</span>
+        <br>
+
+
 
         <label for="nm">Nombre Postes:</label>
         <input  name="nm" id="nm" ngModel [(ngModel)]="nombrePostes" class="form-control" type="number" required>
+        <span *ngIf="err==1" style="color: red">{{Errors.nombrePostes}}</span>
+        <br>
 
         <div *ngIf="fileStatus.status==='progress'">
           <div class="progress">

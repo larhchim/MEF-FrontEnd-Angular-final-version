@@ -46,6 +46,8 @@ export class HomeGestionnaireComponent implements OnInit {
   currenPageh:any=0;
   sizeh = 5;
   HistoryCandidateh:any;
+  ficResults:any;
+  bol=false;
   constructor(private route:Router,private cnc:SconcoursService,private ss:SgestionnaireService,
               private fileService: FileServiceService,public srv:SAuthentificationService,
               private sinsc:SinscriptionService,private history:HistoriqueCandidatureService) {
@@ -78,6 +80,8 @@ export class HomeGestionnaireComponent implements OnInit {
         this.ss.showSuccess('Data Loaded Successfully','Message de Confirmation 200')
       }
     )
+
+
 
 
 
@@ -118,6 +122,14 @@ export class HomeGestionnaireComponent implements OnInit {
 
       }
     )
+
+    this.cnc.getResultsOfCnc(this.idc).subscribe(
+      (response) =>{
+        this.ficResults = response;
+      }
+    )
+
+
 
   }
 
@@ -391,6 +403,28 @@ export class HomeGestionnaireComponent implements OnInit {
 
       }
     )
+  }
+
+
+  OnGenerateResults(){
+    if (confirm('En cliquant sur ce button un envoie automatique des convocations et de la liste de preselection par mail se déroule et ca peut prendre un peu du temps etes vous sur de vouloir continuer?')) {
+      this.bol=true;
+      this.cnc.getSendConvocations(this.idc).subscribe(
+        (response) => {
+          this.ficResults = response;
+        },
+        (error) => {
+          this.bol = false
+        },
+        () =>{
+          this.bol = false
+        }
+      )
+    } else {
+      return
+    }
+
+
   }
 
 }
