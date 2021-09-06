@@ -28,7 +28,7 @@
 
   </div>
 -->
-
+<!---
 <div class="container">
   <div class="First"></div>
   <div class="Second">
@@ -110,8 +110,9 @@
 
   </div>
 </div>
-
+-->
 <!-- Wave SVG Animation -->
+<!--
 <div class="waves">
   <svg width="100%" height="200px" fill="none" version="1.1"
        xmlns="http://www.w3.org/2000/svg">
@@ -184,6 +185,356 @@
   </svg>
 </div>
 
+
+-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+  <title>E-Concours</title>
+</head>
+<body *ngIf="CMI==1">
+<!-- Navbar -->
+<div class="navbar">
+  <div class="container flex">
+    <h1 class="logo" >      <img id="pointed-image"  style="cursor: pointer"  class="rounded-circle" src="assets/images/logo.jpg" width="230px" height="100px">
+    </h1>
+    <nav>
+      <ul>
+        <li><a style="cursor: pointer" (click)="CMI=1">Home</a></li>
+        <li><a style="cursor: pointer" (click)="TOSearch()">Annonces</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<!-- Showcase -->
+<section class="showcase">
+  <div class="container grid">
+    <div class="showcase-text">
+      <h1>Intégration Facile</h1>
+      <p>organisé et déterminé. sens de l'écoute et du contact. vous avez une grande capacité d'adaptation disponibilité : immédiate. rejoignez nous. avantages sociaux et autres un salaire très attractif et des primes de rendement très interessantes amplitude.</p>
+      <a (click)="TOSearch()" class="btn btn-outline">Lancer l'aventure</a>
+    </div>
+
+    <div class="showcase-form card">
+     <!-- <h2>Request a Demo</h2>-->
+      <!--  <form name="contact" netlify-honeypot="bot-field" method="POST" data-netlify="true">
+         <input type="hidden" name="form-name" value="contact">
+         <p class="hidden">
+             <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
+           </p>
+         <div class="form-control">
+             <input type="text" name="name" placeholder="Name" required>
+         </div>
+         <div class="form-control">
+             <input type="text" name="company" placeholder="Company Name" required>
+         </div>
+         <div class="form-control">
+             <input type="email" name="email" placeholder="Email" required>
+         </div>
+         <input type="submit" value="Send" class="btn btn-primary">
+     </form> -->
+      <!--
+      <form>
+        <div class="form-control">
+          <input type="text" name="name" placeholder="Name" required>
+        </div>
+        <div class="form-control">
+          <input type="text" name="company" placeholder="Company Name" required>
+        </div>
+        <div class="form-control">
+          <input type="email" name="email" placeholder="Email" required>
+        </div>
+        <input type="submit" value="Send" class="btn btn-primary">
+      </form>
+      -->
+      <img height="300px" src="assets/images/register.svg" class="image" alt="register" />
+
+    </div>
+  </div>
+</section>
+
+<!-- Stats -->
+<section class="stats">
+  <div class="container">
+    <h1 class="stats-heading text-center my-1">
+      Nos chiffres en matiere de transformation digitale
+    </h1>
+
+    <div class="grid grid-3 text-center my-4">
+      <div>
+        <i class="fas fa-server fa-3x"></i>
+        <h3>10,349,405</h3>
+        <p class="text-secondary">Capacité de deploiement</p>
+      </div>
+      <div>
+        <i class="fas fa-upload fa-3x"></i>
+        <h3>500 TB</h3>
+        <p class="text-secondary">Projets lancés</p>
+      </div>
+      <div>
+        <i class="fas fa-project-diagram fa-3x"></i>
+        <h3>20,452,265</h3>
+        <p class="text-secondary">Collaborations</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Cloud -->
+<section class="cloud my-2 py-2" style="background-color: firebrick;">
+  <div class="container grid">
+    <div class="text-center">
+      <h2 style="color: white" class="lg">Ministère de l'économie et des finances Royaume du Maroc</h2>
+      <p style="color: white" class="lead my-1">vous aimez relever les challenges et vous souhaitez enrichir votre parcours professionnel. rejoignez nous. Notre equipe vous attends le ministére vous occupe une offre speciale c'est parti!!</p>
+      <a (click)="TOSearch()" class="btn btn-dark">C'est parti</a>
+    </div>
+    <img src="src/assets/IMG/images/cloud.png" alt="">
+  </div>
+</section>
+
+<!-- Languages -->
+<section class="languages">
+  <h1 class="md text-center my-2">
+    Nos Directions en question
+  </h1>
+  <div class="container flex">
+    <div class="card" >
+      <a href="https://www.finances.gov.ma/fr/Ministere/Pages/daag.aspx">
+      <img  title="Direction des Affaires Administratives & Générales"  style="cursor: pointer" width="125" height="125" src="assets/images/logo.jpg">
+      </a>
+    </div>
+    <div class="card">
+      <a href="https://www.finances.gov.ma/fr/Ministere/Pages/dde.aspx">
+        <img title="Direction des Domaines de l'Etat" style="cursor: pointer" width="125" height="125" src="assets/images/DOMAINES.png"  alt="">
+      </a>
+    </div>
+    <div class="card">
+      <a href="https://www.douane.gov.ma/web/guest">
+        <img style="margin: auto" title="Administration des Douanes & Impôts Indirects" style="cursor: pointer" width="125" height="125" src="assets/images/DOUANE.png" alt="">
+      </a>
+    </div>
+    <div class="card">
+      <a href="https://tax.gov.ma/wps/portal/DGI/Accueil/!ut/p/z1/04_Sj9CPykssy0xPLMnMz0vMAfIjo8zizSwdnQ2NvQ18LEwMzQ0cXcOMA_x8zA0snAz0wwkpiAJKG-AAjiD9UWAlOExwdzGCKsBjhpd-VHpOfhLEuY55ScYW6fpRRalpqUWpRXqlRUDhjJKSgmIrVQNVg_Lycr30_Pz0nFS95PxcVQNsWjLyi0v0I1BV6hfkRhhkmeaU-TgqKgIAMfgEbg!!/dz/d5/L2dBISEvZ0FBIS9nQSEh/">
+        <img title="Direction Générale des Impôts" style="cursor: pointer" width="125" height="125" src="assets/images/IMPOTS.jpg" alt="">
+      </a>
+    </div>
+    <div class="card">
+      <a href="https://www.finances.gov.ma/fr/Ministere/Pages/igf.aspx">
+        <img title="Inspection Générale des Finances" style="cursor: pointer" width="125" height="125" src="assets/images/INSPECTION.png" alt="">
+      </a>
+    </div>
+    <div class="card">
+      <a href="https://www.tgr.gov.ma/wps/portal">
+        <img title="Trésorerie Générale du Royaume" style="cursor: pointer" width="125" height="125" src="assets/images/TGR.jpg" alt="">
+      </a>
+    </div>
+    <div class="card">
+      <a href="https://www.finances.gov.ma/fr/Ministere/Pages/dtfe.aspx">
+        <img title="Direction du Trésor et des Finances Extérieures" style="cursor: pointer" width="125" height="125" src="assets/images/TRESOR.jpg" alt="">
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer bg-dark py-5">
+  <div class="container grid grid-3">
+    <div>
+      <h1>MEFRA
+      </h1>
+      <p>Copyright &copy; 2021</p>
+    </div>
+<nav ></nav>
+    <div class="social">
+      <a href="https://www.youtube.com/c/financesmarocofficiel"><i class="fab fa-youtube fa-2x"></i></a>
+      <a href="https://www.facebook.com/financesmaroc/"><i class="fab fa-facebook fa-2x"></i></a>
+      <a href="https://www.linkedin.com/company/financesmaroc/mycompany/"><i class="fab fa-linkedin fa-2x"></i></a>
+      <a href="https://twitter.com/financesmaroc/"><i class="fab fa-twitter fa-2x"></i></a>
+    </div>
+  </div>
+</footer>
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body *ngIf="CMI==2">
+<!-- Navbar -->
+
+
+<div class="navbar">
+  <div class="container flex">
+    <h1 class="logo" >      <img (click)="CMI=1" id="pointed-image2"  style="cursor: pointer"  class="rounded-circle" src="assets/images/logo.jpg" width="230px" height="100px">
+    </h1>
+    <nav>
+      <ul>
+        <li><a style="cursor: pointer" (click)="CMI=1">Home</a></li>
+        <li><a style="cursor: pointer" (click)="TOSearch()">Annonces</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<!-- Head -->
+<section style="background-color: firebrick;" class="features-head py-3">
+  <div class="container grid">
+    <div>
+      <h1 style="color: white" class="xl">Espace Annonces</h1>
+      <p style="color: white" class="lead">
+        Découvrez nos dernières offres de recrutement pour nos Directions vous pouvez postuler a votre profil adéquat
+      </p>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="features-main my-2">
+  <div class="container grid grid-3">
+    <div class="card flex">
+      <h1 style="color: red;text-align: center">Renseignements</h1>
+      <i style="color: red" class="fas fa-bell fa-3x"></i>
+      <p>Pour Postuler a un concours il suffit de choisir votre profil dans le menu ci dessous apres une panoplie de choix vont s'afficher une fois vous choisissez de postuler a un concours un formulaire d'informations va s'afficher apres avoir validé ce dernier un recu d'inscription se met en place pour le telecharger une copie s'adresse a votre boite mail automatiquement.</p>
+      <p>Pour Voir les Resultats d'un concours specifique il suffit de choisir de la meme facon le profil adéquat dans le menu ci dessous suite a votre choix les concours liées a ce profil avec Resultats publiées vont s'afficher</p>
+      <i style="color: red" class="fas fa-exclamation-triangle fa-3x"></i>
+      <p>Apres la publication de chaque resultat un message automatique parvient a votre email contient la decision favorable ainsi que la liste de la preselection et le lieu ainsi que la date de l'examen</p>
+      <h1 style="color: red;text-align: center">Choix de profil</h1>
+      <i style="color: red" class="fas fa-briefcase fa-3x"></i>
+      <select (change)="changeSelection(intitled)" id="dir" name="dir"  ngModel  [(ngModel)]="intitled" class="form-control" required>
+        <option [selected] ="true" disabled >----------------------Votre Profil----------------------</option>
+        <option  *ngFor="let opt of objProfils" [value]="opt.intitled" [selected]="opt.selected == true">{{opt.intitled}} de Type {{opt.type}}</option>
+      </select>
+    </div>
+
+
+    <!---
+
+          <table  class="table table-striped mb-0" style="overflow: auto;display: block;max-height: 350px ">
+            <thead>
+            <tr>
+              <th scope="col">Date Limite</th>
+              <th scope="col">Date Passage</th>
+              <th scope="col">Intitulé</th>
+              <th scope="col">Postes</th>
+              <th scope="col">Communiqué</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let cnc of Cocnours;let i=index"  >
+              <td>{{cnc.dateLimiteConcours  | date:'medium'}}</td>
+              <td>{{cnc.datePassage}}</td>
+              <td>{{cnc.intitled}}</td>
+              <td>{{cnc.nombrePostes}}</td>
+              <td onMouseOver="this.style.color='#00F'"
+                  onMouseOut="this.style.color='black'" style="cursor: pointer;" (click)="onDownloadFile(cnc.exigences)">{{cnc.exigences}}</td>
+              <td><button  (click)="setClickedRow(cnc)" class="btn btn-success">Postuler</button></td>
+
+            </tr>
+            </tbody>
+          </table>
+
+    --->
+
+
+    <h1 style="color: red;text-align: center" *ngIf="goid==1">Resultats de Recherche Trouvés: {{LONG}} </h1>
+    <br>
+
+
+    <div *ngFor="let cnc of Cocnours;let i=index" style="max-width: 313px" class="card flex">
+          <img style="max-width: 50px;max-height: 50px" (click)="CMI=1"  style="cursor: pointer"  class="rounded-circle" src="assets/images/logo.jpg" >
+      <table  class="table " style="overflow: auto;display: block;max-height: 350px ">
+        <tbody>
+        <tr>
+          <td style="color: red">{{cnc.intitled}}</td>
+        </tr>
+        <tr>
+          <td><span style="color:red;">Date Limite: </span>{{cnc.dateLimiteConcours  | date:'medium'}}</td>
+        </tr>
+        <tr>
+          <td><span style="color: red">Date Passage: </span>{{cnc.datePassage}}</td>
+        </tr>
+        <tr>
+          <td><span style="color: red">Postes Vacants: </span>{{cnc.nombrePostes}}</td>
+        </tr>
+        <tr *ngIf="cnc.resultats!=null">
+          <td>
+            <button style="background-color: crimson!important;"  (click)="OnDownloadResult(cnc)" style="margin-right: 15px"  class="btn">Resultats</button>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <button style="background-color: aqua"  (click)="onDownloadFile(cnc.exigences)" style="margin-right: 15px"  class="btn ">Exigence</button>
+          </td>
+        </tr>
+        <tr>
+          <td *ngIf="cnc.resultats==null">
+            <button style="background-color: #f99324"  (click)="setClickedRow(cnc)"  class="btn btn-primary">Postuler</button>
+          </td>
+        </tr>
+        </tbody>
+
+
+      </table>
+
+    </div>
+
+
+
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer bg-dark py-5">
+  <div class="container grid grid-3">
+    <div>
+      <h1>MEFRA
+      </h1>
+      <p>Copyright &copy; 2021</p>
+    </div>
+    <nav ></nav>
+    <div class="social">
+      <a href="https://www.youtube.com/c/financesmarocofficiel"><i class="fab fa-youtube fa-2x"></i></a>
+      <a href="https://www.facebook.com/financesmaroc/"><i class="fab fa-facebook fa-2x"></i></a>
+      <a href="https://www.linkedin.com/company/financesmaroc/mycompany/"><i class="fab fa-linkedin fa-2x"></i></a>
+      <a href="https://twitter.com/financesmaroc/"><i class="fab fa-twitter fa-2x"></i></a>
+    </div>
+  </div>
+</footer>
+</body>
+
+
+</html>
 
 
 

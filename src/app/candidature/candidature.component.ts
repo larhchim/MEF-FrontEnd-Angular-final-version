@@ -17,14 +17,17 @@ export class CandidatureComponent implements OnInit {
 
   mod = 1;
   pod = 1;
+  CMI=1;
   intitled= '';
   objProfils:any;
   filenames: string[] = [];
   Cocnours:any;
   fileStatus = { status: '', requestType: '', percent: 0 };
-
+  ficResults:any;
   // @ts-ignore
   TabProfils:any[];
+  LONG:any;
+  goid=0;
   constructor(private profil:ProfilService,private route:Router,private fileService:FileServiceService,private cnc:SconcoursService,private ss:SgestionnaireService) { }
 
   ngOnInit(): void {
@@ -41,7 +44,6 @@ export class CandidatureComponent implements OnInit {
     this.cnc.SpecificConcours(option).subscribe(
       (resp) => {
         this.Cocnours =resp;
-        console.log(this.Cocnours)
       },
       (error) => {
         this.ss.showError('Error Cannot retrieve data from server','Server Issue');
@@ -49,6 +51,8 @@ export class CandidatureComponent implements OnInit {
       () => {
         this.pod = 2;
         this.mod = 1;
+        this.LONG=this.Cocnours.length;
+        this.goid=1;
 
         GlobalConstants.ConcoursName = option;
 
@@ -112,6 +116,27 @@ export class CandidatureComponent implements OnInit {
     this.mod =1;
     this.pod =1;
     this.route.navigate(['Inscription/'+cnc.idConcours+'/'+GlobalConstants.ConcoursName+''])
+  }
+
+  TOSearch(){
+    this.CMI=2;
+  }
+
+  OnDownloadResult(cnc:any){
+    console.log('hello')
+
+    this.cnc.getResultsOfCnc(cnc.idConcours).subscribe(
+      (response) =>{
+        this.ficResults = response;
+        console.log(this.ficResults)
+      },
+      (err) => {
+
+      },
+      () => {
+        this.onDownloadFile(this.ficResults.candidatsConvoques);
+      }
+    )
   }
 }
 
