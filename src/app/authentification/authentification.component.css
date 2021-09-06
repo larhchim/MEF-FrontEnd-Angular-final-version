@@ -219,8 +219,8 @@ form.sign-in-form {
   top: -10%;
   right: 48%;
   transform: translateY(-50%);
-  background-image: linear-gradient(-45deg, rgb(220,20,60)
-  50%, rgb(220,20,60)
+  background-image: linear-gradient(-45deg, firebrick
+  50%,firebrick
   50%);
   transition: 1.8s ease-in-out;
   border-radius: 50%;
@@ -228,8 +228,8 @@ form.sign-in-form {
 }
 
 div.container.ml-0.sign-up-mode::before{
-  background-image: linear-gradient(-45deg, rgb(220,20,60)
-  50%, rgb(220,20,60)
+  background-image: linear-gradient(-45deg, firebrick
+  50%, firebrick
   50%);
   padding: 0!important;
   float: right;
